@@ -42,6 +42,7 @@ Decide if you need to declare some more factor or date
 actives<-c(12, 15, 16, 17, 18, 22, 25, 26, 29, 33, 34, 37, 38, 40, 47, 48, 51, 52, 53, 54, 56, 57, 58, 61, 62, 63, 66, 67, 69, 74)
 
 dd[,12]<-as.Date(dd[,12], format="%Y-%m-%d")
+dd$price = as.numeric(gsub("[\\$,]", "", dd$price))
 
 ```
 
