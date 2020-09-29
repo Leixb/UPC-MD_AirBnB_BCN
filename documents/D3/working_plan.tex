@@ -19,16 +19,16 @@
 \begin{tabular}{@{}l|c|c|c|c@{}}
              & \rot{Aleix Boné} & \rot{Eduard Bosch} & \rot{David Gili} & \rot{Albert Mercadé} \\
 \toprule
-\textbf{Coordination}                           &    & \X &    &    \\ \midrule
-\textbf{Motivation and Description}             &    &    & \x &    \\ \midrule
-\textbf{Data source presentation}               &    &    &    &    \\
-Description of data source                      &    &    &    &    \\ \midrule
+\textbf{Coordination}                           &    &  &\X    &    \\ \midrule
+\textbf{Motivation and Description}             & \x   &    & & \X   \\ \midrule
+\textbf{Data source presentation}               &    & \X   & \x    &    \\
+Description of data source                      &    &    &    & \X  \\ \midrule
 \textbf{Formal description of data structure}   &    &    &    &    \\
 Row descriptions                                &    &    &    &    \\
 Metadata Table                                  &    &    &    &    \\
 Scope of study                                  &    &    &    &    \\ \midrule
-\textbf{Data mining process performed}          &    &    &    &    \\
-Workflow                                        &    &    &    &    \\ \midrule
+%\textbf{Data mining process performed}          &    &    &    &    \\
+%Workflow                                        &    &    &    &    \\ \midrule
 \textbf{Description of prepossessing}           &    &    &    &    \\ \midrule
 \textbf{Basic statistical descriptive analysis} &    &    &    &    \\
 Univariate of all variables                     &    &    &    &    \\
@@ -61,9 +61,19 @@ Profiling graphs                                &    &    &    &    \\ \bottomru
 Risk & How to prevent & How to manage \\ \midrule
 A team member leaves the group & All tasks have at least two members assigned & Pending work reassigned to balance the workload\\
 \addlinespace[0.5em]
-A team member couldn't complete his assigned tasks one week & All tasks have at least two members assigned & Upon being notified that one member can't fulfill his tasks, the members that share tasks with that person will exceptionally complete his tasks for that week\\
+A team member couldn't complete his assigned tasks one week & All tasks have at least two members assigned & Upon being notified that one member can't fulfill his tasks, the members that share tasks with that person will exceptionally complete his tasks for that week.\\
 \addlinespace[0.5em]
-The project (data \& R scripts) is lost or corrupted & Have multiple back up copies of GitHub repository both on the cloud (Overleaf \& GitLab) and locally in our computers & Recover the whole project from one of the other back ups\\
+The project (data \& R scripts) is lost or corrupted & Have multiple back up copies of GitHub repository both on the cloud (Overleaf \& GitLab) and locally in our computers & Recover the whole project from one of the other back ups.\\
+\addlinespace[0.5em]
+A member does not have time due to work, an exam or a project & Each member has to make the group aware of busy weeks so the group can schedule the tasks accordingly & If an unexpected time-consuming problem occurs communicate with the group immediately so that work can be redistributed in advance.\\
+\addlinespace[0.5em]
+Conflicting opinions between group members on a specific topic & Stick whenever possible to what we agreed on the preliminary plan & If there are conflicting opinions in a specific decision let each member explain his point of view. After that vote and proceed with the majority opinion.\\
+\addlinespace[0.5em]
+We get inconclusive or conflicting results in some step & Try to finish each step days before delivery day so there is time to solve the problem & As the project requires progressive work, solve the problem in this each before starting the next one. If the problem can't be pinpointed communicate with our lab teacher.  
+\\
+\addlinespace[0.5em]
+The Government imposes a quarantine and we aren't allowed to do face-to-face classes or meetings & There's nothing in our hands to prevent this & Set up a Slack to coordinate the work and a Discord group to do online group meetings.\\
+
 \bottomrule
 \end{tabular}
 \end{table}
@@ -73,50 +83,38 @@ The project (data \& R scripts) is lost or corrupted & Have multiple back up cop
 \begin{center}
 \begin{ganttchart}[
 vgrid={*{6}{draw=none}, dotted},
-x unit=.65cm,
+x unit=.55cm,
 y unit title=1cm,
 y unit chart=1cm,
     time slot format=isodate
-    ]{2020-10-01}{2020-10-28}
+    ]{2020-09-14}{2020-10-18}
 \gantttitlecalendar{month=name, day}
-
-\ganttnewline
-\ganttgroup{Coordination}{2020-10-01}{2020-10-28}
 \ganttnewline
 
-\ganttgroup{Motivation and Description}{2020-10-01}{2020-10-28}
+\ganttgroup{Motivation and Description}{2020-09-16}{2020-09-23}
 \ganttnewline
 
-\ganttgroup{Data source presentation}{2020-10-01}{2020-10-28}
+\ganttgroup{Data source presentation}{2020-09-16}{2020-09-23}
 \ganttnewline
 
-\ganttbar{Description of data source}{2020-10-01}{2020-10-28}
+\ganttbar{Description of data source}{2020-09-16}{2020-09-23}
 \ganttnewline
 
-\ganttgroup{Formal description of data structure}{2020-10-01}{2020-10-28}
+\ganttgroup{Formal description of data structure}{2020-09-23}{2020-09-30}
 \ganttnewline
-\ganttbar{Row descriptions}{2020-10-01}{2020-10-28}
+\ganttbar{Metadata Table}{2020-09-23}{2020-09-25}
 \ganttnewline
-\ganttbar{Metadata Table}{2020-10-01}{2020-10-28}
-\ganttnewline
-\ganttbar{Scope of study}{2020-10-01}{2020-10-28}
+\ganttbar{Scope of study}{2020-09-25}{2020-09-30}
 \ganttnewline
 
-\ganttgroup{Data mining process performed}{2020-10-01}{2020-10-28}
-\ganttnewline
-\ganttbar{workflow}{2020-10-01}{2020-10-28}
-\ganttnewline
-
-\ganttgroup{Description of prepossessing}{2020-10-01}{2020-10-28}
+\ganttgroup{Description of preprocessing}{2020-09-23}{2020-09-30}
 \ganttnewline
 
 \ganttgroup{Basic statistical descriptive analysis}{2020-10-01}{2020-10-28}
 \ganttnewline
-\ganttbar{Univariate of all variables}{2020-10-01}{2020-10-28}
+\ganttbar{Univariate analysis}{2020-10-01}{2020-10-28}
 \ganttnewline
-\ganttbar{Bivariate when relevant}{2020-10-01}{2020-10-28}
-\ganttnewline
-\ganttbar{Descriptives before \& after}{2020-10-01}{2020-10-28}
+\ganttbar{Bivariate analysis}{2020-10-01}{2020-10-28}
 \ganttnewline
 \ganttbar{Conclusion describing data}{2020-10-01}{2020-10-28}
 \ganttnewline
@@ -136,14 +134,14 @@ y unit chart=1cm,
 \gantttitlecalendar{month=name, day}
 \ganttnewline
 
-\ganttgroup{PCA analysis for numerical variables}{2020-10-01}{2020-10-28}
+\ganttgroup{PCA analysis for numerical variables}{2020-10-07}{2020-10-14}
 \ganttnewline
-\ganttbar{Scree plot}{2020-10-01}{2020-10-28}
+\ganttbar{Scree plot}{2020-10-07}{2020-10-11}
 \ganttnewline
-\ganttbar{Factorial map visualization}{2020-10-01}{2020-10-28}
+\ganttbar{Factorial map visualization}{2020-10-11}{2020-10-14}
 \ganttnewline
 
-\ganttgroup{Hierarchical Clustering}{2020-10-01}{2020-10-28}
+\ganttgroup{Hierarchical Clustering}{2020-10-14}{2020-10-21}
 \ganttnewline
 \ganttbar{Description of data used}{2020-10-01}{2020-10-28}
 \ganttnewline
@@ -156,9 +154,9 @@ y unit chart=1cm,
 \ganttbar{Table with description of cluster size}{2020-10-01}{2020-10-28}
 \ganttnewline
 
-\ganttgroup{Profiling of clusters}{2020-10-01}{2020-10-28}
+\ganttgroup{Profiling of clusters}{2020-10-21}{2020-10-28}
 \ganttnewline
-\ganttbar{Profiling graphs}{2020-10-01}{2020-10-28}
+\ganttbar{Profiling graphs}{2020-10-21}{2020-10-28}
 \ganttnewline
 
 \end{ganttchart}
