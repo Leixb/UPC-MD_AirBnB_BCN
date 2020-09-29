@@ -1,11 +1,96 @@
 ---
 output: latex_fragment
 ---
-#install.packages("rmarkdown")
-#library("rmarkdown")
+
+Here you can write the introduction of your report and include some text that will be transferred to the word file every time you re-run this Markdown
 
 ```{r}
-data <- read.csv(gzfile("../listings.csv.gz"))
+dd <- read.csv(gzfile("../listings.csv.gz"))
 
-summary(data)
+dataset <- "airbnb"
+```
+
+Check the type of the R object created for the dataset
+
+```{r}
+class(dd)
+```
+
+without including the R instruction in the final document
+
+```{r, echo=FALSE}
+class(dd)
+```
+
+Get dimensions of the dataset
+```{r}
+dim(dd)
+n<-dim(dd)[1]
+K<-dim(dd)[2]
+
+n
+K
+```
+Check the variables
+
+```{r}
+names(dd)
+```
+Decide if you need to declare some more factor or date
+
+```{r}
+actives<-c(12, 15, 16, 17, 18, 22, 25, 26, 29, 33, 34, 37, 38, 40, 47, 48, 51, 52, 53, 54, 56, 57, 58, 61, 62, 63, 66, 67, 69, 74)
+
+dd[,12]<-as.Date(dd[,12], format="%Y-%m-%d")
+
+```
+
+
+Basic descriptive analysis for numerical variables
+
+(decide the maximum number of colors you can need in a graph based on your metadata file)
+```{r, echo=FALSE}
+listOfColors<-rainbow(39)
+
+par(ask=TRUE)
+
+for(k in actives){
+  print(paste("variable ", k, ":", names(dd)[k] ))
+  if (!(is.numeric(dd[,k]) || class(dd[,k])=="Date")){
+    frecs<-table(as.factor(dd[,k]), useNA="ifany")
+    proportions<-frecs/n
+    #ojo, decidir si calcular porcentages con o sin missing values
+    pie(frecs, cex=0.6, main=paste("Pie of", names(dd)[k]))
+    barplot(frecs, las=3, cex.names=0.7, main=paste("Barplot of", names(dd)[k]), col=listOfColors)
+    print(paste("Number of modalities: ", length(frecs)))
+    print("Frequency table")
+    print(frecs)
+    print("Relative frequency table (proportions)")
+    print(proportions)
+    print("Frequency table sorted")
+    print(sort(frecs, decreasing=TRUE))
+    print("Relative frequency table (proportions) sorted")
+    print(sort(proportions, decreasing=TRUE))
+   }else{
+     if(class(dd[,k])=="Date"){
+       print(summary(dd[,k]))
+       print(sd(dd[,k]))
+       #decide breaks: weeks, months, quarters...
+       hist(dd[,k],breaks="weeks")
+     }else{
+       hist(dd[,k], main=paste("Histogram of", names(dd)[k]))
+       boxplot(dd[,k], horizontal=TRUE, main=paste("Boxplot of", names    (dd)[k]))
+       print("Extended Summary Statistics")
+       print(summary(dd[,k]))
+       print(paste("sd: ", sd(dd[,k], na.rm=TRUE)))
+       print(paste("vc: ", sd(dd[,k], na.rm=TRUE)/mean(dd[,k], na.rm=TRUE)))
+      }
+   }
+}
+par(ask=FALSE)
+
+#per exportar figures d'R per programa
+#dev.off()
+#png(file=mypath,width = 950, height = 800, units = "px")
+#dev.off()
 ```
