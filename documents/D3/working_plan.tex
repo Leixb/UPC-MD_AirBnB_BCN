@@ -5,88 +5,28 @@
 % brief risk contingency plan(see Working team resources slides in the website
 % section entitled Working team resources)
 
-\subsection{Gantt}%
-\label{sub:gantt}
-
-\subsection{Division of tasks}%
-\label{sub:division_of_tasks}
-
-\newcommand*\rot{\rotatebox{90}}
-\newcommand*\X{\ding{56}}
-\newcommand*\x{\ding{55}}
-\begin{table}[H]
-\centering
-\begin{tabular}{@{}l|c|c|c|c@{}}
-             & \rot{Aleix Boné} & \rot{Eduard Bosch} & \rot{David Gili} & \rot{Albert Mercadé} \\
-\toprule
-\textbf{Coordination}                           &    &  &\X    &    \\ \midrule
-\textbf{Motivation and Description}             & \x   &    & & \X   \\ \midrule
-\textbf{Data source presentation}               &    &    &     &    \\
-Description of data source                      &    & \x   &    & \X  \\ \midrule
-\textbf{Formal description of data structure}   &    &    &    &    \\
-Metadata Table                                  &\x    &\x    & \X   &    \\
-Scope of study                                  &\X    &\x    &    &    \\ \midrule
-%\textbf{Data mining process performed}          &\X    &    &\x    &    \\
-%Workflow                                        &    &    &    &    \\ \midrule
-\textbf{Description of prepossessing}           &    &\X    &    &x    \\ \midrule
-\textbf{Basic statistical descriptive analysis} &    &    &    &    \\
-Univariate analysis                             &    &\x    &    & \X \\
-Bivariate analysis                              &    & \x   &\X    &    \\
-Conclusion describing data                      &\X  & \x &    &    \\ \midrule
-\textbf{PCA analysis for numerical variables}   &    &    &    &    \\
-Scree plot                                      &    &    &\x  & \X  \\
-Factorial map visualization                     &    & \X & \x &    \\ \midrule
-\textbf{Hierarchical Clustering}                &    &    &    &  \\ 
-Clustering script                               &    & \X &    & \x \\
-Description of data used                        &\x  &    & \X &    \\
-Clustering method and metrics used                & \X &\x  &    &    \\
-Resulting Dendogram                             &    &    &\X   &\x  \\
-Discussion about number of clusters             &\x  &\X  &    &    \\
-Table with description of cluster size          &\x  &    &\X  &    \\ \midrule
-\textbf{Profiling of clusters}                  &    &    &    & \\ 
-Profiling graphs                                &    &    &\X  &\x  \\
-Profiling graphs                                &    &\x  &    & \X \\ \bottomrule
-\end{tabular}
-\end{table}
-
-\subsection{Risk contingency plan}%
-\label{sub:risk_contingency_plan}
-
-
-\begin{table}[H]
-\centering
-\begin{tabular}{@{}p{5cm}p{5cm}p{5cm}@{}}
-\toprule
-Risk & How to prevent & How to manage \\ \midrule
-A team member leaves the group & All tasks have at least two members assigned & Pending work reassigned to balance the workload\\
-\addlinespace[0.5em]
-A team member couldn't complete his assigned tasks one week & All tasks have at least two members assigned & Upon being notified that one member can't fulfill his tasks, the members that share tasks with that person will exceptionally complete his tasks for that week.\\
-\addlinespace[0.5em]
-The project (data \& R scripts) is lost or corrupted & Have multiple back up copies of GitHub repository both on the cloud (Overleaf \& GitLab) and locally in our computers & Recover the whole project from one of the other back ups.\\
-\addlinespace[0.5em]
-A member does not have time due to work, an exam or a project & Each member has to make the group aware of busy weeks so the group can schedule the tasks accordingly & If an unexpected time-consuming problem occurs communicate with the group immediately so that work can be redistributed in advance.\\
-\addlinespace[0.5em]
-Conflicting opinions between group members on a specific topic & Stick whenever possible to what we agreed on the preliminary plan & If there are conflicting opinions in a specific decision let each member explain his point of view. After that vote and proceed with the majority opinion.\\
-\addlinespace[0.5em]
-We get inconclusive or conflicting results in some step & Try to finish each step days before delivery day so there is time to solve the problem & As the project requires progressive work, solve the problem in this each before starting the next one. If the problem can't be pinpointed communicate with our lab teacher.  
-\\
-\addlinespace[0.5em]
-The Government imposes a quarantine and we aren't allowed to do face-to-face classes or meetings & There's nothing in our hands to prevent this & Set up a Slack to coordinate the work and a Discord group to do online group meetings.\\
-
-\bottomrule
-\end{tabular}
-\end{table}
 
 \newgeometry{top=0.5cm, bottom=0.5cm, left=0.5cm, right=0.5cm}
 \begin{landscape}
+
+\null
+\vspace{1em}
+{
+%\centering
+\section{\hspace{2cm} Working Plan}
+\subsection{\hspace{2cm} Gantt}%
+\label{sub:gantt}
+\vspace{2em}
+\par}
+
 \begin{center}
 \begin{ganttchart}[
 vgrid={*{6}{draw=none}, dotted},
-x unit=.55cm,
+x unit=.75cm,
 y unit title=1cm,
 y unit chart=1cm,
     time slot format=isodate
-    ]{2020-09-14}{2020-10-18}
+    ]{2020-09-14}{2020-10-07}
 \gantttitlecalendar{month=name, day}
 \ganttnewline
 
@@ -121,15 +61,16 @@ y unit chart=1cm,
 \end{center}
 
 \pagebreak
-
+\null
+\vspace{3.5em}
 \begin{center}
 \begin{ganttchart}[
 vgrid={*{6}{draw=none}, dotted},
-x unit=.65cm,
+x unit=.85cm,
 y unit title=1cm,
 y unit chart=1cm,
     time slot format=isodate
-    ]{2020-10-01}{2020-10-28}
+    ]{2020-10-07}{2020-10-28}
 \gantttitlecalendar{month=name, day}
 \ganttnewline
 
@@ -165,3 +106,73 @@ y unit chart=1cm,
 \end{landscape}
 
 \restoregeometry
+
+\subsection{Division of tasks}%
+\label{sub:division_of_tasks}
+
+\newcommand*\rot{\rotatebox{90}}
+\newcommand*\X{\ding{56}}
+\newcommand*\x{\ding{55}}
+\begin{table}[H]
+\centering
+\begin{tabular}{@{}l|c|c|c|c@{}}
+             & \rot{Aleix Boné} & \rot{Eduard Bosch} & \rot{David Gili} & \rot{Albert Mercadé} \\
+\toprule
+\textbf{Coordination}                           &    &  &\X    &    \\ \midrule
+\textbf{Motivation and Description}             & \x   &    & & \X   \\ \midrule
+\textbf{Data source presentation}               &    &    &     &    \\
+Description of data source                      &    & \x   &    & \X  \\ \midrule
+\textbf{Formal description of data structure}   &    &    &    &    \\
+Metadata Table                                  &\x    &\x    & \X   &    \\
+Scope of study                                  &\X    &\x    &    &    \\ \midrule
+%\textbf{Data mining process performed}          &\X    &    &\x    &    \\
+%Workflow                                        &    &    &    &    \\ \midrule
+\textbf{Description of prepossessing}           &    &\X    &    &x    \\ \midrule
+\textbf{Basic statistical descriptive analysis} &    &    &    &    \\
+Univariate analysis                             &    &\x    &    & \X \\
+Bivariate analysis                              &    & \x   &\X    &    \\
+Conclusion describing data                      &\X  & \x &    &    \\ \midrule
+\textbf{PCA analysis for numerical variables}   &    &    &    &    \\
+Scree plot                                      &    &    &\x  & \X  \\
+Factorial map visualization                     &    & \X & \x &    \\ \midrule
+\textbf{Hierarchical Clustering}                &    &    &    &  \\ 
+Clustering script                               &    & \X &    & \x \\
+Description of data used                        &\x  &    & \X &    \\
+Clustering method and metrics used              & \X &\x  &    &    \\
+Resulting Dendogram                             &    &    &\X   &\x  \\
+Discussion about number of clusters             &\x  &\X  &    &    \\
+Table with description of cluster size          &\x  &    &\X  &    \\ \midrule
+\textbf{Profiling of clusters}                  &    &    &    & \\ 
+Profiling graphs                                &    &    &\X  &\x  \\
+\end{tabular}
+\end{table}
+
+\subsection{Risk contingency plan}%
+\label{sub:risk_contingency_plan}
+
+
+\begin{table}[H]
+\centering
+\begin{tabular}{@{}p{5cm}p{5cm}p{5cm}@{}}
+\toprule
+Risk & How to prevent & How to manage \\ \midrule
+A team member leaves the group & All tasks have at least two members assigned & Pending work reassigned to balance the workload\\
+\addlinespace[0.5em]
+A team member couldn't complete his assigned tasks one week & All tasks have at least two members assigned & Upon being notified that one member can't fulfill his tasks, the members that share tasks with that person will exceptionally complete his tasks for that week.\\
+\addlinespace[0.5em]
+The project (data \& R scripts) is lost or corrupted & Have multiple back up copies of GitHub repository both on the cloud (Overleaf \& GitLab) and locally in our computers & Recover the whole project from one of the other back ups.\\
+\addlinespace[0.5em]
+A member does not have time due to work, an exam or a project & Each member has to make the group aware of busy weeks so the group can schedule the tasks accordingly & If an unexpected time-consuming problem occurs communicate with the group immediately so that work can be redistributed in advance.\\
+\addlinespace[0.5em]
+Conflicting opinions between group members on a specific topic & Stick whenever possible to what we agreed on the preliminary plan & If there are conflicting opinions in a specific decision let each member explain his point of view. After that vote and proceed with the majority opinion.\\
+\addlinespace[0.5em]
+We get inconclusive or conflicting results in some step & Try to finish each step days before delivery day so there is time to solve the problem & As the project requires progressive work, solve the problem in this each before starting the next one. If the problem can't be pinpointed communicate with our lab teacher.  
+\\
+\addlinespace[0.5em]
+The Government imposes a quarantine and we aren't allowed to do face-to-face classes or meetings & There's nothing in our hands to prevent this & Set up a Slack to coordinate the work and a Discord group to do online group meetings.\\
+
+\bottomrule
+\end{tabular}
+\end{table}
+
+
