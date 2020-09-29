@@ -12,11 +12,85 @@
          \item \textbf{K:}
 \end{itemize}
 
-\begin{table}[H]
-         \centering
-\begin{tabular}{@{}lllllllll@{}}
+\begin{center}
+\begin{longtable}{@{}lllllllll@{}}
 \toprule
-Variable & Modalities & meaning & Type & \makecell{Measuring\\ unit} & \makecell{Missing\\ code} & \makecell{Measuring\\ procedure} & Range & Role \\ \midrule
-         &            &         &      &                &              &                     &       &      \\ \bottomrule
-\end{tabular}
-\end{table}
+Variable & Modalities & meaning & Type & \makecell{Measuring\\ unit} & \makecell{Missing\\ code} & \makecell & Range & Role \\ \midrule
+%Variable                    & Modalities                  & meaning                           & Type        & Measuring unit & Missing code                & Measuring procedure & Range   & role \\ \midrule
+\endfirsthead
+\toprule
+Variable & Modalities & meaning & Type & \makecell{Measuring\\ unit} & \makecell{Missing\\ code} & \makecell & Range & Role \\ \midrule
+
+\endhead
+\bottomrule
+\endfoot
+\bottomrule
+\endlastfoot
+
+host\_since &                             & \multirow{5}{15ex}{Time since the user has been a host in the platform.} & categorical &                & NA                          &         & role \\
+                            & \textless{}six months          &                                   &             &                &                             &                     &         & role \\
+                            & 0.5-2 years                  &                                   &             &                &                             &                     &         & role \\
+                            & 2-5 years                    &                                   &             &                &                             &                     &         & role \\
+                            & \textgreater{}5 years        &                                   &             &                &                             &                     &         & role \\
+host\_response\_time        &                             & \multirow{5}{15ex}{Median time the host takes to respond messages and petitions.} & categorical &                & NA                          &                     &         & role \\
+                            & within an hour              &                                   &             &                &                             &                     &         & role \\
+                            & within a few hours          &                                   &             &                &                             &                     &         & role \\
+                            & a few days or more          &                                   &             &                &                             &                     &         & role \\
+                            & within a day                &                                   &             &                &                             &                     &         & role \\
+host\_response\_rate        &                             & \multirow{5}{15ex}{Rate of times the host answers the petitions and messages upon receiving them.} & categorical &                & NA                    &                     &         & role \\
+                            & v.low                       &                                   &             &                &                             &                     &         & role \\
+                            & low                         &                                   &             &                &                             &                     &         & role \\
+                            & average                     &                                   &             &                &                             &                     &         & role \\
+                            & high                        &                                   &             &                &                             &                     &         & role \\
+                            & very high                   &                                   &             &                &                             &                     &         & role \\
+host\_acceptance\_rate      &                             & \multirow{5}{15ex}{Rate of times the host accepts the guests.} & categorical &                & N/A                         &                     &         & role \\
+                            & v.low                       &                                   &             &                &                             &                     &         & role \\
+                            & low                         &                                   &             &                &                             &                     &         & role \\
+                            & average                     &                                   &             &                &                             &                     &         & role \\
+                            & high                        &                                   &             &                &                             &                     &         & role \\
+                            & very high                   &                                   &             &                &                             &                     &         & role \\
+                            &                             &                                   &             &                &                             &                     &         & role \\
+host\_is\_superhost         &                             & The host is a superhost & boolean &                & \textless{}NA\textgreater{} &                     &         & role \\
+host\_listing\_count        &                             & Number of listings for this host & numeric     & listings       &                             &                     & 0-551   & role \\
+host\_has\_profile\_pic     &                             & t, f & boolean     &                & \textless{}NA\textgreater{} &                     &         & role \\
+host\_identity\_verified    &                             & t, f & boolean     &                & \textless{}NA\textgreater{} &                     &         & role \\
+neigbourhood\_cleansed      &                             &                                   & categorical &                &                             &                     &         & role \\
+                            & Ciutat Vella                &                                   &             &                &                             &                     &         & role \\
+                            & Sant Martí                  &                                   &             &                &                             &                     &         & role \\
+                            & Gràcia                      &                                   &             &                &                             &                     &         & role \\
+                            & Eixample                    &                                   &             &                &                             &                     &         & role \\
+                            & Sants-Montjuíc              &                                   &             &                &                             &                     &         & role \\
+                            & Sarrià-Sant Gervasi         &                                   &             &                &                             &                     &         & role \\
+                            & Les Corts                   &                                   &             &                &                             &                     &         & role \\
+                            & Horta-Guinardó              &                                   &             &                &                             &                     &         & role \\
+                            & Sant Andreu                 &                                   &             &                &                             &                     &         & role \\
+                            & Nou Barris                  &                                   &             &                &                             &                     &         & role \\
+room\_type                  &                             &                                   & categorical &                &                             &                     &         & role \\
+                            & Private room                &                                   &             &                &                             &                     &         & role \\
+                            & Entire home/apt  &                                   &             &                &                             &                     &         & role \\
+                                                        & Hotel room  &                                   &             &                &                             &                     &         & role \\
+
+                            & Shared room                 &                                   &             &                &                             &                     &         & role \\
+accomodates                 &                             & meaning                           & numerical   & people         &                             &                     & 1-16    & role \\
+bedroom                     &                             & meaning                           & numerical   & bedrooms       & NA                          &                     & 1-16    & role \\
+bed                         &                             & meaning                           & numerical   & beds           & NA                          &                     & 1-48    & role \\
+price                       &                             & meaning                           & numerical   & dollars        &                             &                     & 0-10000 & role \\
+minimum\_nights\_averge\_nt &                             & meaning                           & numerical   & nights         &                             &                     & 1-1123  & role \\
+maximum\_nights\_averge\_nt &                             & meaning                           & numerical   & nights         &                             &                     & 1-9958  & role \\
+availability\_30            &                             & meaning                           & numerical   & days           &                             &                     & 0-30    & role \\
+availability\_60            &                             & meaning                           & numerical   & days           &                             &                     & 0-60    & role \\
+availability\_90            &                             & meaning                           & numerical   & days           &                             &                     & 0-90    & role \\
+availability\_365           &                             & meaning                           & numerical   & days           &                             &                     & 0-365   & role \\
+number\_of\_reviews         &                             & meaning                           & numerical   & reviews        &                             &                     & 0-743   & role \\
+number\_of\_reviews\_l30d   &                             & meaning                           & numerical   & reviews        &                             &                     & 0-15    & role \\
+number\_of\_reviews\_lt     &                             & meaning                           & numerical   & reviews        &                             &                     & 0-278   & role \\
+review\_scores\_ratin       &                             & meaning                           & numerical   & stars          &                             &                     & 20-100  & role \\
+review\_scores\_accurac     &                             & meaning                           & numerical   & stars          &                             &                     & 2-10    & role \\
+review\_scores\_cleanlines  &                             & meaning                           & numerical   & stars          &                             &                     & 2-10    & role \\
+review\_scores\_locatio     &                             & meaning                           & numerical   & stars          &                             &                     & 2-10    & role \\
+review\_scores\_valu        &                             & meaning                           & numerical   & stars          &                             &                     & 2-10    & role \\
+instant\_bookable           &                             & meaning                           & boolean     &                &                             &                     &         & role \\
+reviews\_per\_month         &                             & meaning                           & numerical   & reviews        &                             &                     & 0-21.41 & role \\ \bottomrule
+\end{longtable}
+
+\end{center}
