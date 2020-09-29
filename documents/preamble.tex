@@ -55,8 +55,29 @@
 \usepackage{float}              % Force tables and images position (H and H!)
 \usepackage{wrapfig}            % Wrap images like in HTML
 
-\usepackage{tabularx, colortbl, booktabs}    % Better tables
-\usepackage{longtable}                      % Multiple page table
+%\usepackage{tabularx, colortbl, booktabs}    % Better tables
+%\usepackage{tabularx, colortbl, booktabs}    % Better tables
+%\usepackage{longtable}                      % Multiple page table
+\usepackage{xltabular}
+\usepackage{colortbl, booktabs}    % Better tables
+
+% bug booktabs + xltabular
+\makeatletter
+\def\@BTrule[#1]{%
+  \ifx\longtable\undefined
+    \let\@BTswitch\@BTnormal
+  \else\ifx\hline\LT@hline
+    \nobreak
+    \let\@BTswitch\@BLTrule
+  \else
+     \let\@BTswitch\@BTnormal
+  \fi\fi
+  \global\@thisrulewidth=#1\relax
+  \ifnum\@thisruleclass=\tw@\vskip\@aboverulesep\else
+  \ifnum\@lastruleclass=\z@\vskip\@aboverulesep\else
+  \ifnum\@lastruleclass=\@ne\vskip\doublerulesep\fi\fi\fi
+  \@BTswitch}
+\makeatother
 
 % Split cell in lines and more formating options inside table
 \usepackage{array, multirow, multicol, makecell}
@@ -119,5 +140,5 @@
 %\DeclareMathOperator{\arccsc}{arccsc}
 %\DeclareMathOperator{\cis}{cis}
 
-\usepackage{pdflscape}
+%\usepackage{pdflscape}
 \usepackage{pifont}
