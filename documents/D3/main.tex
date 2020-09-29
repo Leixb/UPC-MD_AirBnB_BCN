@@ -1,0 +1,59 @@
+% vim: spell spelllang=en:
+\input{../preamble}
+\input{../preamble_rmarkdown}
+
+\usepackage{pgfgantt}
+
+\title{MD - AirBnB Barcelona Listings}
+\author{
+    Aleix Bon\'e\\
+    Eduard Bosch\\
+    David Gili\\
+    Albert Mercad\'e\\
+}
+\date{\today}
+
+\begin{document}
+
+\input{titlepage}
+
+% Initial working plan (two pages): Including Gantt, division of tasks and
+% brief risk contingency plan(see Working team resources slides in the website
+% section entitled Working team resources)
+\clearpage
+\section{Working Plan}
+\input{working_plan}
+
+% Metadata file describing the selection of variables considered for the
+% analysis (see slide nr 8 in Data and Metadata slides from Theme 2. Data
+% Preparation)
+\clearpage
+\begin{landscape}
+\section{Metadata file}
+\input{metadata}
+\end{landscape}
+
+% Basic initial univariate descriptive statistics of raw variables (see
+% provided R scripts for automatic descriptive analysis in  Lab Session2.
+% Preprocessing (II). Markdow produces word files, the R script is interpreted.
+% The scripts ARE ORIENTATIVE. Modify whenever required)
+\clearpage
+\section{Descriptive Statistics of raw variables}
+\input{descriptive_stats}
+
+% Enumerate which steps of the preprocessing process are used with your
+% particular data (consider the steps proposed in slide 4 of Preprocessing
+% Slides in Theme 2. Data Preparation. Remember that you have the whole
+% complete information on preprocessing in the reference text from the
+% linkSurvey of preprocessing. Reference paper (MIE 2001) from complementary
+% materials section of Theme 2. Data Preparation)
+
+% List and justify all decisions taken for each preprocessing step
+
+% Additional descriptive statistics of variables that have been modified or
+% created by preprocessing
+\clearpage
+\section{Preprocessing}
+\input{preprocessing}
+
+\end{document}

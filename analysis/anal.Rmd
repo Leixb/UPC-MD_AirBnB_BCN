@@ -1,0 +1,11 @@
+---
+output: latex_fragment
+---
+#install.packages("rmarkdown")
+#library("rmarkdown")
+
+```{r}
+data <- read.csv(gzfile("../listings.csv.gz"))
+
+summary(data)
+```

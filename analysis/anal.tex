@@ -1,0 +1,196 @@
+\#install.packages(``rmarkdown'') \#library(``rmarkdown'')
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data \textless{}{-}}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\KeywordTok{gzfile}\NormalTok{(}\StringTok{"../listings.csv.gz"}\NormalTok{))}
+
+\KeywordTok{summary}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        id           listing_url          scrape_id        last_scraped      
+##  Min.   :   21974   Length:20703       Min.   :2.02e+13   Length:20703      
+##  1st Qu.:14737064   Class :character   1st Qu.:2.02e+13   Class :character  
+##  Median :27479730   Mode  :character   Median :2.02e+13   Mode  :character  
+##  Mean   :25883290                      Mean   :2.02e+13                     
+##  3rd Qu.:38872258                      3rd Qu.:2.02e+13                     
+##  Max.   :45086940                      Max.   :2.02e+13                     
+##                                                                             
+##      name           description        neighborhood_overview picture_url       
+##  Length:20703       Length:20703       Length:20703          Length:20703      
+##  Class :character   Class :character   Class :character      Class :character  
+##  Mode  :character   Mode  :character   Mode  :character      Mode  :character  
+##                                                                                
+##                                                                                
+##                                                                                
+##                                                                                
+##     host_id            host_url          host_name          host_since       
+##  Min.   :     3073   Length:20703       Length:20703       Length:20703      
+##  1st Qu.:  9364267   Class :character   Class :character   Class :character  
+##  Median : 59065387   Mode  :character   Mode  :character   Mode  :character  
+##  Mean   :110213147                                                           
+##  3rd Qu.:197962361                                                           
+##  Max.   :363926491                                                           
+##                                                                              
+##  host_location       host_about        host_response_time host_response_rate
+##  Length:20703       Length:20703       Length:20703       Length:20703      
+##  Class :character   Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+##                                                                             
+##                                                                             
+##                                                                             
+##                                                                             
+##  host_acceptance_rate host_is_superhost  host_thumbnail_url host_picture_url  
+##  Length:20703         Length:20703       Length:20703       Length:20703      
+##  Class :character     Class :character   Class :character   Class :character  
+##  Mode  :character     Mode  :character   Mode  :character   Mode  :character  
+##                                                                               
+##                                                                               
+##                                                                               
+##                                                                               
+##  host_neighbourhood host_listings_count host_total_listings_count
+##  Length:20703       Min.   :  0.00      Min.   :  0.00           
+##  Class :character   1st Qu.:  1.00      1st Qu.:  1.00           
+##  Mode  :character   Median :  2.00      Median :  2.00           
+##                     Mean   : 16.81      Mean   : 16.81           
+##                     3rd Qu.: 11.00      3rd Qu.: 11.00           
+##                     Max.   :551.00      Max.   :551.00           
+##                     NA's   :8           NA's   :8                
+##  host_verifications host_has_profile_pic host_identity_verified
+##  Length:20703       Length:20703         Length:20703          
+##  Class :character   Class :character     Class :character      
+##  Mode  :character   Mode  :character     Mode  :character      
+##                                                                
+##                                                                
+##                                                                
+##                                                                
+##  neighbourhood      neighbourhood_cleansed neighbourhood_group_cleansed
+##  Length:20703       Length:20703           Length:20703                
+##  Class :character   Class :character       Class :character            
+##  Mode  :character   Mode  :character       Mode  :character            
+##                                                                        
+##                                                                        
+##                                                                        
+##                                                                        
+##     latitude       longitude     property_type       room_type        
+##  Min.   :41.35   Min.   :2.086   Length:20703       Length:20703      
+##  1st Qu.:41.38   1st Qu.:2.157   Class :character   Class :character  
+##  Median :41.39   Median :2.168   Mode  :character   Mode  :character  
+##  Mean   :41.39   Mean   :2.167                                        
+##  3rd Qu.:41.40   3rd Qu.:2.178                                        
+##  Max.   :41.46   Max.   :2.229                                        
+##                                                                       
+##   accommodates    bathrooms      bathrooms_text        bedrooms     
+##  Min.   : 1.000   Mode:logical   Length:20703       Min.   : 1.000  
+##  1st Qu.: 2.000   NA's:20703     Class :character   1st Qu.: 1.000  
+##  Median : 2.000                  Mode  :character   Median : 1.000  
+##  Mean   : 3.297                                     Mean   : 1.604  
+##  3rd Qu.: 4.000                                     3rd Qu.: 2.000  
+##  Max.   :16.000                                     Max.   :16.000  
+##                                                     NA's   :684     
+##       beds         amenities            price           minimum_nights   
+##  Min.   : 0.000   Length:20703       Length:20703       Min.   :   1.00  
+##  1st Qu.: 1.000   Class :character   Class :character   1st Qu.:   1.00  
+##  Median : 2.000   Mode  :character   Mode  :character   Median :   2.00  
+##  Mean   : 2.233                                         Mean   :  10.39  
+##  3rd Qu.: 3.000                                         3rd Qu.:   7.00  
+##  Max.   :48.000                                         Max.   :1124.00  
+##  NA's   :409                                                             
+##  maximum_nights      minimum_minimum_nights maximum_minimum_nights
+##  Min.   :1.000e+00   Min.   :   1.00        Min.   :   1.00       
+##  1st Qu.:9.000e+01   1st Qu.:   1.00        1st Qu.:   2.00       
+##  Median :1.125e+03   Median :   2.00        Median :   3.00       
+##  Mean   :2.082e+05   Mean   :  10.16        Mean   :  11.38       
+##  3rd Qu.:1.125e+03   3rd Qu.:   6.00        3rd Qu.:  20.00       
+##  Max.   :2.147e+09   Max.   :1123.00        Max.   :1124.00       
+##                                                                   
+##  minimum_maximum_nights maximum_maximum_nights minimum_nights_avg_ntm
+##  Min.   :1.000e+00      Min.   :1.000e+00      Min.   :   1.00       
+##  1st Qu.:3.300e+02      1st Qu.:3.300e+02      1st Qu.:   1.40       
+##  Median :1.125e+03      Median :1.125e+03      Median :   2.70       
+##  Mean   :2.083e+05      Mean   :3.120e+05      Mean   :  10.67       
+##  3rd Qu.:1.125e+03      3rd Qu.:1.125e+03      3rd Qu.:  12.10       
+##  Max.   :2.147e+09      Max.   :2.147e+09      Max.   :1123.00       
+##                                                                      
+##  maximum_nights_avg_ntm calendar_updated has_availability   availability_30
+##  Min.   :1.000e+00      Mode:logical     Length:20703       Min.   : 0.00  
+##  1st Qu.:3.300e+02      NA's:20703       Class :character   1st Qu.: 0.00  
+##  Median :1.125e+03                       Mode  :character   Median :24.00  
+##  Mean   :3.118e+05                                          Mean   :17.55  
+##  3rd Qu.:1.125e+03                                          3rd Qu.:30.00  
+##  Max.   :2.147e+09                                          Max.   :30.00  
+##                                                                            
+##  availability_60 availability_90 availability_365 calendar_last_scraped
+##  Min.   : 0.00   Min.   : 0.00   Min.   :  0.0    Length:20703         
+##  1st Qu.: 0.00   1st Qu.: 3.00   1st Qu.: 55.0    Class :character     
+##  Median :52.00   Median :80.00   Median :180.0    Mode  :character     
+##  Mean   :36.43   Mean   :56.01   Mean   :191.3                         
+##  3rd Qu.:59.00   3rd Qu.:89.00   3rd Qu.:352.0                         
+##  Max.   :60.00   Max.   :90.00   Max.   :365.0                         
+##                                                                        
+##  number_of_reviews number_of_reviews_ltm number_of_reviews_l30d
+##  Min.   :  0.0     Min.   :  0.000       Min.   : 0.0000       
+##  1st Qu.:  0.0     1st Qu.:  0.000       1st Qu.: 0.0000       
+##  Median :  5.0     Median :  1.000       Median : 0.0000       
+##  Mean   : 33.1     Mean   :  6.401       Mean   : 0.1621       
+##  3rd Qu.: 36.0     3rd Qu.:  9.000       3rd Qu.: 0.0000       
+##  Max.   :743.0     Max.   :278.000       Max.   :15.0000       
+##                                                                
+##  first_review       last_review        review_scores_rating
+##  Length:20703       Length:20703       Min.   : 20.00      
+##  Class :character   Class :character   1st Qu.: 88.00      
+##  Mode  :character   Mode  :character   Median : 93.00      
+##                                        Mean   : 91.08      
+##                                        3rd Qu.: 98.00      
+##                                        Max.   :100.00      
+##                                        NA's   :5971        
+##  review_scores_accuracy review_scores_cleanliness review_scores_checkin
+##  Min.   : 2.000         Min.   : 2.000            Min.   : 2.000       
+##  1st Qu.: 9.000         1st Qu.: 9.000            1st Qu.: 9.000       
+##  Median :10.000         Median : 9.000            Median :10.000       
+##  Mean   : 9.379         Mean   : 9.227            Mean   : 9.558       
+##  3rd Qu.:10.000         3rd Qu.:10.000            3rd Qu.:10.000       
+##  Max.   :10.000         Max.   :10.000            Max.   :10.000       
+##  NA's   :5982           NA's   :5980              NA's   :5986         
+##  review_scores_communication review_scores_location review_scores_value
+##  Min.   : 2.000              Min.   : 2.000         Min.   : 2.000     
+##  1st Qu.: 9.000              1st Qu.: 9.000         1st Qu.: 9.000     
+##  Median :10.000              Median :10.000         Median : 9.000     
+##  Mean   : 9.551              Mean   : 9.618         Mean   : 9.055     
+##  3rd Qu.:10.000              3rd Qu.:10.000         3rd Qu.:10.000     
+##  Max.   :10.000              Max.   :10.000         Max.   :10.000     
+##  NA's   :5978                NA's   :5985           NA's   :5985       
+##    license          instant_bookable   calculated_host_listings_count
+##  Length:20703       Length:20703       Min.   :  1.00                
+##  Class :character   Class :character   1st Qu.:  1.00                
+##  Mode  :character   Mode  :character   Median :  2.00                
+##                                        Mean   : 14.03                
+##                                        3rd Qu.: 11.00                
+##                                        Max.   :169.00                
+##                                                                      
+##  calculated_host_listings_count_entire_homes
+##  Min.   :  0.00                             
+##  1st Qu.:  0.00                             
+##  Median :  1.00                             
+##  Mean   : 11.41                             
+##  3rd Qu.:  7.00                             
+##  Max.   :169.00                             
+##                                             
+##  calculated_host_listings_count_private_rooms
+##  Min.   : 0.000                              
+##  1st Qu.: 0.000                              
+##  Median : 1.000                              
+##  Mean   : 2.336                              
+##  3rd Qu.: 2.000                              
+##  Max.   :97.000                              
+##                                              
+##  calculated_host_listings_count_shared_rooms reviews_per_month
+##  Min.   : 0.0000                             Min.   : 0.010   
+##  1st Qu.: 0.0000                             1st Qu.: 0.210   
+##  Median : 0.0000                             Median : 0.710   
+##  Mean   : 0.0768                             Mean   : 1.179   
+##  3rd Qu.: 0.0000                             3rd Qu.: 1.770   
+##  Max.   :13.0000                             Max.   :21.410   
+##                                              NA's   :5731
+\end{verbatim}
