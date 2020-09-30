@@ -4,7 +4,19 @@ Markdown
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dd \textless{}{-}}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\KeywordTok{gzfile}\NormalTok{(}\StringTok{"../listings.csv.gz"}\NormalTok{))}
+\KeywordTok{library}\NormalTok{(viridis)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: viridisLite
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ggplot2)}
+
+\NormalTok{dd \textless{}{-}}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\KeywordTok{gzfile}\NormalTok{(}\StringTok{"../listings.csv.gz"}\NormalTok{), }\DataTypeTok{na.strings =} \KeywordTok{c}\NormalTok{(}\StringTok{""}\NormalTok{, }\StringTok{"N/A"}\NormalTok{))}
 
 \NormalTok{dataset \textless{}{-}}\StringTok{ "airbnb"}
 \end{Highlighting}
@@ -152,17 +164,224 @@ Decide if you need to declare some more factor or date
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{actives\textless{}{-}}\KeywordTok{c}\NormalTok{(}\DecValTok{12}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{16}\NormalTok{, }\DecValTok{17}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{26}\NormalTok{, }\DecValTok{29}\NormalTok{, }\DecValTok{33}\NormalTok{, }\DecValTok{34}\NormalTok{, }\DecValTok{37}\NormalTok{, }\DecValTok{38}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{47}\NormalTok{, }\DecValTok{48}\NormalTok{, }\DecValTok{51}\NormalTok{, }\DecValTok{52}\NormalTok{, }\DecValTok{53}\NormalTok{, }\DecValTok{54}\NormalTok{, }\DecValTok{56}\NormalTok{, }\DecValTok{57}\NormalTok{, }\DecValTok{58}\NormalTok{, }\DecValTok{61}\NormalTok{, }\DecValTok{62}\NormalTok{, }\DecValTok{63}\NormalTok{, }\DecValTok{66}\NormalTok{, }\DecValTok{67}\NormalTok{, }\DecValTok{69}\NormalTok{, }\DecValTok{74}\NormalTok{)}
+\NormalTok{actives\textless{}{-}}\KeywordTok{c}\NormalTok{(}\DecValTok{12}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{16}\NormalTok{, }\DecValTok{17}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{26}\NormalTok{, }\DecValTok{29}\NormalTok{, }\DecValTok{33}\NormalTok{, }\DecValTok{34}\NormalTok{, }\DecValTok{37}\NormalTok{, }\DecValTok{38}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{47}\NormalTok{, }\DecValTok{48}\NormalTok{, }\DecValTok{51}\NormalTok{,}
+           \DecValTok{52}\NormalTok{, }\DecValTok{53}\NormalTok{, }\DecValTok{54}\NormalTok{, }\DecValTok{56}\NormalTok{, }\DecValTok{57}\NormalTok{, }\DecValTok{58}\NormalTok{, }\DecValTok{61}\NormalTok{, }\DecValTok{62}\NormalTok{, }\DecValTok{63}\NormalTok{, }\DecValTok{66}\NormalTok{, }\DecValTok{67}\NormalTok{, }\DecValTok{69}\NormalTok{, }\DecValTok{74}\NormalTok{)}
 
-\NormalTok{dd[,}\DecValTok{12}\NormalTok{]\textless{}{-}}\KeywordTok{as.Date}\NormalTok{(dd[,}\DecValTok{12}\NormalTok{], }\DataTypeTok{format=}\StringTok{"\%Y{-}\%m{-}\%d"}\NormalTok{)}
-\NormalTok{dd}\OperatorTok{$}\NormalTok{price =}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{gsub}\NormalTok{(}\StringTok{"[}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{$,]"}\NormalTok{, }\StringTok{""}\NormalTok{, dd}\OperatorTok{$}\NormalTok{price))}
+\CommentTok{\# Check variable names}
+\KeywordTok{names}\NormalTok{(dd[,actives])}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+##  [1] "host_since"                   "host_response_time"          
+##  [3] "host_response_rate"           "host_acceptance_rate"        
+##  [5] "host_is_superhost"            "host_listings_count"         
+##  [7] "host_has_profile_pic"         "host_identity_verified"      
+##  [9] "neighbourhood_group_cleansed" "room_type"                   
+## [11] "accommodates"                 "bedrooms"                    
+## [13] "beds"                         "price"                       
+## [15] "minimum_nights_avg_ntm"       "maximum_nights_avg_ntm"      
+## [17] "availability_30"              "availability_60"             
+## [19] "availability_90"              "availability_365"            
+## [21] "number_of_reviews"            "number_of_reviews_ltm"       
+## [23] "number_of_reviews_l30d"       "review_scores_rating"        
+## [25] "review_scores_accuracy"       "review_scores_cleanliness"   
+## [27] "review_scores_location"       "review_scores_value"         
+## [29] "instant_bookable"             "reviews_per_month"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Parse dates}
+\NormalTok{dd}\OperatorTok{$}\NormalTok{host\_since \textless{}{-}}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(dd}\OperatorTok{$}\NormalTok{host\_since, }\DataTypeTok{format=}\StringTok{"\%Y{-}\%m{-}\%d"}\NormalTok{)}
+
+\CommentTok{\# Remove dollar sign and comma from price}
+\NormalTok{dd}\OperatorTok{$}\NormalTok{price \textless{}{-}}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{sub}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{,"}\NormalTok{, }\StringTok{""}\NormalTok{, }\KeywordTok{sub}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{$"}\NormalTok{, }\StringTok{""}\NormalTok{, dd}\OperatorTok{$}\NormalTok{price)))}
+
+\CommentTok{\# Remove percent sign from rates}
+\NormalTok{dd}\OperatorTok{$}\NormalTok{host\_response\_rate \textless{}{-}}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{sub}\NormalTok{(}\StringTok{"\%"}\NormalTok{, }\StringTok{""}\NormalTok{, dd}\OperatorTok{$}\NormalTok{host\_response\_rate))}
+\NormalTok{dd}\OperatorTok{$}\NormalTok{host\_acceptance\_rate \textless{}{-}}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{sub}\NormalTok{(}\StringTok{"\%"}\NormalTok{, }\StringTok{""}\NormalTok{, dd}\OperatorTok{$}\NormalTok{host\_acceptance\_rate))}
+\CommentTok{\#dd$host\_response\_time[dd$host\_response\_time \%in\% c("", "N/A")] \textless{}{-} NA }
+
+\CommentTok{\# convert booleans from "t" / "f" to logical}
+\NormalTok{booleans \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"host\_is\_superhost"}\NormalTok{, }\StringTok{"host\_has\_profile\_pic"}\NormalTok{, }\StringTok{"host\_identity\_verified"}\NormalTok{, }\StringTok{"instant\_bookable"}\NormalTok{)}
+\NormalTok{dd[,booleans] \textless{}{-}}\StringTok{ }\NormalTok{dd[,booleans] }\OperatorTok{==}\StringTok{ "t"}
+\end{Highlighting}
+\end{Shaded}
+
+Make categories
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dd}\OperatorTok{$}\NormalTok{host\_since\_year \textless{}{-}}\StringTok{ }\KeywordTok{factor}\NormalTok{(}\KeywordTok{sub}\NormalTok{(}\StringTok{"{-}[0{-}9{-}]+"}\NormalTok{,}\StringTok{""}\NormalTok{, dd}\OperatorTok{$}\NormalTok{host\_since))}
+\NormalTok{dd}\OperatorTok{$}\NormalTok{host\_since\_mm\_dd \textless{}{-}}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{sub}\NormalTok{(}\StringTok{"[0{-}9]+[{-}]"}\NormalTok{,}\StringTok{""}\NormalTok{, dd}\OperatorTok{$}\NormalTok{host\_since), }\DataTypeTok{format=}\StringTok{"\%m{-}\%d"}\NormalTok{)}
+
+\NormalTok{breaks \textless{}{-}}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"01{-}01"}\NormalTok{,}\StringTok{"03{-}21"}\NormalTok{,}\StringTok{"06{-}21"}\NormalTok{,}\StringTok{"09{-}21"}\NormalTok{, }\StringTok{"12{-}21"}\NormalTok{, }\StringTok{"12{-}31"}\NormalTok{), }\DataTypeTok{format=}\StringTok{"\%m{-}\%d"}\NormalTok{)}
+\NormalTok{dd}\OperatorTok{$}\NormalTok{host\_since\_season \textless{}{-}}\StringTok{ }\KeywordTok{cut}\NormalTok{(dd}\OperatorTok{$}\NormalTok{host\_since\_mm\_dd, }\DataTypeTok{labels=}\KeywordTok{c}\NormalTok{(}\StringTok{"Winter"}\NormalTok{, }\StringTok{"Spring"}\NormalTok{, }\StringTok{"Summer"}\NormalTok{, }\StringTok{"Autumn"}\NormalTok{, }\StringTok{"Winter"}\NormalTok{), }\DataTypeTok{breaks=}\NormalTok{breaks)}
+
+\CommentTok{\# add new category to actives}
+\NormalTok{index\_new \textless{}{-}}\StringTok{ }\KeywordTok{grep}\NormalTok{(}\StringTok{"host\_since\_season"}\NormalTok{, }\KeywordTok{colnames}\NormalTok{(dd))}
+\NormalTok{actives \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(actives, index\_new)}
+\NormalTok{index\_new \textless{}{-}}\StringTok{ }\KeywordTok{grep}\NormalTok{(}\StringTok{"host\_since\_year"}\NormalTok{, }\KeywordTok{colnames}\NormalTok{(dd))}
+\NormalTok{actives \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(actives, index\_new)}
+
+\NormalTok{categories \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"host\_response\_rate"}\NormalTok{, }\StringTok{"host\_acceptance\_rate"}\NormalTok{)}
+
+\ControlFlowTok{for}\NormalTok{ (k }\ControlFlowTok{in}\NormalTok{ categories) \{}
+\NormalTok{  newfield \textless{}{-}}\StringTok{ }\KeywordTok{paste}\NormalTok{(}\DataTypeTok{sep =} \StringTok{""}\NormalTok{, k, }\StringTok{"\_cat"}\NormalTok{)}
+\NormalTok{  dd[,newfield] \textless{}{-}}\StringTok{ }\KeywordTok{cut}\NormalTok{(dd[,k],}
+                       \DataTypeTok{breaks=}\KeywordTok{c}\NormalTok{(}\OperatorTok{{-}}\DecValTok{1}\NormalTok{,}\DecValTok{20}\NormalTok{,}\DecValTok{40}\NormalTok{,}\DecValTok{60}\NormalTok{,}\DecValTok{80}\NormalTok{,}\DecValTok{100}\NormalTok{),}
+                       \DataTypeTok{labels=}\KeywordTok{c}\NormalTok{(}\StringTok{"very low"}\NormalTok{, }\StringTok{"low"}\NormalTok{, }\StringTok{"average"}\NormalTok{, }\StringTok{"high"}\NormalTok{, }\StringTok{"very high"}\NormalTok{))}
+  
+  \CommentTok{\# remove old category from actives}
+\NormalTok{  actives \textless{}{-}}\StringTok{ }\NormalTok{actives[}\KeywordTok{names}\NormalTok{(dd)[actives]}\OperatorTok{!=}\NormalTok{k]}
+  
+  \CommentTok{\# add new category to actives}
+\NormalTok{  index\_new \textless{}{-}}\StringTok{ }\KeywordTok{grep}\NormalTok{(newfield, }\KeywordTok{colnames}\NormalTok{(dd))}
+\NormalTok{  actives \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(actives, index\_new)}
+\NormalTok{\}}
+\NormalTok{actives \textless{}{-}}\StringTok{ }\KeywordTok{unique}\NormalTok{(actives)}
+
+\NormalTok{factors \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"neighbourhood\_group\_cleansed"}\NormalTok{, }\StringTok{"host\_response\_time"}\NormalTok{, }\StringTok{"room\_type"}\NormalTok{)}
+\NormalTok{dd[,factors] \textless{}{-}}\StringTok{ }\KeywordTok{lapply}\NormalTok{(dd[,factors], factor)}
+
+\CommentTok{\#for (k in actives) \{}
+  \KeywordTok{print}\NormalTok{(}\KeywordTok{paste}\NormalTok{(}\StringTok{"Variable: "}\NormalTok{, actives, }\StringTok{": "}\NormalTok{, }\KeywordTok{names}\NormalTok{(dd)[actives], }\StringTok{" {-}{-}{-} "}\NormalTok{, }\KeywordTok{lapply}\NormalTok{(dd[,actives], class)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "Variable:  12 :  host_since  ---  Date"                    
+##  [2] "Variable:  15 :  host_response_time  ---  factor"          
+##  [3] "Variable:  18 :  host_is_superhost  ---  logical"          
+##  [4] "Variable:  22 :  host_listings_count  ---  integer"        
+##  [5] "Variable:  25 :  host_has_profile_pic  ---  logical"       
+##  [6] "Variable:  26 :  host_identity_verified  ---  logical"     
+##  [7] "Variable:  29 :  neighbourhood_group_cleansed  ---  factor"
+##  [8] "Variable:  33 :  room_type  ---  factor"                   
+##  [9] "Variable:  34 :  accommodates  ---  integer"               
+## [10] "Variable:  37 :  bedrooms  ---  integer"                   
+## [11] "Variable:  38 :  beds  ---  integer"                       
+## [12] "Variable:  40 :  price  ---  numeric"                      
+## [13] "Variable:  47 :  minimum_nights_avg_ntm  ---  numeric"     
+## [14] "Variable:  48 :  maximum_nights_avg_ntm  ---  numeric"     
+## [15] "Variable:  51 :  availability_30  ---  integer"            
+## [16] "Variable:  52 :  availability_60  ---  integer"            
+## [17] "Variable:  53 :  availability_90  ---  integer"            
+## [18] "Variable:  54 :  availability_365  ---  integer"           
+## [19] "Variable:  56 :  number_of_reviews  ---  integer"          
+## [20] "Variable:  57 :  number_of_reviews_ltm  ---  integer"      
+## [21] "Variable:  58 :  number_of_reviews_l30d  ---  integer"     
+## [22] "Variable:  61 :  review_scores_rating  ---  integer"       
+## [23] "Variable:  62 :  review_scores_accuracy  ---  integer"     
+## [24] "Variable:  63 :  review_scores_cleanliness  ---  integer"  
+## [25] "Variable:  66 :  review_scores_location  ---  integer"     
+## [26] "Variable:  67 :  review_scores_value  ---  integer"        
+## [27] "Variable:  69 :  instant_bookable  ---  logical"           
+## [28] "Variable:  74 :  reviews_per_month  ---  numeric"          
+## [29] "Variable:  77 :  host_since_season  ---  factor"           
+## [30] "Variable:  75 :  host_since_year  ---  factor"             
+## [31] "Variable:  78 :  host_response_rate_cat  ---  factor"      
+## [32] "Variable:  79 :  host_acceptance_rate_cat  ---  factor"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\}}
+  
+\KeywordTok{summary}\NormalTok{(dd[,actives])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    host_since                  host_response_time host_is_superhost
+##  Min.   :2008-09-19   a few days or more: 843     Mode :logical    
+##  1st Qu.:2013-10-12   within a day      :2018     FALSE:16734      
+##  Median :2016-02-18   within a few hours:2946     TRUE :3961       
+##  Mean   :2016-02-03   within an hour    :7722     NA's :8          
+##  3rd Qu.:2018-06-27   NA's              :7174                      
+##  Max.   :2020-08-23                                                
+##  NA's   :8                                                         
+##  host_listings_count host_has_profile_pic host_identity_verified
+##  Min.   :  0.00      Mode :logical        Mode :logical         
+##  1st Qu.:  1.00      FALSE:55             FALSE:5302            
+##  Median :  2.00      TRUE :20640          TRUE :15393           
+##  Mean   : 16.81      NA's :8              NA's :8               
+##  3rd Qu.: 11.00                                                 
+##  Max.   :551.00                                                 
+##  NA's   :8                                                      
+##       neighbourhood_group_cleansed           room_type      accommodates   
+##  Eixample           :7020          Entire home/apt: 9596   Min.   : 1.000  
+##  Ciutat Vella       :4834          Hotel room     :  390   1st Qu.: 2.000  
+##  Sants-Montjuïc     :2365          Private room   :10497   Median : 2.000  
+##  Sant Martí         :2123          Shared room    :  220   Mean   : 3.297  
+##  Gràcia             :1773                                  3rd Qu.: 4.000  
+##  Sarrià-Sant Gervasi: 852                                  Max.   :16.000  
+##  (Other)            :1736                                                  
+##     bedrooms           beds            price          minimum_nights_avg_ntm
+##  Min.   : 1.000   Min.   : 0.000   Min.   :    0.00   Min.   :   1.00       
+##  1st Qu.: 1.000   1st Qu.: 1.000   1st Qu.:   35.00   1st Qu.:   1.40       
+##  Median : 1.000   Median : 2.000   Median :   55.00   Median :   2.70       
+##  Mean   : 1.604   Mean   : 2.233   Mean   :   86.34   Mean   :  10.67       
+##  3rd Qu.: 2.000   3rd Qu.: 3.000   3rd Qu.:   95.00   3rd Qu.:  12.10       
+##  Max.   :16.000   Max.   :48.000   Max.   :10000.00   Max.   :1123.00       
+##  NA's   :684      NA's   :409                                               
+##  maximum_nights_avg_ntm availability_30 availability_60 availability_90
+##  Min.   :1.000e+00      Min.   : 0.00   Min.   : 0.00   Min.   : 0.00  
+##  1st Qu.:3.300e+02      1st Qu.: 0.00   1st Qu.: 0.00   1st Qu.: 3.00  
+##  Median :1.125e+03      Median :24.00   Median :52.00   Median :80.00  
+##  Mean   :3.118e+05      Mean   :17.55   Mean   :36.43   Mean   :56.01  
+##  3rd Qu.:1.125e+03      3rd Qu.:30.00   3rd Qu.:59.00   3rd Qu.:89.00  
+##  Max.   :2.147e+09      Max.   :30.00   Max.   :60.00   Max.   :90.00  
+##                                                                        
+##  availability_365 number_of_reviews number_of_reviews_ltm
+##  Min.   :  0.0    Min.   :  0.0     Min.   :  0.000      
+##  1st Qu.: 55.0    1st Qu.:  0.0     1st Qu.:  0.000      
+##  Median :180.0    Median :  5.0     Median :  1.000      
+##  Mean   :191.3    Mean   : 33.1     Mean   :  6.401      
+##  3rd Qu.:352.0    3rd Qu.: 36.0     3rd Qu.:  9.000      
+##  Max.   :365.0    Max.   :743.0     Max.   :278.000      
+##                                                          
+##  number_of_reviews_l30d review_scores_rating review_scores_accuracy
+##  Min.   : 0.0000        Min.   : 20.00       Min.   : 2.000        
+##  1st Qu.: 0.0000        1st Qu.: 88.00       1st Qu.: 9.000        
+##  Median : 0.0000        Median : 93.00       Median :10.000        
+##  Mean   : 0.1621        Mean   : 91.08       Mean   : 9.379        
+##  3rd Qu.: 0.0000        3rd Qu.: 98.00       3rd Qu.:10.000        
+##  Max.   :15.0000        Max.   :100.00       Max.   :10.000        
+##                         NA's   :5971         NA's   :5982          
+##  review_scores_cleanliness review_scores_location review_scores_value
+##  Min.   : 2.000            Min.   : 2.000         Min.   : 2.000     
+##  1st Qu.: 9.000            1st Qu.: 9.000         1st Qu.: 9.000     
+##  Median : 9.000            Median :10.000         Median : 9.000     
+##  Mean   : 9.227            Mean   : 9.618         Mean   : 9.055     
+##  3rd Qu.:10.000            3rd Qu.:10.000         3rd Qu.:10.000     
+##  Max.   :10.000            Max.   :10.000         Max.   :10.000     
+##  NA's   :5980              NA's   :5985           NA's   :5985       
+##  instant_bookable reviews_per_month host_since_season host_since_year
+##  Mode :logical    Min.   : 0.010    Winter:4988       2019   :2973   
+##  FALSE:9372       1st Qu.: 0.210    Spring:5411       2013   :2395   
+##  TRUE :11331      Median : 0.710    Summer:5251       2015   :2392   
+##                   Mean   : 1.179    Autumn:5031       2018   :2249   
+##                   3rd Qu.: 1.770    NA's  :  22       2017   :2126   
+##                   Max.   :21.410                      (Other):8560   
+##                   NA's   :5731                        NA's   :   8   
+##  host_response_rate_cat host_acceptance_rate_cat
+##  very low :  588        very low :  852         
+##  low      :  240        low      :  379         
+##  average  :  487        average  :  713         
+##  high     :  996        high     : 1584         
+##  very high:11218        very high:13737         
+##  NA's     : 7174        NA's     : 3438         
+## 
+\end{verbatim}
 
 Basic descriptive analysis for numerical variables
 
 (decide the maximum number of colors you can need in a graph based on
 your metadata file)
+
+ggplot
 
 \begin{verbatim}
 ## [1] "variable  12 : host_since"
@@ -173,246 +392,91 @@ your metadata file)
 ## [1] NA
 \end{verbatim}
 
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-1.pdf}
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 8 rows containing non-finite values (stat_bin).
+\end{verbatim}
+
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-1}
 
 \begin{verbatim}
 ## [1] "variable  15 : host_response_time"
 \end{verbatim}
 
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-2.pdf}
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-3.pdf}
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-2}
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-3}
 
 \begin{verbatim}
-## [1] "Number of modalities:  6"
+## [1] "Number of modalities:  5"
 ## [1] "Frequency table"
 ## 
-##                    a few days or more                N/A       within a day 
-##                  8                843               7166               2018 
-## within a few hours     within an hour 
-##               2946               7722 
+## a few days or more       within a day within a few hours     within an hour 
+##                843               2018               2946               7722 
+##               <NA> 
+##               7174 
 ## [1] "Relative frequency table (proportions)"
 ## 
-##                    a few days or more                N/A       within a day 
-##       0.0003864174       0.0407187364       0.3461334106       0.0974737961 
-## within a few hours     within an hour 
-##       0.1422982176       0.3729894218 
+## a few days or more       within a day within a few hours     within an hour 
+##         0.04071874         0.09747380         0.14229822         0.37298942 
+##               <NA> 
+##         0.34651983 
 ## [1] "Frequency table sorted"
 ## 
-##     within an hour                N/A within a few hours       within a day 
-##               7722               7166               2946               2018 
-## a few days or more                    
-##                843                  8 
+##     within an hour               <NA> within a few hours       within a day 
+##               7722               7174               2946               2018 
+## a few days or more 
+##                843 
 ## [1] "Relative frequency table (proportions) sorted"
 ## 
-##     within an hour                N/A within a few hours       within a day 
-##       0.3729894218       0.3461334106       0.1422982176       0.0974737961 
-## a few days or more                    
-##       0.0407187364       0.0003864174 
-## [1] "variable  16 : host_response_rate"
-\end{verbatim}
-
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-4.pdf}
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-5.pdf}
-
-\begin{verbatim}
-## [1] "Number of modalities:  58"
-## [1] "Frequency table"
-## 
-##        0%  10% 100%  11%  13%  14%  17%  20%  25%  26%  28%  29%  30%  33%  38% 
-##    8  513    7 8031    1    8    2    1   15   29    1  132    3    3   58    1 
-##  40%  43%  44%  50%  56%  57%  60%  63%  64%  66%  67%  68%  70%  71%  73%  75% 
-##   13   12    1  209   17   45  203    5   53    1  146    1   94   79   35   95 
-##  76%  77%  78%  79%  80%  81%  82%  83%  84%  85%  86%  87%  88%  89%   9%  90% 
-##   48   27    6   20  386   42   16   54   31  154   96   17  263  153   41  629 
-##  91%  92%  93%  94%  95%  96%  97%  98%  99%  N/A 
-##  340  102  152  111  162  155  180  364  166 7166 
-## [1] "Relative frequency table (proportions)"
-## 
-##                        0%          10%         100%          11%          13% 
-## 3.864174e-04 2.477902e-02 3.381152e-04 3.879148e-01 4.830218e-05 3.864174e-04 
-##          14%          17%          20%          25%          26%          28% 
-## 9.660436e-05 4.830218e-05 7.245327e-04 1.400763e-03 4.830218e-05 6.375888e-03 
-##          29%          30%          33%          38%          40%          43% 
-## 1.449065e-04 1.449065e-04 2.801526e-03 4.830218e-05 6.279283e-04 5.796261e-04 
-##          44%          50%          56%          57%          60%          63% 
-## 4.830218e-05 1.009516e-02 8.211370e-04 2.173598e-03 9.805342e-03 2.415109e-04 
-##          64%          66%          67%          68%          70%          71% 
-## 2.560015e-03 4.830218e-05 7.052118e-03 4.830218e-05 4.540405e-03 3.815872e-03 
-##          73%          75%          76%          77%          78%          79% 
-## 1.690576e-03 4.588707e-03 2.318505e-03 1.304159e-03 2.898131e-04 9.660436e-04 
-##          80%          81%          82%          83%          84%          85% 
-## 1.864464e-02 2.028691e-03 7.728349e-04 2.608318e-03 1.497368e-03 7.438535e-03 
-##          86%          87%          88%          89%           9%          90% 
-## 4.637009e-03 8.211370e-04 1.270347e-02 7.390233e-03 1.980389e-03 3.038207e-02 
-##          91%          92%          93%          94%          95%          96% 
-## 1.642274e-02 4.926822e-03 7.341931e-03 5.361542e-03 7.824953e-03 7.486838e-03 
-##          97%          98%          99%          N/A 
-## 8.694392e-03 1.758199e-02 8.018162e-03 3.461334e-01 
-## [1] "Frequency table sorted"
-## 
-## 100%  N/A  90%   0%  80%  98%  91%  88%  50%  60%  97%  99%  95%  96%  85%  89% 
-## 8031 7166  629  513  386  364  340  263  209  203  180  166  162  155  154  153 
-##  93%  67%  28%  94%  92%  86%  75%  70%  71%  33%  83%  64%  76%  57%  81%   9% 
-##  152  146  132  111  102   96   95   94   79   58   54   53   48   45   42   41 
-##  73%  84%  25%  77%  79%  56%  87%  82%  20%  40%  43%       13%  10%  78%  63% 
-##   35   31   29   27   20   17   17   16   15   13   12    8    8    7    6    5 
-##  29%  30%  14%  11%  17%  26%  38%  44%  66%  68% 
-##    3    3    2    1    1    1    1    1    1    1 
-## [1] "Relative frequency table (proportions) sorted"
-## 
-##         100%          N/A          90%           0%          80%          98% 
-## 3.879148e-01 3.461334e-01 3.038207e-02 2.477902e-02 1.864464e-02 1.758199e-02 
-##          91%          88%          50%          60%          97%          99% 
-## 1.642274e-02 1.270347e-02 1.009516e-02 9.805342e-03 8.694392e-03 8.018162e-03 
-##          95%          96%          85%          89%          93%          67% 
-## 7.824953e-03 7.486838e-03 7.438535e-03 7.390233e-03 7.341931e-03 7.052118e-03 
-##          28%          94%          92%          86%          75%          70% 
-## 6.375888e-03 5.361542e-03 4.926822e-03 4.637009e-03 4.588707e-03 4.540405e-03 
-##          71%          33%          83%          64%          76%          57% 
-## 3.815872e-03 2.801526e-03 2.608318e-03 2.560015e-03 2.318505e-03 2.173598e-03 
-##          81%           9%          73%          84%          25%          77% 
-## 2.028691e-03 1.980389e-03 1.690576e-03 1.497368e-03 1.400763e-03 1.304159e-03 
-##          79%          56%          87%          82%          20%          40% 
-## 9.660436e-04 8.211370e-04 8.211370e-04 7.728349e-04 7.245327e-04 6.279283e-04 
-##          43%                       13%          10%          78%          63% 
-## 5.796261e-04 3.864174e-04 3.864174e-04 3.381152e-04 2.898131e-04 2.415109e-04 
-##          29%          30%          14%          11%          17%          26% 
-## 1.449065e-04 1.449065e-04 9.660436e-05 4.830218e-05 4.830218e-05 4.830218e-05 
-##          38%          44%          66%          68% 
-## 4.830218e-05 4.830218e-05 4.830218e-05 4.830218e-05 
-## [1] "variable  17 : host_acceptance_rate"
-\end{verbatim}
-
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-6.pdf}
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-7.pdf}
-
-\begin{verbatim}
-## [1] "Number of modalities:  95"
-## [1] "Frequency table"
-## 
-##        0%  10% 100%  11%  13%  14%  15%  16%  17%  18%   2%  20%  21%  22%  23% 
-##    8  511    6 7857    4   65    5    5    1  177    4    5   21   12   12    5 
-##  25%  26%  27%  29%   3%  30%  32%  33%  35%  36%  37%  38%  39%   4%  40%  41% 
-##   44   10   10   23    1    2    4  143   12   17    5   11    8    1   61    8 
-##  42%  43%  44%  45%  46%  47%  48%  49%   5%  50%  51%  52%  53%  54%  55%  56% 
-##    7   18    9    3   13   12    8   11    2  329    1    5    9   12   26   20 
-##  57%  58%  59%   6%  60%  61%  62%  63%  64%  65%  66%  67%  68%  69%   7%  70% 
-##   96   16   53    1   57  102   29   47   44   49    7  202   67   21    1   31 
-##  71%  72%  73%  74%  75%  76%  77%  78%  79%   8%  80%  81%  82%  83%  84%  85% 
-##  143   68   33   29  209   51   91   74   44   42  243   54   54  182   62   82 
-##  86%  87%  88%  89%  90%  91%  92%  93%  94%  95%  96%  97%  98%  99%  N/A 
-##  166   84  162  224  203  151  398  255  233  293  516  539  937 1285 3430 
-## [1] "Relative frequency table (proportions)"
-## 
-##                        0%          10%         100%          11%          13% 
-## 3.864174e-04 2.468241e-02 2.898131e-04 3.795102e-01 1.932087e-04 3.139642e-03 
-##          14%          15%          16%          17%          18%           2% 
-## 2.415109e-04 2.415109e-04 4.830218e-05 8.549486e-03 1.932087e-04 2.415109e-04 
-##          20%          21%          22%          23%          25%          26% 
-## 1.014346e-03 5.796261e-04 5.796261e-04 2.415109e-04 2.125296e-03 4.830218e-04 
-##          27%          29%           3%          30%          32%          33% 
-## 4.830218e-04 1.110950e-03 4.830218e-05 9.660436e-05 1.932087e-04 6.907212e-03 
-##          35%          36%          37%          38%          39%           4% 
-## 5.796261e-04 8.211370e-04 2.415109e-04 5.313240e-04 3.864174e-04 4.830218e-05 
-##          40%          41%          42%          43%          44%          45% 
-## 2.946433e-03 3.864174e-04 3.381152e-04 8.694392e-04 4.347196e-04 1.449065e-04 
-##          46%          47%          48%          49%           5%          50% 
-## 6.279283e-04 5.796261e-04 3.864174e-04 5.313240e-04 9.660436e-05 1.589142e-02 
-##          51%          52%          53%          54%          55%          56% 
-## 4.830218e-05 2.415109e-04 4.347196e-04 5.796261e-04 1.255857e-03 9.660436e-04 
-##          57%          58%          59%           6%          60%          61% 
-## 4.637009e-03 7.728349e-04 2.560015e-03 4.830218e-05 2.753224e-03 4.926822e-03 
-##          62%          63%          64%          65%          66%          67% 
-## 1.400763e-03 2.270202e-03 2.125296e-03 2.366807e-03 3.381152e-04 9.757040e-03 
-##          68%          69%           7%          70%          71%          72% 
-## 3.236246e-03 1.014346e-03 4.830218e-05 1.497368e-03 6.907212e-03 3.284548e-03 
-##          73%          74%          75%          76%          77%          78% 
-## 1.593972e-03 1.400763e-03 1.009516e-02 2.463411e-03 4.395498e-03 3.574361e-03 
-##          79%           8%          80%          81%          82%          83% 
-## 2.125296e-03 2.028691e-03 1.173743e-02 2.608318e-03 2.608318e-03 8.790996e-03 
-##          84%          85%          86%          87%          88%          89% 
-## 2.994735e-03 3.960779e-03 8.018162e-03 4.057383e-03 7.824953e-03 1.081969e-02 
-##          90%          91%          92%          93%          94%          95% 
-## 9.805342e-03 7.293629e-03 1.922427e-02 1.231706e-02 1.125441e-02 1.415254e-02 
-##          96%          97%          98%          99%          N/A 
-## 2.492392e-02 2.603487e-02 4.525914e-02 6.206830e-02 1.656765e-01 
-## [1] "Frequency table sorted"
-## 
-## 100%  N/A  99%  98%  97%  96%   0%  92%  50%  95%  93%  80%  94%  89%  75%  90% 
-## 7857 3430 1285  937  539  516  511  398  329  293  255  243  233  224  209  203 
-##  67%  83%  17%  86%  88%  91%  33%  71%  61%  57%  77%  87%  85%  78%  72%  68% 
-##  202  182  177  166  162  151  143  143  102   96   91   84   82   74   68   67 
-##  13%  84%  40%  60%  81%  82%  59%  76%  65%  63%  25%  64%  79%   8%  73%  70% 
-##   65   62   61   57   54   54   53   51   49   47   44   44   44   42   33   31 
-##  62%  74%  55%  29%  20%  69%  56%  43%  36%  58%  46%  21%  22%  35%  47%  54% 
-##   29   29   26   23   21   21   20   18   17   16   13   12   12   12   12   12 
-##  38%  49%  26%  27%  44%  53%       39%  41%  48%  42%  66%  10%  14%  15%   2% 
-##   11   11   10   10    9    9    8    8    8    8    7    7    6    5    5    5 
-##  23%  37%  52%  11%  18%  32%  45%  30%   5%  16%   3%   4%  51%   6%   7% 
-##    5    5    5    4    4    4    3    2    2    1    1    1    1    1    1 
-## [1] "Relative frequency table (proportions) sorted"
-## 
-##         100%          N/A          99%          98%          97%          96% 
-## 3.795102e-01 1.656765e-01 6.206830e-02 4.525914e-02 2.603487e-02 2.492392e-02 
-##           0%          92%          50%          95%          93%          80% 
-## 2.468241e-02 1.922427e-02 1.589142e-02 1.415254e-02 1.231706e-02 1.173743e-02 
-##          94%          89%          75%          90%          67%          83% 
-## 1.125441e-02 1.081969e-02 1.009516e-02 9.805342e-03 9.757040e-03 8.790996e-03 
-##          17%          86%          88%          91%          33%          71% 
-## 8.549486e-03 8.018162e-03 7.824953e-03 7.293629e-03 6.907212e-03 6.907212e-03 
-##          61%          57%          77%          87%          85%          78% 
-## 4.926822e-03 4.637009e-03 4.395498e-03 4.057383e-03 3.960779e-03 3.574361e-03 
-##          72%          68%          13%          84%          40%          60% 
-## 3.284548e-03 3.236246e-03 3.139642e-03 2.994735e-03 2.946433e-03 2.753224e-03 
-##          81%          82%          59%          76%          65%          63% 
-## 2.608318e-03 2.608318e-03 2.560015e-03 2.463411e-03 2.366807e-03 2.270202e-03 
-##          25%          64%          79%           8%          73%          70% 
-## 2.125296e-03 2.125296e-03 2.125296e-03 2.028691e-03 1.593972e-03 1.497368e-03 
-##          62%          74%          55%          29%          20%          69% 
-## 1.400763e-03 1.400763e-03 1.255857e-03 1.110950e-03 1.014346e-03 1.014346e-03 
-##          56%          43%          36%          58%          46%          21% 
-## 9.660436e-04 8.694392e-04 8.211370e-04 7.728349e-04 6.279283e-04 5.796261e-04 
-##          22%          35%          47%          54%          38%          49% 
-## 5.796261e-04 5.796261e-04 5.796261e-04 5.796261e-04 5.313240e-04 5.313240e-04 
-##          26%          27%          44%          53%                       39% 
-## 4.830218e-04 4.830218e-04 4.347196e-04 4.347196e-04 3.864174e-04 3.864174e-04 
-##          41%          48%          42%          66%          10%          14% 
-## 3.864174e-04 3.864174e-04 3.381152e-04 3.381152e-04 2.898131e-04 2.415109e-04 
-##          15%           2%          23%          37%          52%          11% 
-## 2.415109e-04 2.415109e-04 2.415109e-04 2.415109e-04 2.415109e-04 1.932087e-04 
-##          18%          32%          45%          30%           5%          16% 
-## 1.932087e-04 1.932087e-04 1.449065e-04 9.660436e-05 9.660436e-05 4.830218e-05 
-##           3%           4%          51%           6%           7% 
-## 4.830218e-05 4.830218e-05 4.830218e-05 4.830218e-05 4.830218e-05 
+##     within an hour               <NA> within a few hours       within a day 
+##         0.37298942         0.34651983         0.14229822         0.09747380 
+## a few days or more 
+##         0.04071874 
 ## [1] "variable  18 : host_is_superhost"
 \end{verbatim}
 
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-8.pdf}
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-9.pdf}
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-4}
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-5}
 
 \begin{verbatim}
 ## [1] "Number of modalities:  3"
 ## [1] "Frequency table"
 ## 
-##           f     t 
-##     8 16734  3961 
+## FALSE  TRUE  <NA> 
+## 16734  3961     8 
 ## [1] "Relative frequency table (proportions)"
 ## 
-##                         f            t 
-## 0.0003864174 0.8082886538 0.1913249288 
+##        FALSE         TRUE         <NA> 
+## 0.8082886538 0.1913249288 0.0003864174 
 ## [1] "Frequency table sorted"
 ## 
-##     f     t       
+## FALSE  TRUE  <NA> 
 ## 16734  3961     8 
 ## [1] "Relative frequency table (proportions) sorted"
 ## 
-##            f            t              
+##        FALSE         TRUE         <NA> 
 ## 0.8082886538 0.1913249288 0.0003864174 
 ## [1] "variable  22 : host_listings_count"
 \end{verbatim}
 
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-10.pdf}
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-11.pdf}
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 8 rows containing non-finite values (stat_bin).
+\end{verbatim}
+
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-6}
+
+\begin{verbatim}
+## Warning: Removed 8 rows containing non-finite values (stat_boxplot).
+\end{verbatim}
+
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-7}
 
 \begin{verbatim}
 ## [1] "Extended Summary Statistics"
@@ -423,56 +487,56 @@ your metadata file)
 ## [1] "variable  25 : host_has_profile_pic"
 \end{verbatim}
 
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-12.pdf}
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-13.pdf}
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-8}
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-9}
 
 \begin{verbatim}
 ## [1] "Number of modalities:  3"
 ## [1] "Frequency table"
 ## 
-##           f     t 
-##     8    55 20640 
+## FALSE  TRUE  <NA> 
+##    55 20640     8 
 ## [1] "Relative frequency table (proportions)"
 ## 
-##                         f            t 
-## 0.0003864174 0.0026566198 0.9969569628 
+##        FALSE         TRUE         <NA> 
+## 0.0026566198 0.9969569628 0.0003864174 
 ## [1] "Frequency table sorted"
 ## 
-##     t     f       
+##  TRUE FALSE  <NA> 
 ## 20640    55     8 
 ## [1] "Relative frequency table (proportions) sorted"
 ## 
-##            t            f              
+##         TRUE        FALSE         <NA> 
 ## 0.9969569628 0.0026566198 0.0003864174 
 ## [1] "variable  26 : host_identity_verified"
 \end{verbatim}
 
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-14.pdf}
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-15.pdf}
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-10}
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-11}
 
 \begin{verbatim}
 ## [1] "Number of modalities:  3"
 ## [1] "Frequency table"
 ## 
-##           f     t 
-##     8  5302 15393 
+## FALSE  TRUE  <NA> 
+##  5302 15393     8 
 ## [1] "Relative frequency table (proportions)"
 ## 
-##                         f            t 
-## 0.0003864174 0.2560981500 0.7435154325 
+##        FALSE         TRUE         <NA> 
+## 0.2560981500 0.7435154325 0.0003864174 
 ## [1] "Frequency table sorted"
 ## 
-##     t     f       
+##  TRUE FALSE  <NA> 
 ## 15393  5302     8 
 ## [1] "Relative frequency table (proportions) sorted"
 ## 
-##            t            f              
+##         TRUE        FALSE         <NA> 
 ## 0.7435154325 0.2560981500 0.0003864174 
 ## [1] "variable  29 : neighbourhood_group_cleansed"
 \end{verbatim}
 
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-16.pdf}
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-17.pdf}
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-12}
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-13}
 
 \begin{verbatim}
 ## [1] "Number of modalities:  10"
@@ -511,8 +575,8 @@ your metadata file)
 ## [1] "variable  33 : room_type"
 \end{verbatim}
 
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-18.pdf}
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-19.pdf}
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-14}
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-15}
 
 \begin{verbatim}
 ## [1] "Number of modalities:  4"
@@ -535,8 +599,12 @@ your metadata file)
 ## [1] "variable  34 : accommodates"
 \end{verbatim}
 
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-20.pdf}
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-21.pdf}
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-16}
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-17}
 
 \begin{verbatim}
 ## [1] "Extended Summary Statistics"
@@ -547,8 +615,21 @@ your metadata file)
 ## [1] "variable  37 : bedrooms"
 \end{verbatim}
 
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-22.pdf}
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-23.pdf}
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 684 rows containing non-finite values (stat_bin).
+\end{verbatim}
+
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-18}
+
+\begin{verbatim}
+## Warning: Removed 684 rows containing non-finite values (stat_boxplot).
+\end{verbatim}
+
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-19}
 
 \begin{verbatim}
 ## [1] "Extended Summary Statistics"
@@ -559,8 +640,21 @@ your metadata file)
 ## [1] "variable  38 : beds"
 \end{verbatim}
 
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-24.pdf}
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-25.pdf}
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 409 rows containing non-finite values (stat_bin).
+\end{verbatim}
+
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-20}
+
+\begin{verbatim}
+## Warning: Removed 409 rows containing non-finite values (stat_boxplot).
+\end{verbatim}
+
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-21}
 
 \begin{verbatim}
 ## [1] "Extended Summary Statistics"
@@ -571,8 +665,12 @@ your metadata file)
 ## [1] "variable  40 : price"
 \end{verbatim}
 
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-26.pdf}
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-27.pdf}
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-22}
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-23}
 
 \begin{verbatim}
 ## [1] "Extended Summary Statistics"
@@ -583,8 +681,12 @@ your metadata file)
 ## [1] "variable  47 : minimum_nights_avg_ntm"
 \end{verbatim}
 
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-28.pdf}
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-29.pdf}
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-24}
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-25}
 
 \begin{verbatim}
 ## [1] "Extended Summary Statistics"
@@ -595,8 +697,12 @@ your metadata file)
 ## [1] "variable  48 : maximum_nights_avg_ntm"
 \end{verbatim}
 
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-30.pdf}
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-31.pdf}
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-26}
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-27}
 
 \begin{verbatim}
 ## [1] "Extended Summary Statistics"
@@ -607,8 +713,12 @@ your metadata file)
 ## [1] "variable  51 : availability_30"
 \end{verbatim}
 
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-32.pdf}
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-33.pdf}
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-28}
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-29}
 
 \begin{verbatim}
 ## [1] "Extended Summary Statistics"
@@ -619,8 +729,12 @@ your metadata file)
 ## [1] "variable  52 : availability_60"
 \end{verbatim}
 
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-34.pdf}
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-35.pdf}
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-30}
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-31}
 
 \begin{verbatim}
 ## [1] "Extended Summary Statistics"
@@ -631,8 +745,12 @@ your metadata file)
 ## [1] "variable  53 : availability_90"
 \end{verbatim}
 
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-36.pdf}
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-37.pdf}
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-32}
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-33}
 
 \begin{verbatim}
 ## [1] "Extended Summary Statistics"
@@ -643,8 +761,12 @@ your metadata file)
 ## [1] "variable  54 : availability_365"
 \end{verbatim}
 
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-38.pdf}
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-39.pdf}
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-34}
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-35}
 
 \begin{verbatim}
 ## [1] "Extended Summary Statistics"
@@ -655,8 +777,12 @@ your metadata file)
 ## [1] "variable  56 : number_of_reviews"
 \end{verbatim}
 
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-40.pdf}
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-41.pdf}
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-36}
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-37}
 
 \begin{verbatim}
 ## [1] "Extended Summary Statistics"
@@ -667,8 +793,12 @@ your metadata file)
 ## [1] "variable  57 : number_of_reviews_ltm"
 \end{verbatim}
 
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-42.pdf}
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-43.pdf}
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-38}
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-39}
 
 \begin{verbatim}
 ## [1] "Extended Summary Statistics"
@@ -679,8 +809,12 @@ your metadata file)
 ## [1] "variable  58 : number_of_reviews_l30d"
 \end{verbatim}
 
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-44.pdf}
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-45.pdf}
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-40}
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-41}
 
 \begin{verbatim}
 ## [1] "Extended Summary Statistics"
@@ -691,8 +825,21 @@ your metadata file)
 ## [1] "variable  61 : review_scores_rating"
 \end{verbatim}
 
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-46.pdf}
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-47.pdf}
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 5971 rows containing non-finite values (stat_bin).
+\end{verbatim}
+
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-42}
+
+\begin{verbatim}
+## Warning: Removed 5971 rows containing non-finite values (stat_boxplot).
+\end{verbatim}
+
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-43}
 
 \begin{verbatim}
 ## [1] "Extended Summary Statistics"
@@ -703,8 +850,21 @@ your metadata file)
 ## [1] "variable  62 : review_scores_accuracy"
 \end{verbatim}
 
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-48.pdf}
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-49.pdf}
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 5982 rows containing non-finite values (stat_bin).
+\end{verbatim}
+
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-44}
+
+\begin{verbatim}
+## Warning: Removed 5982 rows containing non-finite values (stat_boxplot).
+\end{verbatim}
+
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-45}
 
 \begin{verbatim}
 ## [1] "Extended Summary Statistics"
@@ -715,8 +875,21 @@ your metadata file)
 ## [1] "variable  63 : review_scores_cleanliness"
 \end{verbatim}
 
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-50.pdf}
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-51.pdf}
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 5980 rows containing non-finite values (stat_bin).
+\end{verbatim}
+
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-46}
+
+\begin{verbatim}
+## Warning: Removed 5980 rows containing non-finite values (stat_boxplot).
+\end{verbatim}
+
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-47}
 
 \begin{verbatim}
 ## [1] "Extended Summary Statistics"
@@ -727,8 +900,21 @@ your metadata file)
 ## [1] "variable  66 : review_scores_location"
 \end{verbatim}
 
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-52.pdf}
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-53.pdf}
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 5985 rows containing non-finite values (stat_bin).
+\end{verbatim}
+
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-48}
+
+\begin{verbatim}
+## Warning: Removed 5985 rows containing non-finite values (stat_boxplot).
+\end{verbatim}
+
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-49}
 
 \begin{verbatim}
 ## [1] "Extended Summary Statistics"
@@ -739,8 +925,21 @@ your metadata file)
 ## [1] "variable  67 : review_scores_value"
 \end{verbatim}
 
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-54.pdf}
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-55.pdf}
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 5985 rows containing non-finite values (stat_bin).
+\end{verbatim}
+
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-50}
+
+\begin{verbatim}
+## Warning: Removed 5985 rows containing non-finite values (stat_boxplot).
+\end{verbatim}
+
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-51}
 
 \begin{verbatim}
 ## [1] "Extended Summary Statistics"
@@ -751,32 +950,45 @@ your metadata file)
 ## [1] "variable  69 : instant_bookable"
 \end{verbatim}
 
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-56.pdf}
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-57.pdf}
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-52}
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-53}
 
 \begin{verbatim}
 ## [1] "Number of modalities:  2"
 ## [1] "Frequency table"
 ## 
-##     f     t 
+## FALSE  TRUE 
 ##  9372 11331 
 ## [1] "Relative frequency table (proportions)"
 ## 
-##        f        t 
+##    FALSE     TRUE 
 ## 0.452688 0.547312 
 ## [1] "Frequency table sorted"
 ## 
-##     t     f 
+##  TRUE FALSE 
 ## 11331  9372 
 ## [1] "Relative frequency table (proportions) sorted"
 ## 
-##        t        f 
+##     TRUE    FALSE 
 ## 0.547312 0.452688 
 ## [1] "variable  74 : reviews_per_month"
 \end{verbatim}
 
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-58.pdf}
-\includegraphics{anal_files/figure-latex/unnamed-chunk-7-59.pdf}
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 5731 rows containing non-finite values (stat_bin).
+\end{verbatim}
+
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-54}
+
+\begin{verbatim}
+## Warning: Removed 5731 rows containing non-finite values (stat_boxplot).
+\end{verbatim}
+
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-55}
 
 \begin{verbatim}
 ## [1] "Extended Summary Statistics"
@@ -784,4 +996,108 @@ your metadata file)
 ##   0.010   0.210   0.710   1.179   1.770  21.410    5731 
 ## [1] "sd:  1.28741924372801"
 ## [1] "vc:  1.09231185933215"
+## [1] "variable  77 : host_since_season"
+\end{verbatim}
+
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-56}
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-57}
+
+\begin{verbatim}
+## [1] "Number of modalities:  5"
+## [1] "Frequency table"
+## 
+## Winter Spring Summer Autumn   <NA> 
+##   4988   5411   5251   5031     22 
+## [1] "Relative frequency table (proportions)"
+## 
+##      Winter      Spring      Summer      Autumn        <NA> 
+## 0.240931266 0.261363087 0.253634739 0.243008260 0.001062648 
+## [1] "Frequency table sorted"
+## 
+## Spring Summer Autumn Winter   <NA> 
+##   5411   5251   5031   4988     22 
+## [1] "Relative frequency table (proportions) sorted"
+## 
+##      Spring      Summer      Autumn      Winter        <NA> 
+## 0.261363087 0.253634739 0.243008260 0.240931266 0.001062648 
+## [1] "variable  75 : host_since_year"
+\end{verbatim}
+
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-58}
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-59}
+
+\begin{verbatim}
+## [1] "Number of modalities:  14"
+## [1] "Frequency table"
+## 
+## 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 <NA> 
+##    1   28  249 1179 1988 2395 1794 2392 2101 2126 2249 2973 1220    8 
+## [1] "Relative frequency table (proportions)"
+## 
+##         2008         2009         2010         2011         2012         2013 
+## 4.830218e-05 1.352461e-03 1.202724e-02 5.694827e-02 9.602473e-02 1.156837e-01 
+##         2014         2015         2016         2017         2018         2019 
+## 8.665411e-02 1.155388e-01 1.014829e-01 1.026904e-01 1.086316e-01 1.436024e-01 
+##         2020         <NA> 
+## 5.892866e-02 3.864174e-04 
+## [1] "Frequency table sorted"
+## 
+## 2019 2013 2015 2018 2017 2016 2012 2014 2020 2011 2010 2009 <NA> 2008 
+## 2973 2395 2392 2249 2126 2101 1988 1794 1220 1179  249   28    8    1 
+## [1] "Relative frequency table (proportions) sorted"
+## 
+##         2019         2013         2015         2018         2017         2016 
+## 1.436024e-01 1.156837e-01 1.155388e-01 1.086316e-01 1.026904e-01 1.014829e-01 
+##         2012         2014         2020         2011         2010         2009 
+## 9.602473e-02 8.665411e-02 5.892866e-02 5.694827e-02 1.202724e-02 1.352461e-03 
+##         <NA>         2008 
+## 3.864174e-04 4.830218e-05 
+## [1] "variable  78 : host_response_rate_cat"
+\end{verbatim}
+
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-60}
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-61}
+
+\begin{verbatim}
+## [1] "Number of modalities:  6"
+## [1] "Frequency table"
+## 
+##  very low       low   average      high very high      <NA> 
+##       588       240       487       996     11218      7174 
+## [1] "Relative frequency table (proportions)"
+## 
+##   very low        low    average       high  very high       <NA> 
+## 0.02840168 0.01159252 0.02352316 0.04810897 0.54185384 0.34651983 
+## [1] "Frequency table sorted"
+## 
+## very high      <NA>      high  very low   average       low 
+##     11218      7174       996       588       487       240 
+## [1] "Relative frequency table (proportions) sorted"
+## 
+##  very high       <NA>       high   very low    average        low 
+## 0.54185384 0.34651983 0.04810897 0.02840168 0.02352316 0.01159252 
+## [1] "variable  79 : host_acceptance_rate_cat"
+\end{verbatim}
+
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-62}
+\includegraphics[width=0.5\linewidth]{anal_files/figure-latex/figures-side-63}
+
+\begin{verbatim}
+## [1] "Number of modalities:  6"
+## [1] "Frequency table"
+## 
+##  very low       low   average      high very high      <NA> 
+##       852       379       713      1584     13737      3438 
+## [1] "Relative frequency table (proportions)"
+## 
+##   very low        low    average       high  very high       <NA> 
+## 0.04115346 0.01830653 0.03443945 0.07651065 0.66352703 0.16606289 
+## [1] "Frequency table sorted"
+## 
+## very high      <NA>      high  very low   average       low 
+##     13737      3438      1584       852       713       379 
+## [1] "Relative frequency table (proportions) sorted"
+## 
+##  very high       <NA>       high   very low    average        low 
+## 0.66352703 0.16606289 0.07651065 0.04115346 0.03443945 0.01830653
 \end{verbatim}

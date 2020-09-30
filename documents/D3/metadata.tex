@@ -33,16 +33,35 @@ Variable & Modalities & meaning & Type & \makecell{Measuring\\ unit} & \makecell
 \bottomrule
 \endlastfoot
 
-host\_since &                             & \multirow{2}{\hsize}{Time since the user has been a host in the platform.} & categorical &                & NA                          &         & explanatory \\
-                            & \textless{}six months          &                                   &             &                &                             &         &  \\
-                            & 0.5-2 years                  &                                   &             &                &                             &         &  \\
-                            & 2-5 years                    &                                   &             &                &                             &         &  \\
-                            & \textgreater{}5 years        &                                   &             &                &                                      &         &  \\
+host\_since\_season &                             & \multirow{2}{\hsize}{Season when the user became a host in the platform.} & categorical &                & NA                          &         & explanatory \\
+                            & Winter          &                                   &             &                &                             &         &  \\
+                            & Spring                 &                                   &             &                &                             &         &  \\
+                            &  Autumn                 &                                   &             &                &                             &         &  \\
+                            & Summer       &                                   &             &                &                                      &         &  \\
+host\_since\_year &                             & \multirow{2}{\hsize}{Year when the user became a host in the platform.} & categorical &                & NA                          &         & explanatory \\
+                            & 2008          &                                   &             &                &                             &         &  \\
+                            & 2009                 &                                   &             &                &                             &         &  \\
+                            &  2010                 &                                   &             &                &                             &         &  \\
+                            & 2011       &                                   &             &                &                                      &         &  \\
+                                                        &  2012                 &                                   &             &                &                             &         &  \\
+                            &  2013                 &                                   &             &                &                             &         &  \\
+                            &  2014                 &                                   &             &                &                             &         &  \\
+                            &  2015                 &                                   &             &                &                             &         &  \\
+                            &  2016                 &                                   &             &                &                             &         &  \\
+                            &  2017                 &                                   &             &                &                             &         &  \\
+                            &  2018                 &                                   &             &                &                             &         &  \\
+                            &  2019                 &                                   &             &                &                             &         &  \\
+                            &  2020                 &                                   &             &                &                             &         &  \\
+
+
+
+
 host\_response\_time        &                             & \multirow{2}{\hsize}{Median time the host takes to respond messages and petitions.} & categorical &                & NA                          &         & explanatory \\
                             & within an hour              &                                   &             &                &                             &         &  \\
                             & within a few hours          &                                   &             &                &                             & &  \\
                             & a few days or more          &                                   &             &                &                             &                                  &  \\
                             & within a day                &                                   &             &                &                             &                     &  \\
+\pagebreak
 host\_response\_rate        &                             & \multirow{3}{\hsize}{Rate of times the host answers the petitions and messages upon receiving them.} & categorical &                & NA                    &                     & explanatory \\
                             & very low                       &                                   &             &                &                             &                     &  \\
                             & low                         &                                   &             &                &                             &                     &  \\
@@ -56,11 +75,11 @@ host\_acceptance\_rate      &                             & \multirow{1}{\hsize}
                             & high                        &                                   &             &                &                             &                     &  \\
                             & very high                   &                                   &             &                &                             &                     &  \\
 host\_is\_superhost         &                             & The host is a superhost. & boolean &                & \textless{}NA\textgreater{} &                     & explanatory \\
-host\_listing\_countm        &                             & Number of listings for this host. & numeric     & listings       &                             &                     0-551   & explanatory \\
+host\_listings\_count        &                             & Number of listings for this host. & numeric     & listings       &                             &                     0-551   & explanatory \\
 host\_has\_profile\_pic     &                             & The host has a profile picture. & boolean     &                & \textless{}NA\textgreater{} &                     & explanatory \\
 host\_identity\_verified    &                             & The host has has verified his identity. & boolean     &                & \textless{}NA\textgreater{} &                     & explanatory \\
 instant\_bookable           &                             & The listing can be instantly booked & boolean     &                &                             &                     & explanatory \\
-\pagebreak
+
 \makecell[l]{neighbourhood \\ \qquad \_group\_cleansed}      &                             & \multirow{2}{\hsize}{Name of the neighbourhood where the listed property is.} & categorical &                &                             &                     & explanatory \\
                             & Ciutat Vella                &                                   &             &                &                             &                     &  \\
                             & Sant Martí                  &                                   &             &                &                             &                     &  \\
