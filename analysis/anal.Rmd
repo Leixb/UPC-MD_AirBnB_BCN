@@ -134,9 +134,9 @@ kbl(tab, booktabs = T) %>% #landscape()
 for(k in actives){
   var_name <- names(dd)[k]
   var_s <- sym(var_name)
-  cat('\n\\centering')
+  #cat('\n\\begin{center}')
   cat('\n## ', var_name)
-  cat('\n')
+  #cat('\n\\end{center}')
   #print(paste("variable ", k, ":", var_name ))
   if (!(is.numeric(dd[,k]) || class(dd[,k])=="Date")){
     # factors
@@ -165,7 +165,7 @@ for(k in actives){
       labs(x = NULL, y = NULL, fill = NULL) +
       guides(fill = guide_legend(reverse = TRUE)) +
       #scale_fill_manual(values = c("#ffd700", "#bcbcbc", "#ffa500", "#254290")) +
-      theme_classic() +
+    #  theme_classic() +
       theme(axis.line = element_blank(),
             axis.text = element_blank(),
             axis.ticks = element_blank())
@@ -232,15 +232,3 @@ for(k in actives){
 }
 par(ask=FALSE)
 ```
-
-\begin{center}
-
-```{r, echo=FALSE}
-kbl(table(dd$host_response_rate_cat), booktabs=T)
-
-#per exportar figures d'R per programa
-#dev.off()
-#png(file=mypath,width = 950, height = 800, units = "px")
-#dev.off()
-```
-\end{center}
