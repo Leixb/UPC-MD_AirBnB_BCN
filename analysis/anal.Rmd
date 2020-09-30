@@ -42,18 +42,32 @@ Decide if you need to declare some more factor or date
 actives<-c(12, 15, 16, 17, 18, 22, 25, 26, 29, 33, 34, 37, 38, 40, 47, 48, 51,
            52, 53, 54, 56, 57, 58, 61, 62, 63, 66, 67, 69, 74)
 
-dd[,12]<-as.Date(dd[,12], format="%Y-%m-%d")
-dd$price = as.numeric(gsub("[\\$,]", "", dd$price))
-dd$host_response_rate = as.numeric(gsub("[\\%,]", "", dd$host_response_rate))
+# Check variable names
+names(dd[,actives])
 
-h <- dd$host_response_rate;
-dd$hnum <- as.numeric(sub("%","",h));
-dd$hcat <- cut(dd$hnum, breaks=c(-1,20,40,60,80,100),
-               labels=c("very low", "low", "average", "high", "very high"));
+# Parse dates
+dd$host_since <- as.Date(dd$host_since, format="%Y-%m-%d")
 
+# Remove dollar sign and comma from price
+dd$price <- as.numeric(sub("\\,", "", sub("\\$", "", dd$price)))
+
+# Remove percent sign from rate
+dd$host_response_rate <- as.numeric(sub("%", "", dd$host_response_rate))
 
 ```
 
+Make categories
+
+```{r}
+dd$hnum <- as.numeric(sub("%", "", dd$host_response_rate));
+dd$hcat <- cut(dd$hnum, breaks=c(-1,20,40,60,80,100),
+               labels=c("very low", "low", "average", "high", "very high"));
+
+for (k in actives) {
+  print(paste("Variable: ", k, ": ", names(dd)[k], typeof(dd[,k])))
+}
+
+```
 
 Basic descriptive analysis for numerical variables
 
@@ -61,7 +75,7 @@ Basic descriptive analysis for numerical variables
 ```{r, echo=FALSE}
 listOfColors<-rainbow(39)
 
-par(ask=TRUE)
+#par(ask=TRUE)
 
 for(k in actives){
   print(paste("variable ", k, ":", names(dd)[k] ))
