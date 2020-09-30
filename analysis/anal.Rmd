@@ -5,7 +5,7 @@ output: latex_fragment
 Here you can write the introduction of your report and include some text that will be transferred to the word file every time you re-run this Markdown
 
 ```{r}
-dd <- read.csv(gzfile("../listings.csv.gz"))
+dd <- read.csv(gzfile("../listings.csv.gz"), na.strings = c("", "N/A"))
 
 dataset <- "airbnb"
 ```
@@ -51,17 +51,36 @@ dd$host_since <- as.Date(dd$host_since, format="%Y-%m-%d")
 # Remove dollar sign and comma from price
 dd$price <- as.numeric(sub("\\,", "", sub("\\$", "", dd$price)))
 
-# Remove percent sign from rate
+# Remove percent sign from rates
 dd$host_response_rate <- as.numeric(sub("%", "", dd$host_response_rate))
+dd$host_acceptance_rate <- as.numeric(sub("%", "", dd$host_acceptance_rate))
+#dd$host_response_time[dd$host_response_time %in% c("", "N/A")] <- NA 
+
+# convert booleans from "t" / "f" to logical
+booleans <- c("host_is_superhost", "host_has_profile_pic", "host_identity_verified", "instant_bookable")
+dd[,booleans] <- dd[,booleans] == "t"
 
 ```
 
 Make categories
 
 ```{r}
-dd$hnum <- as.numeric(sub("%", "", dd$host_response_rate));
-dd$hcat <- cut(dd$hnum, breaks=c(-1,20,40,60,80,100),
-               labels=c("very low", "low", "average", "high", "very high"));
+categories <- c("host_response_rate", "host_acceptance_rate")
+
+for (k in categories) {
+  newfield <- paste(sep = "", k, "_cat")
+  dd[,newfield] <- cut(dd[,k],
+                       breaks=c(-1,20,40,60,80,100),
+                       labels=c("very low", "low", "average", "high", "very high"))
+  
+  # remove old category from actives
+  actives <- actives[names(dd)[actives]!=k]
+  
+  # add new category to actives
+  index_new <- grep(newfield, colnames(dd))
+  actives <- c(actives, index_new)
+}
+actives <- unique(actives)
 
 for (k in actives) {
   print(paste("Variable: ", k, ": ", names(dd)[k], typeof(dd[,k])))
