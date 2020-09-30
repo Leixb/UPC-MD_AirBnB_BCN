@@ -69,11 +69,17 @@ Make categories
 
 ```{r}
 
-dd$host_since_year <- sub("-[0-9-]+","", dd$host_since)
+dd$host_since_year <- factor(sub("-[0-9-]+","", dd$host_since))
 dd$host_since_mm_dd <- as.Date(sub("[0-9]+[-]","", dd$host_since), format="%m-%d")
 
 breaks <- as.Date(c("01-01","03-21","06-21","09-21", "12-21", "12-31"), format="%m-%d")
 dd$host_since_season <- cut(dd$host_since_mm_dd, labels=c("Winter", "Spring", "Summer", "Autumn", "Winter"), breaks=breaks)
+
+# add new category to actives
+index_new <- grep("host_since_season", colnames(dd))
+actives <- c(actives, index_new)
+index_new <- grep("host_since_year", colnames(dd))
+actives <- c(actives, index_new)
 
 categories <- c("host_response_rate", "host_acceptance_rate")
 
