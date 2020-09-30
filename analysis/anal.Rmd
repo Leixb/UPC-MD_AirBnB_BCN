@@ -5,6 +5,9 @@ output: latex_fragment
 Here you can write the introduction of your report and include some text that will be transferred to the word file every time you re-run this Markdown
 
 ```{r}
+library(viridis)
+library(ggplot2)
+
 dd <- read.csv(gzfile("../listings.csv.gz"), na.strings = c("", "N/A"))
 
 dataset <- "airbnb"
@@ -82,9 +85,12 @@ for (k in categories) {
 }
 actives <- unique(actives)
 
-for (k in actives) {
-  print(paste("Variable: ", k, ": ", names(dd)[k], typeof(dd[,k])))
-}
+factors <- c("neighbourhood_group_cleansed", "host_response_time", "room_type")
+dd[,factors] <- lapply(dd[,factors], factor)
+
+#for (k in actives) {
+  print(paste("Variable: ", actives, ": ", names(dd)[actives], " --- ", lapply(dd[,actives], class)))
+#}
 
 ```
 
@@ -92,19 +98,80 @@ Basic descriptive analysis for numerical variables
 
 (decide the maximum number of colors you can need in a graph based on your metadata file)
 ```{r, echo=FALSE}
-listOfColors<-rainbow(39)
+# listOfColors<-rainbow(10)
+# 
+# #par(ask=TRUE)
+# 
+# for(k in actives){
+#   var_name <- names(dd)[k]
+#   var_s <- sym(var_name)
+#   print(paste("variable ", k, ":", var_name ))
+#   if (!(is.numeric(dd[,k]) || class(dd[,k])=="Date")){
+#     frecs<-table(as.factor(dd[,k]), useNA="ifany")
+#     proportions<-frecs/n
+#     #ojo, decidir si calcular porcentages con o sin missing values
+#     pie(frecs, cex=0.6, main=paste("Pie of", var_name), col = listOfColors)
+#     barplot(frecs, las=3, cex.names=0.7,
+#             main=paste("Barplot of", var_name), col=listOfColors)
+#     print(paste("Number of modalities: ", length(frecs)))
+#     print("Frequency table")
+#     print(frecs)
+#     print("Relative frequency table (proportions)")
+#     print(proportions)
+#     print("Frequency table sorted")
+#     print(sort(frecs, decreasing=TRUE))
+#     print("Relative frequency table (proportions) sorted")
+#     print(sort(proportions, decreasing=TRUE))
+#    }else{
+#      if(class(dd[,k])=="Date"){
+#        print(summary(dd[,k]))
+#        print(sd(dd[,k]))
+#        #decide breaks: weeks, months, quarters...
+#        hist(dd[,k],breaks="quarters", main=paste("Histogram of", var_name), xlab = var_name)
+#      }else{
+#        hist(dd[,k], main=paste("Histogram of", names(dd)[k]), xlab=var_name, col = listOfColors)
+#        #boxplot(dd[,k], horizontal=TRUE, main=paste("Boxplot of", var_name), col = listOfColors)
+#        print(ggplot(dd, aes(x="", y=!!var_s)) + geom_boxplot() + coord_flip())
+#        print("Extended Summary Statistics")
+#        print(summary(dd[,k]))
+#        print(paste("sd: ", sd(dd[,k], na.rm=TRUE)))
+#        print(paste("vc: ", sd(dd[,k], na.rm=TRUE)/mean(dd[,k], na.rm=TRUE)))
+#       }
+#    }
+#}
+#par(ask=FALSE)
+
+#per exportar figures d'R per programa
+#dev.off()
+#png(file=mypath,width = 950, height = 800, units = "px")
+#dev.off()
+```
+
+ggplot
+
+```{r, echo=FALSE}
+listOfColors<-rainbow(10)
 
 #par(ask=TRUE)
 
 for(k in actives){
-  print(paste("variable ", k, ":", names(dd)[k] ))
+  var_name <- names(dd)[k]
+  var_s <- sym(var_name)
+  print(paste("variable ", k, ":", var_name ))
   if (!(is.numeric(dd[,k]) || class(dd[,k])=="Date")){
     frecs<-table(as.factor(dd[,k]), useNA="ifany")
     proportions<-frecs/n
     #ojo, decidir si calcular porcentages con o sin missing values
-    pie(frecs, cex=0.6, main=paste("Pie of", names(dd)[k]))
-    barplot(frecs, las=3, cex.names=0.7,
-            main=paste("Barplot of", names(dd)[k]), col=listOfColors)
+
+    p <- ggplot(dd, aes(x="", fill=!!var_s)) + geom_bar(width = 1) + coord_polar("y", start=0)
+    print(p)
+    #pie(frecs, cex=0.6, main=paste("Pie of", var_name), col = listOfColors)
+
+    p <- ggplot(dd, aes(x=!!var_s, fill=!!var_s)) + geom_bar(width = 0.7) + theme(legend.position = "none")
+    print(p)
+    #barplot(frecs, las=3, cex.names=0.7,
+     #       main=paste("Barplot of", var_name), col=listOfColors)
+
     print(paste("Number of modalities: ", length(frecs)))
     print("Frequency table")
     print(frecs)
@@ -119,10 +186,19 @@ for(k in actives){
        print(summary(dd[,k]))
        print(sd(dd[,k]))
        #decide breaks: weeks, months, quarters...
-       hist(dd[,k],breaks="weeks")
+
+       #hist(dd[,k],breaks="quarters", main=paste("Histogram of", var_name), xlab = var_name)
+       p <- ggplot(dd, aes(x=!!var_s)) + geom_histogram()
+       print(p)
+       
      }else{
-       hist(dd[,k], main=paste("Histogram of", names(dd)[k]))
-       boxplot(dd[,k], horizontal=TRUE, main=paste("Boxplot of", names (dd)[k]))
+       #hist(dd[,k], main=paste("Histogram of", names(dd)[k]), xlab=var_name, col = listOfColors)
+       p <- ggplot(dd, aes(x=!!var_s)) + geom_histogram()
+       print(p)
+
+       #boxplot(dd[,k], horizontal=TRUE, main=paste("Boxplot of", var_name), col = listOfColors)
+       print(ggplot(dd, aes(x="", y=!!var_s)) + geom_boxplot() + coord_flip())
+
        print("Extended Summary Statistics")
        print(summary(dd[,k]))
        print(paste("sd: ", sd(dd[,k], na.rm=TRUE)))
