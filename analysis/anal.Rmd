@@ -68,6 +68,13 @@ dd[,booleans] <- dd[,booleans] == "t"
 Make categories
 
 ```{r}
+
+dd$host_since_year <- sub("-[0-9-]+","", dd$host_since)
+dd$host_since_mm_dd <- as.Date(sub("[0-9]+[-]","", dd$host_since), format="%m-%d")
+
+breaks <- as.Date(c("01-01","03-21","06-21","09-21", "12-21", "12-31"), format="%m-%d")
+dd$host_since_season <- cut(dd$host_since_mm_dd, labels=c("Winter", "Spring", "Summer", "Autumn", "Winter"), breaks=breaks)
+
 categories <- c("host_response_rate", "host_acceptance_rate")
 
 for (k in categories) {
@@ -91,6 +98,8 @@ dd[,factors] <- lapply(dd[,factors], factor)
 #for (k in actives) {
   print(paste("Variable: ", actives, ": ", names(dd)[actives], " --- ", lapply(dd[,actives], class)))
 #}
+  
+summary(dd[,actives])
 
 ```
 
