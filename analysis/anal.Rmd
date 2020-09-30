@@ -164,7 +164,7 @@ Basic descriptive analysis for numerical variables
 
 ggplot
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, figures-side, out.width="50%"}
 listOfColors<-rainbow(10)
 
 #par(ask=TRUE)
