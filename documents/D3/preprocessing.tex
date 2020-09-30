@@ -5,14 +5,41 @@
 \label{sub:steps-decisions}
 
 \subsubsection{Formatting issues, building software context}
-\subsubsection{Determining working matrix, Filtering}
+We haven't encountered any formatting issues or problems with R
+not recognising any rows, columns or variable types.
+
+\subsubsection{Determining working matrix}
+We discarded many variables from the original data set that didn't 
+provide any useful information to our project such as URLs and ids or that couldn't be 
+categorised or were uninteresting such as the host\_name, name 
+and description of the listing, etc. Furthermore, some columns were duplicated with
+different variable names, such as host\_listings\_count and 
+host\_total\_listings\_count, we removed those redundancies as well.
+
 \subsubsection{Identification and treatment of missing data}
 \subsubsection{Identification and treatment of outliers}
-\subsubsection{Identification and treatment of errors (correct when possible)}
-\subsubsection{Feature selection/extraction, dimensionality reduction}
+\subsubsection{Identification and treatment of errors}
+\subsubsection{Feature selection/extraction, dimensional reduction}
 \subsubsection{Instance selection}
 \subsubsection{Data transformation}
 \subsubsection{Derivation of new variables}
+We derived some new variables from the data set in order to flourish new categorical variables.
+
+First, starting with the host\_since variable, which gave us the date the host signed up to AirBnB
+to list his property, we extracted two new variables: host\_since\_year and host\_since\_season,
+both categorical. host\_since\_year categorizes the host sign up dates into their particular year and since . 
+The variable host\_since\_season represents the season of the year during which
+the host signed up. For the latter, the modalities are Winter, Spring, Summer and Autumn.
+
+We have also categorized host\_response\_rate and host\_acceptance\_rate
+as we converted them from a numerical variables measured in percentages to 
+categorical ones with the following modalities: very low, low, average, 
+high and very high. The 
+
+These were all the variable derivations we carried out in our data set for this 
+project. They were all motivated by the necessity to have more categorical
+variables in our data set, as it had plenty numerical and binary variables
+but was short of categorical ones.
 
 % Enumerate which steps of the preprocessing process are used with your
 % particular data (consider the steps proposed in slide 4 of Preprocessing
