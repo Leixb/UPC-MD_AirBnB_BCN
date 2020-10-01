@@ -17,7 +17,22 @@ different variable names, such as host\_listings\_count and
 host\_total\_listings\_count, we removed those redundancies as well.
 
 \subsubsection{Identification and treatment of missing data}
+
 \subsubsection{Identification and treatment of outliers}
+When looking at the boxplots of most of the numerical variables in the dataset we can observe
+that there are a few outliers. Some of them, although differing from the general 
+distribution of the values are to be expected. For example the outliers we find in price,
+beds or score could easily be explained (maybe they correlate to the room\_type variable)
+
+On the other hand we also found some outliers that correspond to extreme values that are not
+expected. For example in \texttt{maximum\_nights\_avg\_ntm} we found some rows with the value 2147483647,
+which corresponds to the maximum int32 allowed. If we convert that value into years we would get a result 
+that is unreasonable. 
+
+We have decided to allow for some outliers as long as they are few and justifiable, in these cases we 
+will try to correlate them to other variables. However in the cases when we encounter unreasonable 
+values (3 rows) we have decided to treat these values as errors and discard the rows.
+
 \subsubsection{Identification and treatment of errors}
 \subsubsection{Feature selection/extraction, dimensional reduction}
 \subsubsection{Instance selection}
@@ -34,7 +49,7 @@ the host signed up. For the latter, the modalities are Winter, Spring, Summer an
 We have also categorized host\_response\_rate and host\_acceptance\_rate
 as we converted them from a numerical variables measured in percentages to 
 categorical ones with the following modalities: very low, low, average, 
-high and very high. The 
+high and very high. 
 
 These were all the variable derivations we carried out in our data set for this 
 project. They were all motivated by the necessity to have more categorical
