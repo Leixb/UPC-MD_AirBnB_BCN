@@ -6,6 +6,10 @@ output: latex_fragment
 library(viridis)
 library(ggplot2)
 library(kableExtra)
+library(grid)
+library(extrafont)
+library(showtext)
+font_add("LM Roman", regular = "latinmodern-math.otf")
 ```
 ```{r}
 dd <- read.csv(gzfile("../listings.csv.gz"), na.strings = c("", "N/A"))
@@ -127,9 +131,11 @@ kbl(tab, booktabs = T) %>% #landscape()
 # Basic descriptive analysis for numerical variables
 
 
-```{r, echo=FALSE, out.width="80%", fig.align = 'center',  warning=FALSE, message=FALSE, results='asis'}
+```{r, echo=FALSE, out.width="80%", fig.align = 'center',  warning=FALSE, message=FALSE, results='asis', dev='tikz', fig.showtext=TRUE}
 
 #par(ask=TRUE)
+
+theme_font <- theme(text = element_text(family="LM Roman"))
 
 for(k in actives){
   var_name <- names(dd)[k]
@@ -161,17 +167,18 @@ for(k in actives){
       geom_bar(width = 1, size = 1, color = "white", stat = "identity") +
       coord_polar("y") +
       geom_text(aes(label = paste0(round(Freq*100), "%")),   
-                position = position_stack(vjust = 0.5)) +
+                position = position_stack(vjust = 0.5),
+                family="LM Roman") +
       labs(x = NULL, y = NULL, fill = NULL) +
       guides(fill = guide_legend(reverse = TRUE)) +
       #scale_fill_manual(values = c("#ffd700", "#bcbcbc", "#ffa500", "#254290")) +
-    #  theme_classic() +
+      theme_classic() + theme_font + 
       theme(axis.line = element_blank(),
             axis.text = element_blank(),
             axis.ticks = element_blank())
     print(p)
 
-    p <- ggplot(dd, aes(x=!!var_s, fill=!!var_s)) + geom_bar(width = 0.7) + theme(legend.position = "none", axis.text.x=element_text(angle = -90, hjust = 0))
+    p <- ggplot(dd, aes(x=!!var_s, fill=!!var_s)) + geom_bar(width = 0.7) + theme(legend.position = "none", axis.text.x=element_text(angle = -90, hjust = 0))  + theme_font
     print(p)
     #barplot(frecs, las=3, cex.names=0.7,
      #       main=paste("Barplot of", var_name), col=listOfColors)
@@ -202,27 +209,31 @@ for(k in actives){
        #decide breaks: weeks, months, quarters...
 
        #hist(dd[,k],breaks="quarters", main=paste("Histogram of", var_name), xlab = var_name)
-       p <- ggplot(dd, aes(x=!!var_s)) + geom_histogram()
+       p <- ggplot(dd, aes(x=!!var_s)) + geom_histogram()  + theme_font
        print(p)
 
      }else{
        #hist(dd[,k], main=paste("Histogram of", names(dd)[k]), xlab=var_name, col = listOfColors)
-       p <- ggplot(dd, aes(x=!!var_s)) + geom_histogram()
-       print(p)
+       hi <- ggplot(dd, aes(x=!!var_s)) + geom_histogram()  + theme_font
+       
 
        #boxplot(dd[,k], horizontal=TRUE, main=paste("Boxplot of", var_name), col = listOfColors)
-       print(ggplot(dd, aes(x="", y=!!var_s)) + geom_boxplot() + coord_flip())
+       bp <- ggplot(dd, aes(x="", y=!!var_s)) + geom_boxplot() + coord_flip()  + theme_font +
+         labs(x = NULL, y = NULL, fill = NULL) 
+
+       grid.newpage()
+       grid.draw(rbind(ggplotGrob(bp), ggplotGrob(hi), size="last"))
 
        # cat('\n')
        cat("\n### Extended Summary Statistics")
-       # cat('\n')
+       #cat('\n```')
        cat('\n\\begin{verbatim}')
        print(summary(dd[,k]))
        print(paste("sd: ", sd(dd[,k], na.rm=TRUE)))
        # 
        print(paste("vc: ", sd(dd[,k], na.rm=TRUE)/mean(dd[,k], na.rm=TRUE)))
        cat('\\end{verbatim}\n')
-       # cat('\n')
+       #cat('\n```')
       }
    }
    cat('\n')
