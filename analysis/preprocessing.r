@@ -15,7 +15,6 @@ names(dd)
 # Select variables
 
 actives <- c(
-    "host_since",
     "host_response_time",
     "host_response_rate",
     "host_acceptance_rate",
