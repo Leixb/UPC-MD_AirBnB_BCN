@@ -19,8 +19,6 @@ for (cat in categorical_vars) {
 
 # Imputation of numerical variables (knn)
 
-# Choose one of these two (TODO)
-dd$maximum_nights_avg_ntm[dd$maximum_nights_avg_ntm > 1125] <- 1125
 dd$maximum_nights_avg_ntm[dd$maximum_nights_avg_ntm > 1125] <- NA
 
 uncomplete_vars <- names(Filter(function(x) is.numeric(x) && any(is.na(x)), dd))
@@ -44,5 +42,11 @@ for (k in uncomplete_vars) {
     dd_complete <- dd[, complete_vars]
 }
 
+# Remove
+dd <- dd[!is.na(dd$host_identity_verified), ]
+
 dim(dd)
 summary(dd)
+
+# Write to file
+write.csv(dd, "../bcn_listings_na_treated.csv", row.names = FALSE)
