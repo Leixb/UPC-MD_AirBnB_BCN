@@ -3,7 +3,7 @@
 \usepackage[a4paper, left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
 
 \usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc} % Use unicode for input
+%\usepackage[utf8]{inputenc} % Use unicode for input
 %\usepackage{lmodern}
 
 \usepackage[english]{babel}
@@ -148,3 +148,19 @@
 \usepackage{xspace}
 
 \usepackage{minted}
+\usepackage{fontspec}
+\setmonofont{DejaVu Sans Mono}
+
+%\usemintedstyle{monokai}
+\definecolor{codeBg}{HTML}{FFFDE7}
+
+\setminted[r]{
+    %style=pastie,
+    frame=lines,
+    framesep=3mm,
+    linenos,
+    breaklines=true,
+    encoding=utf8,
+    fontsize=\footnotesize,
+    bgcolor=codeBg
+}
