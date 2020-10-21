@@ -6,3 +6,112 @@
 
 \section{Preprocessing}%
 \label{sec:preprocessing}
+
+% TODO : aixo es copiat tal qual del D3. S'ha de canviar perk sigui el que
+%        realment vam acabar fent.
+
+\subsection{Steps and Decisions}% \label{sub:steps-decisions}
+
+\subsubsection{Formatting issues, building software context}
+
+We haven't encountered any formatting issues or problems with R not recognising
+any rows, columns or variable types.
+
+\subsubsection{Determining working matrix}%
+\label{ssub:work_matrix}
+
+We discarded many variables from the original data set that didn't provide any
+useful information to our project such as URLs and ids or that couldn't be
+categorised or were uninteresting such as the \texttt{host\_name}, name and
+description of the listing, etc. Furthermore, some columns were duplicated with
+different variable names, such as \texttt{host\_listings\_count} and
+\texttt{host\_total\_listings\_count}, we removed those redundancies as well.
+
+\subsubsection{Identification and treatment of missing data}
+
+The dataset provided had already all missing data encoded as \NA's. Therefore no
+more missing were found encoded as other values. When looking at the missing
+values, they appear to be random. However we may do further investigation to see
+if for example there are more values in older entries.
+
+Most variables have a missing percentage between 0-5\%. However there are also
+variables like \texttt{host\_response\_rate\_cat} with much higher percentages,
+reaching up to 35\%.  We plan to study each variable accordingly and perform the
+best suited missing data treatment.
+
+\subsubsection{Identification and treatment of outliers}
+
+When looking at the boxplots of most of the numerical variables in the dataset
+we can observe that there are a few outliers. Some of them, although differing
+from the general distribution of the values are to be expected. For example the
+outliers we find in price, beds or score could easily be explained (maybe they
+correlate to the \texttt{room\_type} variable)
+
+On the other hand we also found some outliers that correspond to extreme values
+that are not expected. For example in \texttt{maximum\_nights\_avg\_ntm} we
+found some rows with the value 2147483647, which corresponds to the maximum
+int32 allowed. If we convert that value into years we would get a result that is
+unreasonable.
+
+We have decided to allow for some outliers as long as they are few and
+justifiable, in these cases we will try to correlate them to other variables.
+However in the cases when we encounter unreasonable values (3 rows) we have
+decided to treat these values as errors and discard the rows.
+
+\subsubsection{Identification and treatment of errors}
+
+After inspecting the data we have not found errors apart from the one abnormally
+large values mentioned before.
+
+\subsubsection{Feature selection/extraction, dimensional reduction}
+
+The \airbnb dataset contained a large amount of variables. First of all we
+decided which of them would made it in our working matrix following the steps
+detailed in \ref{ssub:work_matrix}. Upon further investigation we decided to
+discard additional variables like\texttt{host\_has\_profile\_pic} because the
+information it provided wasn't relevant to this project. Of those variables that
+made it into our working matrix there are several more relevant than others.
+Therefore further reduction or ranking of importance of variables may be done.
+
+\begin{comment} % TODO posar aixo?
+
+\subsubsection{Instance selection}
+
+\subsubsection{Data transformation}
+
+\end{comment}
+
+\subsubsection{Derivation of new variables}
+
+We derived some new variables from the data set in order to flourish new
+categorical variables.
+
+First, starting with the \texttt{host\_since} variable, which gave us the date
+the host signed up to \airbnb to list his property, we extracted two new
+variables: \texttt{host\_since\_year} and \texttt{host\_since\_season}, both
+categorical. \texttt{host\_since\_year} categorizes the host sign up dates into
+their particular year and since .  The variable \texttt{host\_since\_season}
+represents the season of the year during which the host signed up. For the
+latter, the modalities are Winter, Spring, Summer and Autumn.
+
+We have also categorized \texttt{host\_response\_rate} and
+\texttt{host\_acceptance\_rate} as we converted them from a numerical variables
+measured in percentages to categorical ones with the following modalities: very
+low, low, average, high and very high.
+
+These were all the variable derivations we carried out in our data set for this
+project. They were all motivated by the necessity to have more categorical
+variables in our data set, as it had plenty numerical and binary variables but
+was short of categorical ones.
+
+% Enumerate which steps of the preprocessing process are used with your
+% particular data (consider the steps proposed in slide 4 of Preprocessing
+% Slides in Theme 2. Data Preparation. Remember that you have the whole complete
+% information on preprocessing in the reference text from the linkSurvey of
+% preprocessing. Reference paper (MIE 2001) from complementary materials section
+% of Theme 2. Data Preparation)
+
+% List and justify all decisions taken for each preprocessing step
+
+% Additional descriptive statistics of variables that have been modified or
+% created by preprocessing
