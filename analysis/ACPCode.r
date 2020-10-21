@@ -2,6 +2,10 @@ library(ggplot2)
 
 dd <- readRDS('data/20-data_na.Rda')
 
+dir.create('plots', showWarnings = F)
+#pdf('plots/ACP%03d.pdf', onefile = F, width = 7, height = 5)
+pdf('plots/ACP.pdf', onefile = T, width = 7, height = 5)
+
 #
 # VISUALISATION OF DATA
 #
@@ -27,6 +31,7 @@ totalIner
 pinerEix <- 100 * inerProj / totalIner
 pinerEix
 barplot(pinerEix)
+
 
 # Cummulated Inertia in subspaces, from first principal component to the 11th dimension subspace
 barplot(100 * cumsum(pc1$sdev[1:dim(dcon)[2]]^2) / dim(dcon)[2])
@@ -218,3 +223,5 @@ ggplot(Psi2, aes(x=PC1, y=PC2, color=viv)) +
 ggplot(Psi2, aes(x=PC1, y=PC2, color=Importe)) +
   geom_point() +
   scale_color_gradient(low="blue", high="red")
+
+dev.off()

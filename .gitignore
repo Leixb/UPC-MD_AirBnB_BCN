@@ -2,6 +2,7 @@ tags
 listings.csv
 
 *.pdf
+!/analysis/plots/*.pdf
 
 ##############################
 ### LaTeX
