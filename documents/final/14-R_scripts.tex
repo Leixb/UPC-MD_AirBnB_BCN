@@ -6,3 +6,16 @@
 
 \section{R Scripts}%
 \label{sec:r_scripts}
+
+\newcommand{\mintedfile}[1]{
+    \subsection{#1}%
+    \label{ssub:#1}
+    \inputminted{r}{../../analysis/#1}
+    \pagebreak
+}
+
+\mintedfile{preprocessing.r}
+\mintedfile{NAtreatment.r}
+\mintedfile{ACPCode.r}
+\mintedfile{dendogram.r}
+
