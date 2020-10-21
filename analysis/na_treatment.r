@@ -1,6 +1,7 @@
 library(class)
 
-dd <- read.csv("../bcn_listings_clean.csv")
+# De-serialize data
+dd <- readRDS('data/10-data_pre.Rda')
 
 # Convert years to factors
 dd$host_since_year <- as.factor(dd$host_since_year)
@@ -49,4 +50,7 @@ dim(dd)
 summary(dd)
 
 # Write to file
-write.csv(dd, "../bcn_listings_na_treated.csv", row.names = FALSE)
+write.csv(dd, "csv/bcn_listings_na_treated.csv", row.names = FALSE)
+
+# Serialize object
+saveRDS(dd, 'data/20-data_na.Rda')

@@ -1,5 +1,14 @@
+library(tools)
+
+file_name <- "../listings.csv.gz"
+
+# Check file sum
+if (as.vector(md5sum(file_name))[1] != "f60840b7a7a3879d69ee7066d69a6ce8") {
+    stop("Integrity check failed")
+}
+
 # Read file
-dd <- read.csv(gzfile("../listings.csv.gz"), na.strings = c("", "N/A"))
+dd <- read.csv(gzfile(file_name), na.strings = c("", "N/A"))
 
 class(dd)
 
@@ -110,5 +119,12 @@ dd[, factors] <- lapply(dd[, factors], factor)
 # Save only the columns we need
 dd_clean <- dd[, actives]
 
+# Create directories if not existing
+dir.create("csv", showWarnings = F)
+dir.create("data", showWarnings = F)
+
 # Write to file
-write.csv(dd_clean, "../bcn_listings_clean.csv", row.names = FALSE)
+write.csv(dd_clean, "csv/bcn_listings_clean.csv", row.names = FALSE)
+
+# Serialize object
+saveRDS(dd_clean, 'data/10-data_pre.Rda')
