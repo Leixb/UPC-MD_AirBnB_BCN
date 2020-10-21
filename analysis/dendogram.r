@@ -12,11 +12,14 @@ h2 <- hclust(d, method = "ward.D")  # NOTICE THE COST
 plot(h2)
 
 # # Nicer plot
-# dendo <- ggdendrogram(h2, leaf_labels = F, labels = F)
-# dendo + ggtitle('Cluster Dendogram') +
-#   geom_hline(yintercept = 0.9e6, linetype = "dashed", color = "red")
-#
-# ggsave('plots/dendogram.pdf')
+ dendo <- ggdendrogram(h2, leaf_labels = F, labels = F)
+ dendo +
+   geom_hline(yintercept = 0.9e6, linetype = "dashed", color = "red")
+   # ggtitle('Cluster Dendogram')
+
+ggsave('plots/dendogram.pdf', width = 11, height = 7.6)
+
+saveRDS(h2, 'data/21-clust.Rda')
 
 c <- cutree(h2, 3)
 
