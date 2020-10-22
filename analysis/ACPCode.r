@@ -1,10 +1,15 @@
 library(ggplot2)
+library(ggfortify)
+library(extrafont)
+library(showtext)
+
+loadfonts(quiet = T)
+font_add("LM Roman", regular = "latinmodern-math.otf")
+showtext_auto()
+
+theme_font <- theme(text = element_text(family = "LM Roman"))
 
 dd <- readRDS('data/20-data_na.Rda')
-
-dir.create('plots', showWarnings = F)
-#pdf('plots/ACP%03d.pdf', onefile = F, width = 7, height = 5)
-pdf('plots/ACP.pdf', onefile = T, width = 7, height = 5)
 
 #
 # VISUALISATION OF DATA
@@ -16,33 +21,41 @@ pdf('plots/ACP.pdf', onefile = T, width = 7, height = 5)
 dcon <- Filter(is.numeric, dd)
 
 # PRINCIPAL COMPONENT ANALYSIS OF dcon
-pc1 <- prcomp(dcon, scale = TRUE)
-class(pc1)
-attributes(pc1)
+PCA <- prcomp(dcon, scale = TRUE)
+class(PCA)
+attributes(PCA)
 
-print(pc1)
+print(PCA)
 
 # WHICH PERCENTAGE OF THE TOTAL INERTIA IS REPRESENTED IN SUBSPACES?
-pc1$sdev
-inerProj <- pc1$sdev^2
+PCA$sdev
+inerProj <- PCA$sdev^2
 inerProj
 totalIner <- sum(inerProj)
 totalIner
 pinerEix <- 100 * inerProj / totalIner
 pinerEix
-barplot(pinerEix)
+
+pc <- c()
+for (i in 1:20) pc <- c(pc, sprintf('PC%02d', i))
+p <- qplot(pc, pinerEix, geom = "col", xlab = "Axis", ylab = 'Percentatge of total inertia')
+p <- p + theme_font
+ggsave(plot = p, 'plots/PCA_inertia.pdf')
 
 
 # Cummulated Inertia in subspaces, from first principal component to the 11th dimension subspace
-barplot(100 * cumsum(pc1$sdev[1:dim(dcon)[2]]^2) / dim(dcon)[2])
-percInerAccum <- 100 * cumsum(pc1$sdev[1:dim(dcon)[2]]^2) / dim(dcon)[2]
+percInerAccum <- 100 * cumsum(PCA$sdev[1:dim(dcon)[2]]^2) / dim(dcon)[2]
 percInerAccum
+
+p <- qplot(pc, percInerAccum, geom = "col", xlab = "Axis", ylab = 'Accumulated Percentatge of total inertia')
+p <- p + theme_font
+ggsave(plot = p, 'plots/PCA_inertia_cum.pdf')
 
 # SELECTION OF THE SINGIFICNT DIMENSIONS (keep 80% of total inertia)
 nd <- 4
 
 # STORAGE OF THE EIGENVALUES, EIGENVECTORS AND PROJECTIONS IN THE nd DIMENSIONS
-Psi <- pc1$x[, 1:nd]
+Psi <- PCA$x[, 1:nd]
 
 # STORAGE OF LABELS FOR INDIVIDUALS AND VARIABLES
 iden <- row.names(dcon)
@@ -66,7 +79,7 @@ plot_plane <- function(i, j, plot_title) {
     X <- Phi[, i]
     Y <- Phi[, j]
 
-    plot(Psi[, i], Psi[, j], type = "n", xlim = c(-1, 1), ylim = c(-1, 1),
+    plot(Psi[, i], Psi[, j], type = "n", xlim = c(-1.5, 1.5), ylim = c(-1.5, 1.5),
          xlab = i, ylab = j, main = plot_title)
     build_axis()
 
@@ -94,9 +107,9 @@ plot_all_planes <- function(varcat, plot_title) {
   }
 }
 
-plot_all_cat <- function(eje1, eje2, cat_names) {
+plot_all_cat <- function(eje1, eje2, cat_names, lines = F) {
   ax_col <- 'cyan'
-  plot(Psi[, eje1], Psi[, eje2], type = "n", ylim = c(-1, 1), xlim = c(-1, 1),
+  plot(Psi[, eje1], Psi[, eje2], type = "n", ylim = c(-1.5, 1.5), xlim = c(-1.5, 1.5),
        xlab = eje1, ylab = eje2)
   build_axis(ax_col)
 
@@ -108,29 +121,67 @@ plot_all_cat <- function(eje1, eje2, cat_names) {
     fdic1 <- tapply(Psi[, eje1], dd[, k], mean)
     fdic2 <- tapply(Psi[, eje2], dd[, k], mean)
 
-    # points(fdic1,fdic2,pch=16,col=seguentColor, labels=levels(dd[,k]))
-    # connect modalities of qualitative variables
-    lines(fdic1, fdic2, pch = 16, col = seguentColor)
+    if (lines)
+      # connect modalities of qualitative variables
+      lines(fdic1, fdic2, pch = 16, col = seguentColor)
+    else
+      points(fdic1, fdic2, pch = 16, col = seguentColor)
+
     text(fdic1, fdic2, labels = levels(dd[, k]), col = seguentColor, cex = 0.6)
+
     c <- c + 1
-    #col <- col + 1
+
     legend("bottomleft", cat_names, pch = 1, col = colors, cex = 0.6)
   }
 }
 
 dcat <- Filter(is.factor, dd)
 
+dcat_no_ordi <- c(
+  "neighbourhood_group_cleansed",
+  "room_type",
+  "host_since_season"
+)
+
+dcat_ordi <- c(
+  "host_response_time",
+  "host_since_year",
+  "host_response_rate_cat",
+  "host_acceptance_rate_cat"
+)
+
 # All variables on all planes
-for (f in names(dcat)) plot_all_planes(dd[, f], f)
+
+pdf('plots/PCA_planes_sep.pdf', onefile = T, width = 7, height = 5)
+for (f in names(dcat))
+  plot_all_planes(dd[, f], f)
+dev.off()
 
 # All qualitative together
+pdf('plots/PCA_planes_ordi.pdf', onefile = T, width = 7, height = 5)
 for (i in 1:4) {
   mn <- i + 1
   if (mn > 4) next
-  for (j in mn:4) plot_all_cat(i, j, names(dcat))
+  for (j in mn:4) {
+    plot_all_cat(i, j, dcat_ordi, TRUE)
+  }
 }
+dev.off()
+
+pdf('plots/PCA_planes_no_ordi.pdf', onefile = T, width = 7, height = 5)
+for (i in 1:4) {
+  mn <- i + 1
+  if (mn > 4) next
+  for (j in mn:4) {
+    plot_all_cat(i, j, dcat_no_ordi)
+  }
+}
+dev.off()
 
 # TODO
+
+eje1 <- 1
+eje2 <- 2
 
 # determine zoom level
 # use the scale factor or not depending on the position of centroids
@@ -139,8 +190,8 @@ for (i in 1:4) {
 fm <- 20
 
 # scale the projected variables
-X <- fm * U[, eje1]
-Y <- fm * U[, eje2]
+X <- fm * Phi[, eje1] # U???
+Y <- fm * Phi[, eje2]
 
 # represent numerical variables in background
 plot(Psi[, eje1], Psi[, eje2], type = "n", xlim = c(-1, 1), ylim = c(-3, 1))
@@ -150,6 +201,8 @@ build_axis('cyan')
 # add projections of numerical variables in background
 arrows(ze, ze, X, Y, length = 0.07, col = "lightgray")
 text(X, Y, labels = etiq, col = "gray", cex = 0.7)
+
+colors <- rainbow(length(names(dcat)), alpha = 1)
 
 # add centroids
 c <- 1
