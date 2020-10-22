@@ -29,6 +29,24 @@
 \subsection{Factorial map visualisation}%
 \label{sub:factorial_map_visualisation}
 
+% #2 -> caption #3 -> file, #1 -> page
+\newcommand{\factorialmap}[3][1]{
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.85\linewidth,page=#1]{#3}
+        \caption{#2}%
+        \label{fig:#3-#1}
+    \end{figure}
+}
+
+\begin{landscape}
+
+%TODO
+\factorialmap[3]{Test}{PCA_planes_sep}
+\factorialmap[4]{Test}{PCA_planes_sep}
+
+\end{landscape}
+
 % (Be sure you use a single landscape pager for each single map in order to
 % guarantee visibility of materials to the readers)
 
