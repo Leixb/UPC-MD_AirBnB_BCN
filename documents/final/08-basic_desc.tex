@@ -10,14 +10,42 @@
 \subsection{Univariate analysis}%
 \label{sub:univariate_analysis}
 
-%\fig{accommodates-hi_bp}{Histogram + Boxplot of Accommodates}
-%\fig{availability_30-hi_bp}{Histogram + Boxplot of availability 30}
-%\fig{availability_365-hi_bp}{Histogram + Boxplot of availability 365}
-%\fig{availability_60-hi_bp}{Histogram + Boxplot of availability 60}
-%\fig{availability_90-hi_bp}{Histogram + Boxplot of availability 90}
-%\fig{bedrooms-hi_bp}{Histogram + Boxplot of bedrooms}
-%\fig{beds-hi_bp}{Histogram + Boxplot of beds}
-%\fig{host_acceptance_rate_cat-bar}{Barplot of host acceptance rate cat}
+
+\newcommand{\fign}[2]{
+    \fig{#1-hi_bp}{#2}
+    \input{../../analysis/tables/#1-ext_sum}
+}
+
+\newcommand{\figf}[2]{
+    \fig{#1-bar}{#2}
+    \input{../../analysis/tables/#1-freq}
+}
+
+\begin{comment}
+
+\fign{accommodates}{Histogram + Boxplot of Accommodates}
+
+In the boxplot we can that there are some outliers. However the distribution of the variable seems to be in line with socioeconomic distributions. The majority of listing have low to medium capacities (small-medium houses), while there's only a fraction of high capacities (big houses). 
+
+
+\fign{bedrooms}{Histogram + Boxplot of bedrooms}
+
+The majority of listing contains between 1-4 bedrooms, being the mean around 1.6. There are
+some outliers, but they can somewhat be explained due to the same reasons mentioned in the accommodates analysis.
+
+
+\fign{beds}{Histogram + Boxplot of beds}
+
+The distribution of beds and the outliers seem to follow a similar distribution as bedrooms.
+This is to be expected as those to variables should be correlated. 
+
+\end{comment}
+\fign{availability_30}{Histogram + Boxplot of availability 30}
+\fign{availability_60}{Histogram + Boxplot of availability 60}
+\fign{availability_90}{Histogram + Boxplot of availability 90}
+\fign{availability_365}{Histogram + Boxplot of availability 365}
+
+\figf{host_acceptance_rate_cat}{Barplot of host acceptance rate cat}
 %\fig{host_acceptance_rate_cat-pie}{Piechart of host acceptance rate cat}
 %\fig{host_has_profile_pic-bar}{Barplot of host has profile pic}
 %\fig{host_has_profile_pic-pie}{Piechart of host has profile pic}
@@ -25,7 +53,7 @@
 %\fig{host_identity_verified-pie}{Piechart of host identity verified}
 %\fig{host_is_superhost-bar}{Barplot of host is superhost}
 %\fig{host_is_superhost-pie}{Piechart of host is superhost}
-%\fig{host_listings_count-hi_bp}{Histogram + Boxplot of host listings count}
+%\fign{host_listings_count}{Histogram + Boxplot of host listings count}
 %\fig{host_response_rate_cat-bar}{Barplot of host response rate cat}
 %\fig{host_response_rate_cat-pie}{Piechart of host response rate cat}
 %\fig{host_response_time-bar}{Barplot of host response time}
@@ -36,20 +64,20 @@
 %\fig{host_since_year-pie}{Piechart of host since year}
 %\fig{instant_bookable-bar}{Barplot of instant bookable}
 %\fig{instant_bookable-pie}{Piechart of instant bookable}
-%\fig{maximum_nights_avg_ntm-hi_bp}{Histogram + Boxplot of maximum nights avg ntm}
-%\fig{minimum_nights_avg_ntm-hi_bp}{Histogram + Boxplot of minimum nights avg ntm}
+%\fig{maximum_nights_avg_ntm}{Histogram + Boxplot of maximum nights avg ntm}
+\fign{minimum_nights_avg_ntm}{Histogram + Boxplot of minimum nights avg ntm}
 %\fig{neighbourhood_group_cleansed-bar}{Barplot of neighbourhood group cleansed}
 %\fig{neighbourhood_group_cleansed-pie}{Piechart of neighbourhood group cleansed}
-%\fig{number_of_reviews-hi_bp}{Histogram + Boxplot of number of reviews}
-%\fig{number_of_reviews_l30d-hi_bp}{Histogram + Boxplot of number of reviews l30d}
-%\fig{number_of_reviews_ltm-hi_bp}{Histogram + Boxplot of number of reviews ltm}
-%\fig{price-hi_bp}{Histogram + Boxplot of price}
-%\fig{review_scores_accuracy-hi_bp}{Histogram + Boxplot of review scores accuracy}
-%\fig{review_scores_cleanliness-hi_bp}{Histogram + Boxplot of review scores cleanliness}
-%\fig{review_scores_location-hi_bp}{Histogram + Boxplot of review scores location}
-%\fig{review_scores_rating-hi_bp}{Histogram + Boxplot of review scores rating}
-%\fig{review_scores_value-hi_bp}{Histogram + Boxplot of review scores value}
-%\fig{reviews_per_month-hi_bp}{Histogram + Boxplot of reviews per month}
+%\fign{number_of_reviews}{Histogram + Boxplot of number of reviews}
+%\fign{number_of_reviews_l30d}{Histogram + Boxplot of number of reviews l30d}
+%\fign{number_of_reviews_ltm}{Histogram + Boxplot of number of reviews ltm}
+\fign{price}{Histogram + Boxplot of price}
+%\fign{review_scores_accuracy}{Histogram + Boxplot of review scores accuracy}
+%\fign{review_scores_cleanliness}{Histogram + Boxplot of review scores cleanliness}
+%\fign{review_scores_location}{Histogram + Boxplot of review scores location}
+%\fign{review_scores_rating}{Histogram + Boxplot of review scores rating}
+%\fign{review_scores_value}{Histogram + Boxplot of review scores value}
+%\fign{reviews_per_month}{Histogram + Boxplot of reviews per month}
 %\fig{room_type-bar}{Barplot of room type}
 %\fig{room_type-pie}{Piechart of room type}
 
