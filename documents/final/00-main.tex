@@ -15,6 +15,15 @@
 \newcommand{\airbnb}{\emph{Airbnb}\xspace}
 \newcommand{\NA}{\emph{NA}\xspace}
 
+\newcommand{\fig}[3][0.8]{
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=#1\linewidth]{#2}
+        \caption{#3}%
+        \label{fig:#2}
+    \end{figure}
+}
+
 \begin{document}
 
 % Video frances de HCPC
