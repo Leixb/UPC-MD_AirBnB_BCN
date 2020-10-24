@@ -16,23 +16,23 @@
     \input{../../analysis/tables/#1-ext_sum}
 }
 
-%\newcommand{\figf}[2]{
-%\begin{figure}[H]
-%    \begin{minipage}[0.5\linewidth]
-%            \centering
-%            \includegraphics[width=\linewidth]{#1-bar}
-%            \caption{Barplot chart of #2}%
-%            \label{fig:#1-bar}
-%    \end{minipage}
-%    \begin{minipage}[0.5\linewidth]
-%            \centering
-%            \includegraphics[width=\linewidth]{#1-pie}
-%            \caption{Pie chart of #2}%
-%            \label{fig:#1-pie}
-%    \end{minipage}
-%\end{figure}
-%    \input{../../analysis/tables/#1-freq}
-%}
+\newcommand{\figf}[2]{
+\begin{figure}[H]
+    \begin{minipage}{0.5\linewidth}
+            \centering
+            \includegraphics[width=\linewidth]{#1-bar}
+            \caption{Barplot chart of #2}%
+            \label{fig:#1-bar}
+    \end{minipage}
+    \begin{minipage}{0.5\linewidth}
+            \centering
+            \includegraphics[width=\linewidth]{#1-pie}
+            \caption{Pie chart of #2}%
+            \label{fig:#1-pie}
+    \end{minipage}
+\end{figure}
+    \input{../../analysis/tables/#1-freq}
+}
 
 \begin{comment}
 
@@ -58,29 +58,20 @@ This is to be expected as those to variables should be correlated.
 %\fign{availability_90}{Histogram + Boxplot of availability 90}
 %\fign{availability_365}{Histogram + Boxplot of availability 365}
 
-%\figf{host_acceptance_rate_cat}{Barplot of host acceptance rate cat}
-%\fig{host_acceptance_rate_cat-pie}{Piechart of host acceptance rate cat}
-%\fig{host_has_profile_pic-bar}{Barplot of host has profile pic}
-%\fig{host_has_profile_pic-pie}{Piechart of host has profile pic}
-%\fig{host_identity_verified-bar}{Barplot of host identity verified}
-%\fig{host_identity_verified-pie}{Piechart of host identity verified}
-%\fig{host_is_superhost-bar}{Barplot of host is superhost}
-%\fig{host_is_superhost-pie}{Piechart of host is superhost}
+\figf{host_acceptance_rate_cat}{host acceptance rate cat}
+%\figf{host_acceptance_rate_cat}{host acceptance rate cat}
+%\figf{host_has_profile_pic}{host has profile pic}
+%\figf{host_identity_verified}{host identity verified}
+%\figf{host_is_superhost}{host is superhost}
 %\fign{host_listings_count}{Histogram + Boxplot of host listings count}
-%\fig{host_response_rate_cat-bar}{Barplot of host response rate cat}
-%\fig{host_response_rate_cat-pie}{Piechart of host response rate cat}
-%\fig{host_response_time-bar}{Barplot of host response time}
-%\fig{host_response_time-pie}{Piechart of host response time}
-%\fig{host_since_season-bar}{Barplot of host since season}
-%\fig{host_since_season-pie}{Piechart of host since season}
-%\fig{host_since_year-bar}{Barplot of host since year}
-%\fig{host_since_year-pie}{Piechart of host since year}
-%\fig{instant_bookable-bar}{Barplot of instant bookable}
-%\fig{instant_bookable-pie}{Piechart of instant bookable}
-%\fig{maximum_nights_avg_ntm}{Histogram + Boxplot of maximum nights avg ntm}
+%\figf{host_response_rate_cat}{host response rate cat}
+%\figf{host_response_time}{host response time}
+%\figf{host_since_season}{host since season}
+%\figf{host_since_year}{host since year}
+%\figf{instant_bookable}{instant bookable}
+%\fign{maximum_nights_avg_ntm}{Histogram + Boxplot of maximum nights avg ntm}
 \fign{minimum_nights_avg_ntm}{Histogram + Boxplot of minimum nights avg ntm}
-%\fig{neighbourhood_group_cleansed-bar}{Barplot of neighbourhood group cleansed}
-%\fig{neighbourhood_group_cleansed-pie}{Piechart of neighbourhood group cleansed}
+%\figf{neighbourhood_group_cleansed}{neighbourhood group cleansed}
 %\fign{number_of_reviews}{Histogram + Boxplot of number of reviews}
 %\fign{number_of_reviews_l30d}{Histogram + Boxplot of number of reviews l30d}
 %\fign{number_of_reviews_ltm}{Histogram + Boxplot of number of reviews ltm}
@@ -97,7 +88,7 @@ We can see that the majority of reviews are considered positive. The mean in fac
 a 91.07. That would explain why a common technique among renters is to consider 
 any review lower than 90 as negative. 
 
-We can as well see that there is some polarization, being the most common rating among 
+We can see as well that there is some polarization, being the most common rating among 
 negative reviews a 0 and the most common among positive a 10. We suppose polarization occurs
 because users are more likely to leave reviews when they had either really good or 
 really bad experiences.
@@ -106,13 +97,13 @@ really bad experiences.
 \fign{review_scores_value}{Histogram + Boxplot of review scores value}
 \fign{reviews_per_month}{Histogram + Boxplot of reviews per month}
 
+
 \pagebreak
 \subsubsection{Room Type}
 
-\fig{room_type-bar}{Barplot of room type}
-\fig{room_type-pie}{Piechart of room type}
+\figf{room_type}{room type}
 
-The vast majority of listing correspond to entire homes/apartments or private rooms.
+The vast majority of listings correspond to entire homes/apartments or private rooms.
 
 \pagebreak
 % Bivariate when relevant (half a page per pair of variables)
