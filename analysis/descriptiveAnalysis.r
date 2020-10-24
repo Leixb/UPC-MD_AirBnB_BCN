@@ -90,7 +90,7 @@ for (k in names(dd)) {
         ggplot(dd, aes(x = !!var_s)) + geom_histogram()  + theme_font
       ggsave(plot = p,
              sprintf('plots/%s-hist.pdf', k),
-             height = 5)
+             height = 4, width = 5.5)
 
     } else {
       hi <- ggplot(dd, aes(x = !!var_s)) + geom_histogram(bins = min(100, length(unique(dd[, k]))))  + theme_font
@@ -104,7 +104,7 @@ for (k in names(dd)) {
 
       g <- plot_grid(bp, hi, align = "v", nrow = 2, rel_heights = c(1/4, 3/4))
 
-      ggsave(plot = g, file = sprintf('plots/%s-hi_bp.pdf', k), device = 'pdf')
+      ggsave(plot = g, file = sprintf('plots/%s-hi_bp.pdf', k), device = 'pdf', width = 5.5, height = 4)
       #grid.newpage()
       #rid.draw(rbind(ggplotGrob(bp), ggplotGrob(hi), size = "last"))
       #dev.off()
@@ -136,4 +136,4 @@ hi <- ggplot(df, aes(x = price)) + geom_histogram(bins=100)  + theme_font
 
 g <- plot_grid(bp, hi, align = "v", nrow = 2, rel_heights = c(1/4, 3/4))
 
-ggsave(plot = g, file = sprintf('plots/%s-hi_bp-tallat500.pdf', 'price'), device = 'pdf')
+ggsave(plot = g, file = sprintf('plots/%s-hi_bp-tallat500.pdf', 'price'), device = 'pdf', width = 5.5, height = 4)
