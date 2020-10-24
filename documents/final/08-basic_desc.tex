@@ -16,10 +16,23 @@
     \input{../../analysis/tables/#1-ext_sum}
 }
 
-\newcommand{\figf}[2]{
-    \fig{#1-bar}{#2}
-    \input{../../analysis/tables/#1-freq}
-}
+%\newcommand{\figf}[2]{
+%\begin{figure}[H]
+%    \begin{minipage}[0.5\linewidth]
+%            \centering
+%            \includegraphics[width=\linewidth]{#1-bar}
+%            \caption{Barplot chart of #2}%
+%            \label{fig:#1-bar}
+%    \end{minipage}
+%    \begin{minipage}[0.5\linewidth]
+%            \centering
+%            \includegraphics[width=\linewidth]{#1-pie}
+%            \caption{Pie chart of #2}%
+%            \label{fig:#1-pie}
+%    \end{minipage}
+%\end{figure}
+%    \input{../../analysis/tables/#1-freq}
+%}
 
 \begin{comment}
 
@@ -40,12 +53,12 @@ The distribution of beds and the outliers seem to follow a similar distribution 
 This is to be expected as those to variables should be correlated. 
 
 \end{comment}
-\fign{availability_30}{Histogram + Boxplot of availability 30}
-\fign{availability_60}{Histogram + Boxplot of availability 60}
-\fign{availability_90}{Histogram + Boxplot of availability 90}
-\fign{availability_365}{Histogram + Boxplot of availability 365}
+%\fign{availability_30}{Histogram + Boxplot of availability 30}
+%\fign{availability_60}{Histogram + Boxplot of availability 60}
+%\fign{availability_90}{Histogram + Boxplot of availability 90}
+%\fign{availability_365}{Histogram + Boxplot of availability 365}
 
-\figf{host_acceptance_rate_cat}{Barplot of host acceptance rate cat}
+%\figf{host_acceptance_rate_cat}{Barplot of host acceptance rate cat}
 %\fig{host_acceptance_rate_cat-pie}{Piechart of host acceptance rate cat}
 %\fig{host_has_profile_pic-bar}{Barplot of host has profile pic}
 %\fig{host_has_profile_pic-pie}{Piechart of host has profile pic}
@@ -80,8 +93,15 @@ This is to be expected as those to variables should be correlated.
 \fign{review_scores_location}{Histogram + Boxplot of review scores location}
 \fign{review_scores_rating}{Histogram + Boxplot of review scores rating}
 
-We can see that the majority of reviews are considered positive. We can aswell see that there is some polaritzation, being the most common rating among negative reviews a 0 and the most common among positi
-The mean in fact is a 91.07. 
+We can see that the majority of reviews are considered positive. The mean in fact is 
+a 91.07. That would explain why a common technique among renters is to consider 
+any review lower than 90 as negative. 
+
+We can as well see that there is some polarization, being the most common rating among 
+negative reviews a 0 and the most common among positive a 10. We suppose polarization occurs
+because users are more likely to leave reviews when they had either really good or 
+really bad experiences.
+
 
 \fign{review_scores_value}{Histogram + Boxplot of review scores value}
 \fign{reviews_per_month}{Histogram + Boxplot of reviews per month}
