@@ -10,7 +10,8 @@
 % TODO : aixo es copiat tal qual del D3. S'ha de canviar perk sigui el que
 %        realment vam acabar fent.
 
-\subsection{Steps and Decisions}% \label{sub:steps-decisions}
+\subsection{Steps and Decisions}%
+\label{sub:steps-decisions}
 
 \subsubsection{Formatting issues, building software context}
 
@@ -31,13 +32,15 @@ different variable names, such as \texttt{host\_listings\_count} and
 
 The dataset provided had already all missing data encoded as \NA's. Therefore no
 more missing were found encoded as other values. When looking at the missing
-values, they appear to be random. However we may do further investigation to see
-if for example there are more values in older entries.
+values, they appear to be random. Some effort was put into analysing if the missing values had a correlation with the date of the entry, for example if older entries contained more missing data. However we couldn't find any pattern that supported those claims.
 
 Most variables have a missing percentage between 0-5\%. However there are also
 variables like \texttt{host\_response\_rate\_cat} with much higher percentages,
-reaching up to 35\%.  We plan to study each variable accordingly and perform the
-best suited missing data treatment.
+reaching up to 35\%. We studied each variable accordingly and performed different missing data treatment techniques.
+
+Categorical with a large number of missing data were analysed and we found out that the best 
+
+Numerical variables were treated using the Knn algorithm. This decision was made because our dataset already contained many numerical variables with no NA's. Therefore Knn seemed the best suited algorithm.
 
 \subsubsection{Identification and treatment of outliers}
 
@@ -51,17 +54,15 @@ On the other hand we also found some outliers that correspond to extreme values
 that are not expected. For example in \texttt{maximum\_nights\_avg\_ntm} we
 found some rows with the value 2147483647, which corresponds to the maximum
 int32 allowed. If we convert that value into years we would get a result that is
-unreasonable.
+unreasonable. After doing some research we found out that the maximum number of nights is limited by AirBnb to 1125. We decided to consider all entries that surpassed that number as errors. 
 
 We have decided to allow for some outliers as long as they are few and
 justifiable, in these cases we will try to correlate them to other variables.
-However in the cases when we encounter unreasonable values (3 rows) we have
-decided to treat these values as errors and discard the rows.
 
 \subsubsection{Identification and treatment of errors}
 
 After inspecting the data we have not found errors apart from the one abnormally
-large values mentioned before.
+large values mentioned before. In those cases we decided to change those values to NA's and then impute those values with the knn algorithm.
 
 \subsubsection{Feature selection/extraction, dimensional reduction}
 
@@ -71,7 +72,6 @@ detailed in \ref{ssub:work_matrix}. Upon further investigation we decided to
 discard additional variables like \texttt{host\_has\_profile\_pic} because the
 information it provided wasn't relevant to this project. Of those variables that
 made it into our working matrix there are several more relevant than others.
-Therefore further reduction or ranking of importance of variables may be done.
 
 \begin{comment} % TODO posar aixo?
 
@@ -90,7 +90,7 @@ First, starting with the \texttt{host\_since} variable, which gave us the date
 the host signed up to \airbnb to list his property, we extracted two new
 variables: \texttt{host\_since\_year} and \texttt{host\_since\_season}, both
 categorical. \texttt{host\_since\_year} categorizes the host sign up dates into
-their particular year and since .  The variable \texttt{host\_since\_season}
+their particular year and since. The variable \texttt{host\_since\_season}
 represents the season of the year during which the host signed up. For the
 latter, the modalities are Winter, Spring, Summer and Autumn.
 

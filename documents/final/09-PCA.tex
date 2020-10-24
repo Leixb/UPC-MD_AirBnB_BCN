@@ -13,17 +13,23 @@
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\linewidth]{PCA_inertia}
+    \includegraphics[width=0.7\linewidth]{PCA_inertia}
     \caption{PCA inertia}%
     \label{fig:pca_inertia}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\linewidth]{PCA_inertia_cum}
+    \includegraphics[width=0.7\linewidth]{PCA_inertia_cum}
     \caption{PCA accumulated inertia}%
     \label{fig:pca_inertia_cum}
 \end{figure}
+
+We used the inertia plots to decide the number of factorial axis to analyse. In plot \ref{fig:pca_inertia} we can conclude the 4 first axis represent a much larger amount of variance compared to the others. When looking at \ref{fig:pca_inertia_cum} we can see that the first 4 axis already contain 63\% of the variance. If we analyse further with the elbow method we can clearly see that the slop starts to decrease at around the 4th axis. Therefore we decided to only further analyse the first 4 factorial axis. 
+
+% 20.24968405 17.88042469 13.04514781 12.39547495
+% 20.24968  38.13011  51.17526  63.57073     %  69.09301  74.04671  78.51992  82.73880
+
 
 % Factorial map visualisation:
 \subsection{Factorial map visualisation}%
