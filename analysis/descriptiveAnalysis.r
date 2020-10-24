@@ -60,7 +60,7 @@ for (k in names(dd)) {
       )
     ggsave(plot = p,
            sprintf('plots/%s-pie.pdf', k),
-           height = 5)
+           height = 2.5, width = 3.5)
 
     p <-
       ggplot(dd, aes(x = !!var_s, fill = !!var_s)) + geom_bar(width = 0.7) +
@@ -68,7 +68,7 @@ for (k in names(dd)) {
             axis.text.x = element_text(angle = -90, hjust = 0))  + theme_font
     ggsave(plot = p,
            sprintf('plots/%s-bar.pdf', k),
-           height = 5)
+           height = 2.5, width = 3.5)
 
     table <-
       kbl(sort(frecs, decreasing = T),
@@ -85,11 +85,11 @@ for (k in names(dd)) {
       p <-
         ggplot(dd, aes(x = !!var_s)) + geom_histogram()  + theme_font
       ggsave(plot = p,
-             sprintf('plots/%s-hist.tex', k),
+             sprintf('plots/%s-hist.pdf', k),
              height = 5)
 
     } else {
-      hi <- ggplot(dd, aes(x = !!var_s)) + geom_histogram()  + theme_font
+      hi <- ggplot(dd, aes(x = !!var_s)) + geom_histogram(bins = min(100, length(unique(dd[, k]))))  + theme_font
 
       bp <-
         ggplot(dd, aes(x = "", y = !!var_s)) + geom_boxplot() + coord_flip() +
@@ -118,3 +118,16 @@ for (k in names(dd)) {
     }
   }
 }
+
+df <- dd[dd$price < 500, ]
+
+hi <- ggplot(df, aes(x = price)) + geom_histogram(bins=100)  + theme_font
+
+bp <-
+  ggplot(df, aes(x = "", y = price)) + geom_boxplot() + coord_flip() +
+    theme_font + labs(x = NULL, y = NULL, fill = NULL)
+
+pdf(sprintf('plots/%s-hi_bp-tallat500.pdf', 'price'))
+grid.newpage()
+grid.draw(rbind(ggplotGrob(bp), ggplotGrob(hi), size = "last"))
+dev.off()
