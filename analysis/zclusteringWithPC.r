@@ -28,7 +28,7 @@ res.pca$eig
 ?plot.PCA
 
 ### Plot for the variables
-plot(res.pca,choix="var",axes=c(1,2), grah.type="ggplot")
+plot(res.pca,choix="var",axes=c(1,2), graph.type="ggplot")
 plot(res.pca,choix="var",axes=c(3,4),select = "cos2 0.3")
 plot(res.pca,choix="var",axes=c(5,6),select = "cos2 0.3")
 
