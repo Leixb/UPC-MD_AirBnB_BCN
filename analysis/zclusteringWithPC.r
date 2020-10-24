@@ -101,20 +101,22 @@ names(res.hcpc$desc.var)
 ### desc.var$test.chi2 ###
 ### A.1. The categorical variables which characterizes the clusters ###
 res.hcpc$desc.var$test.chi2
-DictamenXClus<-table(res.hcpc$data.clust$Dictamen,res.hcpc$data.clust$clust)
-sweep(DictamenXClus,2,apply(DictamenXClus,2,sum),"/")
+RoomTypeXClus<-table(res.hcpc$data.clust$room_type,res.hcpc$data.clust$clust)
+sweep(RoomTypeXClus,2,apply(RoomTypeXClus,2,sum),"/")
 
 ### desc.var$category ###
 ### A.2. The description of each cluster by the categories ##
 res.hcpc$desc.var$category
-positiuXclust1<-table(res.hcpc$data.clust$Dictamen,res.hcpc$data.clust$clust)[2,1]
-positiu<-sum(res.hcpc$data.clust$Dictamen=="positiu",na.rm=TRUE)
+privateRoomXclust1<-table(res.hcpc$data.clust$room_type,res.hcpc$data.clust$clust)[2,1]
+positiu<-sum(res.hcpc$data.clust$room_type=="Private room",na.rm=TRUE)
 clust1<-sum(res.hcpc$data.clust$clust=="1")
 N<-nrow(res.hcpc$data.clust)
-positiuXclust1/positiu ###Cla/Mod
-positiuXclust1/clust1 ###Mod/Cla
+privateRoomXclust1/positiu ###Cla/Mod
+privateRoomXclust1/clust1 ###Mod/Cla
 positiu/N ###Global
 
+
+###TODO D'AQU´I CAP AVALL
 ### desc.var$quanti.var ###
 ### A.3. The quantitative variables which characterizes the clusters ###
 res.hcpc$desc.var$quanti.var
