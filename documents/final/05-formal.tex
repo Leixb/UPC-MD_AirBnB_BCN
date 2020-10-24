@@ -7,13 +7,41 @@
 \section{Description of data}%
 \label{sec:description_of_data}
 
+The data set has 20,703 entries and 74 variables, out of which 30 are categorical,
+38 are numerical and 6 are boolean. These provide information about both the hosts 
+and the listings.
+
+Regarding the hosts, it tells us about, among other things, their
+names, when they joined \airbnb, where they live, how long they take to respond 
+messages, their acceptance and response rates, whether they are superhosts, how 
+many listings they have or whether they have a profile picture.
+
+The information it supplies concerning the listing includes its
+neighbourhood, its coordinates, the type of property it is, the number of people 
+it accommodates, the number of bedrooms, beds and bathrooms, amenities, price, 
+the minimum and maximum nights it can be rented, its availability and reviews.
+
+Additionally, the data set contains data that doesn't provide useful information such
+as URLs, identifications numbers, names and descriptions or dates.
 % TODO
 % What do rows of data matrix contain? (one paragraph)
 
 % Metadata Table
 
+% TODO - Recompilar metadata
 \includepdf[pages=-,landscape=true]{../metadata_table/metadata}
+
+
 
 % TODO
 % Final scope of the study with inclusion and exclusion criteria for both rows
 % and columns (max half a page)
+\subsection{Final scope of study}
+
+After considering what variables were appropriate for our study, we decided to keep 
+the variables show in the metadata table presented above. We discarded the rest
+of the variables during preprocessing, either because they were duplicated or
+irrelevant. Furthermore, we extrapolated a few variables and created 
+two new ones, this process is explained in higher detail in the preprocessing 
+section. This resulted in a cleansed data set that contains 30 variables: 
+20 numerical, 7 categorical and 4 boolean.
