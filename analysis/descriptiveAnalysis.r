@@ -1,8 +1,12 @@
 library(ggplot2)
 library(kableExtra)
+library(gridExtra)
 library(grid)
 library(extrafont)
 library(showtext)
+library(cowplot)
+
+
 
 #loadfonts()
 font_add("LM Roman", regular = "latinmodern-math.otf")
@@ -95,10 +99,15 @@ for (k in names(dd)) {
         ggplot(dd, aes(x = "", y = !!var_s)) + geom_boxplot() + coord_flip() +
           theme_font + labs(x = NULL, y = NULL, fill = NULL)
 
-      pdf(sprintf('plots/%s-hi_bp.pdf', k))
-      grid.newpage()
-      grid.draw(rbind(ggplotGrob(bp), ggplotGrob(hi), size = "last"))
-      dev.off()
+
+      #pdf(sprintf('plots/%s-hi_bp.pdf', k))
+
+      g <- plot_grid(bp, hi, align = "v", nrow = 2, rel_heights = c(1/4, 3/4))
+
+      ggsave(plot = g, file = sprintf('plots/%s-hi_bp.pdf', k), device = 'pdf')
+      #grid.newpage()
+      #rid.draw(rbind(ggplotGrob(bp), ggplotGrob(hi), size = "last"))
+      #dev.off()
 
       tab <- data.frame(rbind(t(summary(dd[, k]))))
 
@@ -123,11 +132,8 @@ df <- dd[dd$price < 500, ]
 
 hi <- ggplot(df, aes(x = price)) + geom_histogram(bins=100)  + theme_font
 
-bp <-
-  ggplot(df, aes(x = "", y = price)) + geom_boxplot() + coord_flip() +
-    theme_font + labs(x = NULL, y = NULL, fill = NULL)
+#pdf(sprintf('plots/%s-hi_bp.pdf', k))
 
-pdf(sprintf('plots/%s-hi_bp-tallat500.pdf', 'price'))
-grid.newpage()
-grid.draw(rbind(ggplotGrob(bp), ggplotGrob(hi), size = "last"))
-dev.off()
+g <- plot_grid(bp, hi, align = "v", nrow = 2, rel_heights = c(1/4, 3/4))
+
+ggsave(plot = g, file = sprintf('plots/%s-hi_bp-tallat500.pdf', 'price'), device = 'pdf')
