@@ -7,9 +7,19 @@
 \section{Description of data}%
 \label{sec:description_of_data}
 
+\subsection{Description of initial data matrix}
+
 The data set has 20,703 entries and 74 variables, out of which 30 are categorical,
-38 are numerical and 6 are boolean. These provide information about both the hosts 
-and the listings.
+38 are numerical and 6 are boolean, meaning that there are 1,532,022 data entries.
+The share of missing data is 9.01\%, or 138,007
+entries in absolute terms. We should note that two variables, \texttt{bathrooms} and
+\texttt{calendar\_updated}, have NA values for all records and hence are useless. 
+If we remove those two variables, the share of missing data drops to 
+around 6.5\%.
+Furthermore, for a few variables such as \texttt{neighbourhood} and all variables
+related to reviews we have a significant share of NA entries, around 25 and 30\%
+or 5,000 to 7,000 in absolute terms. The rest of the variables have largely no 
+missing data and the few that do are below 3\%.
 
 Regarding the hosts, it tells us about, among other things, when they joined
 \airbnb, where they live, how long they take to respond 
@@ -21,8 +31,9 @@ neighbourhood, its coordinates, the type of property it is, the number of people
 it accommodates, the number of bedrooms, beds and bathrooms, amenities, price, 
 the minimum and maximum nights it can be rented, its availability and reviews.
 
-Additionally, the data set contains data that doesn't provide useful information such
-as URLs, identifications numbers, names and descriptions or dates.
+Additionally, the data set contains variables that don't provide useful information 
+such as URLs, identifications numbers, names and descriptions or some dates.
+
 % TODO
 % What do rows of data matrix contain? (one paragraph)
 

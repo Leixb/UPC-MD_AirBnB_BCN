@@ -10,15 +10,12 @@
 % TODO : aixo es copiat tal qual del D3. S'ha de canviar perk sigui el que
 %        realment vam acabar fent.
 
-\subsection{Steps and Decisions}%
-\label{sub:steps-decisions}
-
-\subsubsection{Formatting issues, building software context}
+\subsection{Formatting issues, building software context}
 
 We haven't encountered any formatting issues or problems with R not recognising
 any rows, columns or variable types.
 
-\subsubsection{Determining working matrix}%
+\subsection{Determining working matrix}%
 \label{ssub:work_matrix}
 
 We discarded many variables from the original data set that didn't provide any
@@ -28,7 +25,7 @@ description of the listing, etc. Furthermore, some columns were duplicated with
 different variable names, such as \texttt{host\_listings\_count} and
 \texttt{host\_total\_listings\_count}, we removed those redundancies as well.
 
-\subsubsection{Identification and treatment of missing data}
+\subsection{Identification and treatment of missing data}
 
 The dataset provided had already all missing data encoded as \NA's. Therefore no
 more missing were found encoded as other values. When looking at the missing
@@ -42,7 +39,7 @@ Categorical with a large number of missing data were analysed and we found out t
 
 Numerical variables were treated using the Knn algorithm. This decision was made because our dataset already contained many numerical variables with no NA's. Therefore Knn seemed the best suited algorithm.
 
-\subsubsection{Identification and treatment of outliers}
+\subsection{Identification and treatment of outliers}
 
 When looking at the boxplots of most of the numerical variables in the dataset
 we can observe that there are a few outliers. Some of them, although differing
@@ -59,12 +56,12 @@ unreasonable. After doing some research we found out that the maximum number of 
 We have decided to allow for some outliers as long as they are few and
 justifiable, in these cases we will try to correlate them to other variables.
 
-\subsubsection{Identification and treatment of errors}
+\subsection{Identification and treatment of errors}
 
 After inspecting the data we have not found errors apart from the one abnormally
 large values mentioned before. In those cases we decided to change those values to NA's and then impute those values with the knn algorithm.
 
-\subsubsection{Feature selection/extraction, dimensional reduction}
+\subsection{Feature selection/extraction, dimensional reduction}
 
 The \airbnb dataset contained a large amount of variables. First of all we
 decided which of them would made it in our working matrix following the steps
@@ -81,7 +78,7 @@ made it into our working matrix there are several more relevant than others.
 
 \end{comment}
 
-\subsubsection{Derivation of new variables}
+\subsection{Derivation of new variables}
 
 We derived some new variables from the data set in order to flourish new
 categorical variables.
