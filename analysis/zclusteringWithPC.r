@@ -43,15 +43,17 @@ save_plot(scree, 'screeplot')
 
 plane_plots <- function(i, j) {
   var <-
-    fviz(
+    fviz_pca_var(
       res.pca,
-      'var',
+      #alpha.var = "contrib",
+      #col.var = "contrib",
+      #palette = 'jco',
       axes = c(i, j),
-      select.var = list(cos2 = 0.3),
+      select.var = list(cos2 = 0.2),
       repel = T
     )
   ind <-
-    fviz(
+    fviz_pca_ind(
       res.pca,
       'ind',
       axes = c(i, j),
@@ -59,8 +61,6 @@ plane_plots <- function(i, j) {
       geom = c('point'),
       col.ind = "steelblue",
       alpha.ind = 0.1,
-      habillage = "room_type",
-      addEllipses = T
     )
   bi <-
     fviz_pca_biplot(
@@ -93,19 +93,18 @@ dcat <- names(Filter(is.factor, dd))
 
 for (cat in dcat) {
   run_planes(
-    function() {
-  ind <-
-    fviz(
-      res.pca,
-      'ind',
-      axes = c(i, j),
-      select.ind = list(cos2 = 0.3),
-      geom = c('point'),
-      col.ind = "steelblue",
-      alpha.ind = 0.1,
-      habillage = "room_type",
-      addEllipses = T
-    )
+    function(i, j) {
+      ind <- fviz(
+          res.pca,
+          'ind',
+          axes = c(i, j),
+          geom = c('point'),
+          alpha = 0.2,
+          habillage = cat,
+          addEllipses = T,
+          ellipse.alpha = 0.1
+        )
+      save_plot(ind, sprintf('ind_plane_%s_%d_%d', cat, i, j))
     }
   )
 }
