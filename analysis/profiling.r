@@ -88,7 +88,7 @@ ValorTestXquali <- function(P, Xquali) {
 dades <- dd
 K <- dim(dades)[2]
 
-P <- dd$room_type
+P <- dd$room_type # TODO change this for cluster
 
 nc <- length(levels(factor(P)))
 pvalk <-
@@ -114,19 +114,20 @@ plot_num <- function(v, cluster = cluster, df = dd) {
    cluster <- enquo(cluster)
 
    bp <-
-      ggplot(df, aes(!!v, !!cluster, fill = !!cluster)) + geom_boxplot() + no_legend
+      ggplot(df, aes(!!v, !!cluster, fill = !!cluster)) + geom_boxplot(show.legend = F)
    vi <-
-      ggplot(df, aes(!!v, !!cluster, fill = !!cluster)) + geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) + no_legend
+      ggplot(df, aes(!!v, !!cluster, fill = !!cluster)) + geom_violin(draw_quantiles = c(0.25, 0.5, 0.75), show.legend = F)
 
    intercept <- mean(pull(df, !!v))
 
    meanp <-
       ggplot(df) +  geom_bar(aes(!!cluster, !!v, fill = !!cluster),
                              stat = "summary",
-                             fun = "mean") +
+                             fun = "mean",
+                             show.legend = F) +
       geom_hline(yintercept = intercept,
                  linetype = "dashed",
-                 color = "black") + no_legend
+                 color = "black")
 
 
    name <- substring(deparse(v), 2)
