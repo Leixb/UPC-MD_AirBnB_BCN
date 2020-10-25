@@ -13,7 +13,12 @@
 
 \newcommand{\fign}[2]{
     \fig{#1-hi_bp}{Histogram \& Boxplot of #2}
-    \input{../../analysis/tables/#1-ext_sum}
+    \begin{table}[H]
+        \centering
+        \caption{Extended summary statistics of #2}%
+        \label{tab:#2}
+        \input{../../analysis/tables/#1-ext_sum}
+    \end{table}
 }
 
 \newcommand{\figf}[2]{
@@ -31,7 +36,12 @@
             \label{fig:#1-pie}
     \end{minipage}
 \end{figure}
+\begin{table}[H]
+    \centering
+    \caption{Table of #2 frequency}%
+    \label{tab:#1}
     \input{../../analysis/tables/#1-freq}
+\end{table}
 }
 
 \begin{comment}
@@ -68,19 +78,47 @@ The availability of the year follows a similar distribution to the monthly one.
 The only difference are some peaks at 90 days and half a year, which both are 
 likely numbers for a host to rent it's listing.
 
-\end{comment}
 
 \figf{host_acceptance_rate_cat}{host acceptance rate cat}
 
-Up to 66\% of the hosts have a very high chance of accepting a customer.
+Up to 66\% of the hosts have a very high chance of accepting a customer. There is a large number of NA's as well.
 
 
-%\figf{host_acceptance_rate_cat}{host acceptance rate cat}
-%\figf{host_has_profile_pic}{host has profile pic}
-%\figf{host_identity_verified}{host identity verified}
-%\figf{host_is_superhost}{host is superhost}
-%\fign{host_listings_count}{host listings count}
-%\figf{host_response_rate_cat}{host response rate cat}
+\figf{host_has_profile_pic}{host has profile pic}
+
+As seen in figure \ref{fig:host_has_profile_pic-pie}, over 99\% of host with listings in 
+Barcelona have a profile picture, in fact only 55 out of 20,476 hosts don't
+have a picture. Therefore, we don't expect this variable to provide significant
+insight into answering the question we are posing.
+
+\figf{host_identity_verified}{host identity verified}
+
+\Cref{fig:host_identity_verified-pie} shows that only 74\% of hosts have
+had their identity verified by \airbnb, meaning that the other 25\% isn't.
+This can be expected since the verification process can be complicated in some
+cases, even requiring the host to provide an official document or additional
+pictures of himself.
+
+\figf{host_is_superhost}{host is superhost}
+
+As seen in figure \ref{fig:host_is_superhost-pie}, only the 19\% of hosts are superhosts. 
+This may be the case because the conditions to achieve this status are rather hard.
+
+\end{comment}
+
+\fign{host_listings_count}{host listings count}
+
+Figure \ref{fig:host_listings_count} shows 
+
+
+\figf{host_response_rate_cat}{host response rate cat}
+
+This variable conveys how attentive the host is, as it tells us to what degree
+the host replies to messages received inquiring about its listings. As seen
+in figure \ref{fig:host_response_rate_cat-pie}, 55\% of hosts have a very high
+response rate, that is they reply to more than 80\% of messages they receive.
+It should be noted that this variable has a 
+
 %\figf{host_response_time}{host response time}
 %\figf{host_since_season}{host since season}
 \figf{host_since_year}{host since year}
@@ -89,7 +127,10 @@ In figure \ref{fig:host_since_year-pie} we can see that except for the first yea
 in 2019 there has been another spike of new hosts.
 
 
-%\figf{instant_bookable}{instant bookable}
+\figf{instant_bookable}{instant bookable}
+
+As seen in figure \ref{fig:instant_bookable-bar} there are nearly as many instant bookable listings as not.
+
 %\fign{maximum_nights_avg_ntm}{maximum nights avg ntm}
 %\fign{minimum_nights_avg_ntm}{minimum nights avg ntm}
 
@@ -107,7 +148,10 @@ around \$86.34.
 
 %\fign{review_scores_accuracy}{review scores accuracy}
 %\fign{review_scores_cleanliness}{review scores cleanliness}
-%\fign{review_scores_value}{review scores value}
+\fign{review_scores_value}{review scores value}
+
+This variable follows a similar distribution as the other reviews seen so far. Despite that
+it has the peculiarity of having less perfect scores.
 
 \fign{review_scores_location}{review scores location}
 
@@ -126,7 +170,7 @@ negative reviews a 0 and the most common among positive a 10. We suppose polariz
 because users are more likely to leave reviews when they had either really good or 
 really bad experiences.
 
-\fign{number_of_reviews}{number of reviews}
+%\fign{number_of_reviews}{number of reviews}
 %\fign{number_of_reviews_l30d}{number of reviews l30d}
 %\fign{number_of_reviews_ltm}{number of reviews ltm}
 
@@ -145,6 +189,15 @@ The vast majority of listings correspond to entire homes/apartments or private r
 \pagebreak
 % Bivariate when relevant (half a page per pair of variables)
 \subsection{Bivariate analysis}%
+\subsubsection{Host since year vs host listings count}
+
+\fig{bivar-host_since_year-host_listings_count}{Listings per host}
+
+Looking at \cref{fig:bivar-host_since_year-host_listings_count} we can see that there is no clear correlation between the number of listings a host has and the time they have been in the platform.It seems like most of the users have a small amount of listings. 
+But the small group that joined the platform in the years 2009, 2010 and 2011 seems to include some owners with upwards of 100 and 150 lisitings.
+
+
+\pagebreak
 
 
 \label{sub:bivariate_analysis}
