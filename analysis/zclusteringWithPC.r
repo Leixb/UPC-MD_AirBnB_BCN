@@ -5,14 +5,26 @@
 
 dd <- readRDS('data/20-data_na.Rda')
 
-# TODO: remove this
-dd <- dd[dd$host_since_year == "2018", ]
-
 ##### PCA with FactoMineR
 # install.packages("FactoMineR")
 library(FactoMineR)
 library(factoextra)
 library(ggplot2)
+library(extrafont)
+library(showtext)
+
+theme_font <- theme()
+
+font_init <- function() {
+  loadfonts(quiet = T)
+  font_add("LM Roman", regular = "latinmodern-math.otf")
+
+  theme_font <<- theme(text = element_text(family = "LM Roman"))
+
+  showtext_auto()
+}
+
+font_init()
 
 qsup <- names(Filter(function(x)
   is.factor(x) | is.logical(x), dd))
@@ -35,10 +47,10 @@ res.pca$eig
 # Screeplot
 
 save_plot <- function(p, title) {
-  ggsave(filename = sprintf('plots/%s.pdf', title), plot = p)
+  ggsave(filename = sprintf('plots/%s.pdf', title), plot = p + theme_font)
 }
 
-scree <- fviz_screeplot(res.pca, addlabels = T)
+scree <- fviz_screeplot(res.pca, addlabels = T, ncp = 20)
 save_plot(scree, 'screeplot')
 
 plane_plots <- function(i, j) {
