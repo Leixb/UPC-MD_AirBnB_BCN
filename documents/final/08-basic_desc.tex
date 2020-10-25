@@ -269,7 +269,7 @@ This obviously was not the case, which is interesting, since it indicates that a
 
 \fig{bivar-reviews_per_month-review_scores_rating}{Score rating vs reviews per month}
 
- In this case, \cref{fig:bivar-host_since_year-room_type} shows how the number of reviews affects the total rating. We can see that when there are not many reviews those can be anywhere within range, but once the listings get a significant amount of reviews it is harder and harder to find listings with a low rating. This, we believe, is due to people's tendency to give polarized scores and avoid booking the listings with really low scores. 
+ To see if there is a difference, we have created  \cref{fig:bivar-reviews_per_month-review_scores_rating}, which shows how the number of reviews per month correlates to the score of the reviews a listing has, but also integrating the price of such listing. It is interesting to see that some of the most reviewed listings are not very expensive and that the tendency that we saw in \cref{fig:bivar-host_since_year-room_type} is still there, proving that the listings that get reviewed the most tend to have pretty good ratings.
 
 \pagebreak
 \fig{bivar-neighbourhood_group_cleansed-review_scores_rating}{Ratings of listings depending on the neighbourhood \airbnb} 
@@ -278,11 +278,18 @@ This obviously was not the case, which is interesting, since it indicates that a
 \fig{bivar-neighbourhood_group_cleansed-price}{Price of listings depending on the neighbourhood \airbnb}
 As Barcelona dwellers we know that there are some neighborhoods more expensive to others. We want to find out
 if this still holds when talking about \airbnb rents.
-We can see in figure \cref{bivar-neighbourhood_group_cleansed-price} that for example L'Eixample has a mean price of ...,
+We can see in figure \cref{fig:bivar-neighbourhood_group_cleansed-price} that for example L'Eixample has a mean price of ...,
 while Nou Barris has a mean price of .... We can see as well
 that the high price outliers seem to vary between neighborhoods. This leads us to believe that although not
 much there is some correlation between price and neighborhood.
 
+\pagebreak
+
+\fig{bivar-room_type-minimum_nights_avg_ntm}{Minimum number of nights depending on room type} 
+From figure \cref{fig:bivar-room_type-minimum_nights_avg_ntm} we can clearly see that hotel rooms and
+shared rooms have a minimum average of nights much lower than the entire homes or private rooms.
+We can see that entire homes/apartments have less variance, being the majority of values concentrated
+near the mean, while in the private rooms we can see a much larger interquartile range.
 
 \pagebreak
 
