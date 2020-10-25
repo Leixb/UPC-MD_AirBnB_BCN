@@ -10,6 +10,7 @@ dd <- dd[dd$host_since_year == "2018",]
 ##### PCA with FactoMineR
 # install.packages("FactoMineR")
 library(FactoMineR)
+library(factoextra)
 library(ggplot2)
 
 qsup <- names(Filter(function(x) is.factor(x) | is.logical(x), dd))
@@ -28,11 +29,23 @@ res.pca$eig
 ?plot.PCA
 
 ### Plot for the variables
-plot(res.pca,choix="var",axes=c(1,2), graph.type="ggplot")
-plot(res.pca,choix="var",axes=c(3,4),select = "cos2 0.3")
-plot(res.pca,choix="var",axes=c(5,6),select = "cos2 0.3")
+for (i in 1:4) {
+  mn <- i + 1
+  if (mn > 4) next
+  for (j in mn:4) {
+    print(plot(res.pca,choix="var",axes=c(i,j), select = "cos2 0.3", graph.type="ggplot"))
+  }
+}
 
 ### Plot for the individuals
+for (i in 1:4) {
+  mn <- i + 1
+  if (mn > 4) next
+  for (j in mn:4) {
+    print(plot(res.pca,choix="ind",axes=c(i,j), graph.type="ggplot", label="none"))
+  }
+}
+
 plot(res.pca,choix="ind",invisible="quali",axes=c(1,2),label="none")
 plot(res.pca,choix="ind",invisible="quali",axes=c(3,4),label="none")
 plot(res.pca,choix="ind",invisible="quali",axes=c(5,6),label="none")
