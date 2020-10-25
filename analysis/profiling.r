@@ -1,13 +1,8 @@
-#  READING CREDSCO_BIN
-# load("d:/karina/docencia/DataMiningEI/Practiques/2CredscoProfiling/credscok_bin")
-
-#read data only if required
-#setwd("D:/karina/docencia/areferenciesPPT/0DadesPractiques/CREDSCO")
-#dd <- read.table("CredScoClean.csv",header=T, sep=";", dec='.');
 library(dplyr)
 library(ggplot2)
 library(extrafont)
 library(showtext)
+library(kableExtra)
 
 dd <- readRDS('data/20-data_na.Rda')
 
@@ -16,16 +11,15 @@ names(dd)
 theme_font <- theme()
 
 font_init <- function() {
-  loadfonts(quiet = T)
-  font_add("LM Roman", regular = "latinmodern-math.otf")
+   loadfonts(quiet = T)
+   font_add("LM Roman", regular = "latinmodern-math.otf")
 
-  theme_font <<- theme(text = element_text(family = "LM Roman"))
+   theme_font <<- theme(text = element_text(family = "LM Roman"))
 
-  showtext_auto()
+   showtext_auto()
 }
 
 font_init()
-
 
 #Calcula els valor test de la variable Xnum per totes les modalitats del factor P
 ValorTestXnum <- function(Xnum, P) {
@@ -91,17 +85,10 @@ ValorTestXquali <- function(P, Xquali) {
 }
 
 
-#dades contain the dataset
 dades <- dd
-#dades<-dd[filtro,]
-#dades<-df
 K <- dim(dades)[2]
-#par(ask=TRUE)
 
-#P must contain the class variable
-# TODO: use cluster column
 P <- dd$room_type
-#P<-df[,33]
 
 nc <- length(levels(factor(P)))
 pvalk <-
@@ -117,21 +104,29 @@ n <- dim(dades)[1]
 no_legend <- theme(legend.position = 'none')
 
 save_plot <- function(p, title) {
-  ggsave(filename = sprintf('plots/prof_%s.pdf', title), plot = p + theme_font)
+   ggsave(filename = sprintf('plots/prof_%s.pdf', title),
+          plot = p + theme_font)
 }
 
 # Numeriques
-plot_num <- function(v, cluster=cluster, df=dd) {
+plot_num <- function(v, cluster = cluster, df = dd) {
    v <- enquo(v)
    cluster <- enquo(cluster)
 
-   bp <- ggplot(df, aes(!!v, !!cluster, fill=!!cluster)) + geom_boxplot() + no_legend
-   vi <- ggplot(df, aes(!!v, !!cluster, fill=!!cluster)) + geom_violin( draw_quantiles = c(0.25, 0.5, 0.75)) + no_legend
+   bp <-
+      ggplot(df, aes(!!v, !!cluster, fill = !!cluster)) + geom_boxplot() + no_legend
+   vi <-
+      ggplot(df, aes(!!v, !!cluster, fill = !!cluster)) + geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) + no_legend
 
-   intercept <- mean(pull(df, !! v))
+   intercept <- mean(pull(df, !!v))
 
-   meanp <- ggplot(df) +  geom_bar(aes(!!cluster, !!v, fill = !!cluster),  stat = "summary", fun = "mean") +
-      geom_hline(yintercept=intercept, linetype="dashed", color = "black") + no_legend
+   meanp <-
+      ggplot(df) +  geom_bar(aes(!!cluster, !!v, fill = !!cluster),
+                             stat = "summary",
+                             fun = "mean") +
+      geom_hline(yintercept = intercept,
+                 linetype = "dashed",
+                 color = "black") + no_legend
 
 
    name <- substring(deparse(v), 2)
@@ -143,28 +138,38 @@ plot_num <- function(v, cluster=cluster, df=dd) {
 }
 
 # Categoriques
-plot_cat <- function(v, cluster=cluster, df=dd) {
+plot_cat <- function(v, cluster = cluster, df = dd) {
    v <- enquo(v)
    cluster <- enquo(cluster)
 
-   stack <- ggplot(df, aes(!!v, fill=!!cluster)) + geom_bar(position = 'stack')
-   side <- ggplot(df, aes(!!v, fill=!!cluster)) + geom_bar(position = 'dodge')
-   percent <- ggplot(df, aes(!!v, fill=!!cluster)) + geom_bar(position = 'fill')
+   stack <-
+      ggplot(df, aes(!!v, fill = !!cluster)) + geom_bar(position = 'stack')
+   side <-
+      ggplot(df, aes(!!v, fill = !!cluster)) + geom_bar(position = 'dodge')
+   percent <-
+      ggplot(df, aes(!!v, fill = !!cluster)) + geom_bar(position = 'fill')
 
    name <- substring(deparse(v), 2)
    save_plot(stack, sprintf('%s-stack', name))
    save_plot(side, sprintf('%s-side', name))
    save_plot(percent, sprintf('%s-percent', name))
 
-   return(list(stack = stack, side = side, percent = percent))
+   return(list(
+      stack = stack,
+      side = side,
+      percent = percent
+   ))
 }
 
-for (k in names(dd)) {
-   if (is.numeric(dd[,k])) {
-      r <- plot_num(!!sym(k), room_type) # TODO borrar parametre
-      for (j in r) print(r)
+pvalues <- read.csv(text = 'ANOVA,Kruskal-Wallis,Chi square')
 
-      print(paste("Analisi per classes de la Variable:", names(dades)[k]))
+for (k in names(dd)) {
+   if (is.numeric(dd[, k])) {
+      r <- plot_num(!!sym(k), room_type) # TODO borrar parametre
+      for (j in r)
+         print(r)
+
+      print(paste("Analisi per classes de la Variable:", k))
 
       print("Estadistics per groups:")
       for (s in levels(as.factor(P))) {
@@ -177,27 +182,21 @@ for (k in names(dd)) {
       pvalk[, k] <- ValorTestXnum(dades[, k], P)
       print("p-values ValorsTest: ")
       print(pvalk[, k])
+      pvalues[k, ] = c(o, kw, NA)
    } else {
       r <- plot_cat(!!sym(k), room_type) # TODO borrar parametre
-      for (j in r) print(r)
+      for (j in r)
+         print(r)
 
-      print(paste("Variable", names(dades)[k]))
+      print(paste("Variable", k))
       table <- table(P, dades[, k])
-      #   print("Cross-table")
-      #   print(table)
+
       rowperc <- prop.table(table, 1)
-
       colperc <- prop.table(table, 2)
-      #  print("Distribucions condicionades a files")
-      # print(rowperc)
-
-      #ojo porque si la variable es true o false la identifica amb el tipus Logical i
-      #aquest no te levels, por tanto, coertion preventiva
+      print("Distribucions condicionades a files")
+      print(rowperc)
 
       dades[, k] <- as.factor(dades[, k])
-
-      marg <- table(as.factor(P)) / n
-      print(append("Categories=", levels(as.factor(dades[, k]))))
 
       #condicionades a classes
       print(append("Categories=", levels(dades[, k])))
@@ -208,31 +207,37 @@ for (k in names(dd)) {
       print("Distribucions condicionades a columnes:")
       print(colperc)
 
-      #diagrames de barres apilades
+      chi <- chisq.test(dades[, k], as.factor(P))
+      chi_pval <- chi$p.value
+      test_pval <- ValorTestXquali(P, dades[, k])
 
-
-      #diagrames de barres adosades
+      pvalues[k, ] = c(NA, NA, chi_pval)
 
       print("Test Chi quadrat: ")
-      print(chisq.test(dades[, k], as.factor(P)))
-
+      print(chi_pval)
       print("valorsTest:")
-      print(ValorTestXquali(P, dades[, k]))
-      #calcular els pvalues de les quali
+      print(test_pval)
    }
 }
 
+# pvalues per class
 
-#descriptors de les classes m?s significatius. Afegir info qualits
 for (c in 1:length(levels(as.factor(P)))) {
    if (!is.na(levels(as.factor(P))[c])) {
       print(paste("P.values per class:", levels(as.factor(P))[c]))
 
-      print(sort(pvalk[c, ]), digits = 3)
+      print(sort(pvalk[c,]), digits = 3)
    }
 }
 
-#afegir la informacio de les modalitats de les qualitatives a la llista de pvalues i fer ordenacio global
+pvalk <- data.frame(t(pvalk))
 
-#saving the dataframe in an external file
-#write.table(dd, file = "credscoClean.csv", sep = ";", na = "NA", dec = ".", row.names = FALSE, col.names = TRUE)
+table <- kbl(pvalk,
+      booktabs = T,
+      format = 'latex')
+cat(table, file = sprintf('tables/prof-pvalues.tex', k))
+
+table <- kbl(pvalues,
+      booktabs = T,
+      format = 'latex')
+cat(table, file = sprintf('tables/prof-pvalues-special.tex', k))
