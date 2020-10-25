@@ -1,4 +1,5 @@
 library(ggplot2)
+library(GGally)
 library(kableExtra)
 library(grid)
 #library(extrafont)
@@ -16,29 +17,17 @@ theme_font <- theme()
 dd <- readRDS('data/20-data_na.Rda')
 
 saveplot <- function(p) {
-  x <- p$labels$x
-  y <- p$labels$y
-  ggsave(plot = p, sprintf('plots/bivar-%s-%s.pdf', x, y))
+  ggsave(plot = p, sprintf('plots/CorrelationsReviews.pdf'))
 }
 
-bivarplot <- function(x, y, color = NULL, df=dd, save=F, geo=geom_point()) {
-  p <- ggplot(df, aes_string(x, y, colour= color)) + geo + theme_font
+ourggpairs <- function(columnes, save=F, df=dd, color = NULL) {
+  simcolor <- sym(color)
+  p <- ggpairs(df,columns = columnes, aes(colour=!!simcolor, alpha=0.5))
   if (save) saveplot(p)
   return(p)
 }
 
-bivarplot('minimum_nights_avg_ntm', 'number_of_reviews', df = dd[dd$minimum_nights_avg_ntm < 10,], save = T)
-bivarplot('minimum_nights_avg_ntm', 'reviews_per_month', df = dd[dd$minimum_nights_avg_ntm < 10,], save = T)
-bivarplot('minimum_nights_avg_ntm', 'number_of_reviews_l30d',  save = T)
+reviews <- data.frame( review_scores_rating = dd$review_scores_rating, review_scores_cleanliness = dd$review_scores_cleanliness, review_scores_location = dd$review_scores_location, review_scores_accuracy = dd$review_scores_accuracy, review_scores_value = dd$review_scores_value, room_type = dd$room_type)
 
-bivarplot('room_type', 'minimum_nights_avg_ntm', geo = geom_boxplot(), df = dd[dd$minimum_nights_avg_ntm < 10,], save = T)
-bivarplot('number_of_reviews', 'review_scores_rating', df = dd[dd$minimum_nights_avg_ntm < 10,], save = T)
-bivarplot('reviews_per_month', 'review_scores_rating', color = "price",  df = dd[dd$minimum_nights_avg_ntm < 10 & dd$price < 500,], save = T)
+ourggpairs(c('review_scores_rating', 'review_scores_cleanliness', 'review_scores_location', 'review_scores_accuracy', 'review_scores_value') , save = T, color = "room_type")
 
-bivarplot('price', 'review_scores_rating', df = dd[dd$price < 1000,] , save = T)
-bivarplot('room_type', 'minimum_nights_avg_ntm', geo = geom_boxplot(), df = dd[dd$minimum_nights_avg_ntm < 10,], save = T)
-bivarplot('neighbourhood_group_cleansed', 'price', geo = geom_boxplot(), df = dd[dd$price < 1000,], save = T)
-bivarplot('neighbourhood_group_cleansed', 'review_scores_rating', geo = geom_boxplot(), save = T)
-
-bivarplot('host_since_year', 'host_listings_count', geo = geom_boxplot(),df = dd[dd$host_listings_count < 200,], save = T)
-bivarplot('host_since_year', 'price', geo = geom_boxplot(), df = dd[dd$price < 1000,], save = T)
