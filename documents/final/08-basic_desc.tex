@@ -20,7 +20,14 @@
     \end{figure}
 }
 
+\newcommand{\sssfig}[1]{
+    \pagebreak
+    \subsubsection{#1}%
+    \label{ssub:#1}
+}
+
 \newcommand{\fign}[2]{
+\sssfig{#2}
     \hibp{#1}{#2}
     \begin{table}[H]
         \centering
@@ -31,6 +38,7 @@
 }
 
 \newcommand{\figf}[2]{
+\sssfig{#2}
 \begin{figure}[H]
     \begin{minipage}{0.5\linewidth}
             \centering
@@ -161,11 +169,11 @@ As seen in figure \ref{fig:instant_bookable-bar} there are nearly as many instan
 
 \end{comment}
 
-\fign{maximum_nights_avg_ntm}{maximum nights avg ntm}
+%\fign{maximum_nights_avg_ntm}{maximum nights avg ntm}
 
-\fig{maximum_nights_avg_ntm-hi_bp-post}{maximum nights avg ntm post}
+%\fig{maximum_nights_avg_ntm-hi_bp-post}{maximum nights avg ntm post}
 
-\fign{minimum_nights_avg_ntm}{minimum nights avg ntm}
+%\fign{minimum_nights_avg_ntm}{minimum nights avg ntm}
 
 \figf{neighbourhood_group_cleansed}{neighbourhood group cleansed}
 
@@ -213,17 +221,13 @@ The distribution of this variable is really similar to the review score ratings.
 The distribution of this variable is really similar to the review score ratings.
 
 
-%\fign{number_of_reviews}{number of reviews}
-%\fign{number_of_reviews_l30d}{number of reviews l30d}
-%\fign{number_of_reviews_ltm}{number of reviews ltm}
+\fign{number_of_reviews}{number of reviews}
+\fign{number_of_reviews_l30d}{number of reviews l30d}
+\fign{number_of_reviews_ltm}{number of reviews ltm}
 
 \fign{reviews_per_month}{reviews per month}
 
 When looking at \ref{fig:reviews_per_month} we can clearly see a decreasing curve with its mean around 1.17. We found some outliers with the max number of reviews per month being 21. Despite it being quite larger than the mean we think it is still plausible to have 21 reviews over a 30 day span.
-
-
-\pagebreak
-\subsubsection{Room Type}
 
 \figf{room_type}{room type}
 
@@ -254,7 +258,7 @@ Looking at \cref{fig:bivar-host_since_year-price} we can see that again, there i
 
 What we wanted to find out with \cref{fig:bivar-host_since_year-room_type} was if there was any initial promotion within a certain group of hosts, something along the lines of contacting different hotel chains to promote the platform, which at that time was still small, and give them certain advantages to use \airbnb.
 We would have expected, if that was the case, a significantly bigger share of the early years' hosts to be listing hotel rooms instead of private rooms or entire apartments.
-This obviously was not the case, which is interesting, since it indicates that airbnb did not grow through the kind of techniques we had expected.
+This obviously was not the case, which is interesting, since it indicates that \airbnb did not grow through the kind of techniques we had expected.
 
 
 \pagebreak
@@ -265,14 +269,12 @@ This obviously was not the case, which is interesting, since it indicates that a
  In this case, \cref{fig:bivar-host_since_year-room_type} shows how the number of reviews affects the total rating. We can see that when there are not many reviews those can be anywhere within range, but once the listings get a significant amount of reviews it is harder and harder to find listings with a low rating. This, we believe, is due to people's tendency to give polarized scores and avoid booking the listings with really low scores. 
 
 \pagebreak
-\subsubsection{Reviews per month vs review score rating}
+\subsubsection{Reviews per month vs review score rating vs price}
 
 \fig{bivar-reviews_per_month-review_scores_rating}{Score rating vs reviews per month}
 
  To see if there is a difference, we have created  \cref{fig:bivar-reviews_per_month-review_scores_rating}, which shows how the number of reviews per month correlates to the score of the reviews a listing has, but also integrating the price of such listing. It is interesting to see that some of the most reviewed listings are not very expensive and that the tendency that we saw in \cref{fig:bivar-host_since_year-room_type} is still there, proving that the listings that get reviewed the most tend to have pretty good ratings.
 
-\pagebreak
-\fig{bivar-neighbourhood_group_cleansed-review_scores_rating}{Ratings of listings depending on the neighbourhood \airbnb} 
 \pagebreak
 
 \fig{bivar-neighbourhood_group_cleansed-price}{Price of listings depending on the neighbourhood \airbnb}
@@ -280,8 +282,7 @@ As Barcelona dwellers we know that there are some neighborhoods more expensive t
 if this still holds when talking about \airbnb rents.
 We can see in figure \cref{fig:bivar-neighbourhood_group_cleansed-price} that for example L'Eixample has a mean price of ...,
 while Nou Barris has a mean price of .... We can see as well
-that the high price outliers seem to vary between neighborhoods. This leads us to believe that although not
-much there is some correlation between price and neighborhood.
+that the high price outliers seem to vary between neighborhoods. This leads us to believe that although not much there is some correlation between price and neighborhood.
 
 \pagebreak
 
