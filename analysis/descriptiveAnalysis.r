@@ -168,6 +168,10 @@ extra_plots <- function() {
   p <- plot_num('price', df = dd[dd$price < 500,])
 
   plot_save(p, 'price', 'hi_bp-tallat500')
+
+  p <- plot_num('host_listings_count', df = dd[dd$host_listings_count < 100,])
+
+  plot_save(p, 'host_listings_count', 'hi_bp-tallat100')
 }
 
 num_summary()
