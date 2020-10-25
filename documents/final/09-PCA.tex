@@ -36,20 +36,48 @@ We used the inertia plots to decide the number of factorial axis to analyse. In 
 \label{sub:factorial_map_visualisation}
 
 % #2 -> caption #3 -> file, #1 -> page
-\newcommand{\factorialmap}[3][1]{
+\newcommand{\factorialmap}[2]{
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.85\linewidth,page=#1]{#3}
-        \caption{#2}%
-        \label{fig:#3-#1}
+        \includegraphics[width=0.85\linewidth]{plane_#1_#2-var}
+        \caption{PCA plane #1 vs #2}%
+        \label{fig:plane_#1-#2}
+    \end{figure}
+}
+
+\newcommand{\contrib}[2]{
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.85\linewidth]{plane_#1_#2-contrib}
+        \caption{PCA variable contributions of plane #1 vs #2}%
+        \label{fig:contrib_plane_#1-#2}
+    \end{figure}
+}
+
+\newcommand{\categorica}[4]{
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.85\linewidth]{ind_plane_#3_#1_#2}
+        \caption{PCA variable contributions of #4 in plane #1 vs #2}%
+        \label{fig:cat-#3-plane-#1-#2}
     \end{figure}
 }
 
 \begin{landscape}
 
 %TODO
-\factorialmap[3]{Test}{PCA_planes_sep}
-\factorialmap[4]{Test}{PCA_planes_sep}
+
+\factorialmap{1}{2}
+\factorialmap{1}{3}
+\factorialmap{1}{4}
+\factorialmap{2}{3}
+\factorialmap{2}{4}
+\factorialmap{3}{4}
+
+\contrib{1}{2}
+\contrib{3}{4}
+
+\categorica{1}{2}{room_type}{room type}
 
 \end{landscape}
 
