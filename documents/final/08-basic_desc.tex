@@ -52,13 +52,29 @@ some outliers, but they can somewhat be explained due to the same reasons mentio
 The distribution of beds and the outliers seem to follow a similar distribution as bedrooms.
 This is to be expected as those to variables should be correlated. 
 
-\end{comment}
-%\fign{availability_30}{availability 30}
+
+\fign{availability_30}{availability 30}
+
+If we look at the availability in the next 30 days after the data was taken, 
+we can clearly see some polarization. There are some rentals with 0 available days and some close to all days. This polarization explains the high variance
+of this variable.
+
+
 %\fign{availability_60}{availability 60}
 %\fign{availability_90}{availability 90}
-%\fign{availability_365}{availability 365}
+\fign{availability_365}{availability 365}
+
+The availability of the year follows a similar distribution to the monthly one.
+The only difference are some peaks at 90 days and half a year, which both are 
+likely numbers for a host to rent it's listing.
+
+\end{comment}
 
 \figf{host_acceptance_rate_cat}{host acceptance rate cat}
+
+Up to 66\% of the hosts have a very high chance of accepting a customer.
+
+
 %\figf{host_acceptance_rate_cat}{host acceptance rate cat}
 %\figf{host_has_profile_pic}{host has profile pic}
 %\figf{host_identity_verified}{host identity verified}
@@ -67,25 +83,38 @@ This is to be expected as those to variables should be correlated.
 %\figf{host_response_rate_cat}{host response rate cat}
 %\figf{host_response_time}{host response time}
 %\figf{host_since_season}{host since season}
-%\figf{host_since_year}{host since year}
+\figf{host_since_year}{host since year}
+
+In figure \ref{fig:host_since_year-pie} we can see that except for the first years the among of new hosts has more or less remained constant. However 
+in 2019 there has been another spike of new hosts.
+
+
 %\figf{instant_bookable}{instant bookable}
 %\fign{maximum_nights_avg_ntm}{maximum nights avg ntm}
 %\fign{minimum_nights_avg_ntm}{minimum nights avg ntm}
+
 \figf{neighbourhood_group_cleansed}{neighbourhood group cleansed}
 
 Looking at \ref{fig:neighbourhood_group_cleansed-pie} we can see that L'Eixample
 and Ciutat Vella are the most popular neighborhoods for listing.
 
-%\fign{number_of_reviews}{number of reviews}
-%\fign{number_of_reviews_l30d}{number of reviews l30d}
-%\fign{number_of_reviews_ltm}{number of reviews ltm}
 \fign{price}{price}
 \fig{price-hi_bp-tallat500}{price}
 
+In the figure \ref{fig:price-hi_bp-tallat500} we can see that there are some extreme outliers. To visualize the distribution better we have cut the histogram at price 500. Having done that we can see that the price distribution seems to follow a chi-square. We were surprised to find out that the mean price is 
+around \$86.34.
 
-\fign{review_scores_accuracy}{review scores accuracy}
-\fign{review_scores_cleanliness}{review scores cleanliness}
+
+%\fign{review_scores_accuracy}{review scores accuracy}
+%\fign{review_scores_cleanliness}{review scores cleanliness}
+%\fign{review_scores_value}{review scores value}
+
 \fign{review_scores_location}{review scores location}
+
+The location score seems to be the one with most positive reviews. In fact the mean is 9.61, almost 0.5 higher than the overall rating. We found as well
+very few negative reviews, being in fact the median and Q3 both a 10.
+
+
 \fign{review_scores_rating}{review scores rating}
 
 We can see that the majority of reviews are considered positive. The mean in fact is 
@@ -97,10 +126,13 @@ negative reviews a 0 and the most common among positive a 10. We suppose polariz
 because users are more likely to leave reviews when they had either really good or 
 really bad experiences.
 
+\fign{number_of_reviews}{number of reviews}
+%\fign{number_of_reviews_l30d}{number of reviews l30d}
+%\fign{number_of_reviews_ltm}{number of reviews ltm}
 
-\fign{review_scores_value}{review scores value}
 \fign{reviews_per_month}{reviews per month}
 
+When looking at \ref{fig:reviews_per_month} we can clearly see a decreasing curve with its mean around 1.17. We found some outliers with the max number of reviews per month being 21. Despite it being quite larger than the mean we think it is still plausible to have 21 reviews over a 30 day span.
 
 
 \pagebreak
@@ -113,6 +145,8 @@ The vast majority of listings correspond to entire homes/apartments or private r
 \pagebreak
 % Bivariate when relevant (half a page per pair of variables)
 \subsection{Bivariate analysis}%
+
+
 \label{sub:bivariate_analysis}
 
 % When required, please include descriptives before and after preprocessing
