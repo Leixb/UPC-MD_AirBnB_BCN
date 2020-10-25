@@ -11,8 +11,17 @@
 \label{sub:univariate_analysis}
 
 
+\newcommand{\hibp}[2]{
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\linewidth]{#1-hi_bp}
+        \caption{Histogram \& Boxplot of #2}%
+        \label{fig:#1}
+    \end{figure}
+}
+
 \newcommand{\fign}[2]{
-    \fig{#1-hi_bp}{Histogram \& Boxplot of #2}
+    \hibp{#1}{#2}
     \begin{table}[H]
         \centering
         \caption{Extended summary statistics of #2}%
@@ -104,11 +113,16 @@ pictures of himself.
 As seen in figure \ref{fig:host_is_superhost-pie}, only the 19\% of hosts are superhosts. 
 This may be the case because the conditions to achieve this status are rather hard.
 
-\end{comment}
-
 \fign{host_listings_count}{host listings count}
 
-Figure \ref{fig:host_listings_count} shows 
+
+Figure \ref{fig:host_listings_count} shows that the majority of hosts only have 
+a small amount of listings, being the median 2. However we can see that there is
+a lot of variability with many outliers. These outliers might correspond to 
+businesses that own lots of listings.
+
+% TODO
+%\fig{host_listings_count-hi_bp-tallat100}{host listings count}
 
 
 \figf{host_response_rate_cat}{host response rate cat}
@@ -117,10 +131,24 @@ This variable conveys how attentive the host is, as it tells us to what degree
 the host replies to messages received inquiring about its listings. As seen
 in figure \ref{fig:host_response_rate_cat-pie}, 55\% of hosts have a very high
 response rate, that is they reply to more than 80\% of messages they receive.
-It should be noted that this variable has a 
+It should be noted that this variable has a high share of missing data, 
+approximately 34\%.
 
-%\figf{host_response_time}{host response time}
-%\figf{host_since_season}{host since season}
+
+\figf{host_response_time}{host response time}
+
+Figure \ref{fig:host_response_time-bar} shows that the quicker the response, the
+more number of entries it has. A fact to point out as well is the large number
+of NA's.
+
+
+\figf{host_since_season}{host since season}
+
+To our surprise there number of new hosts listings remain more or less equal over
+the four seasons. In figure \ref{fig:host_since_season-bar} we can see that Spring/Summer
+still have a bigger influx but not as much as we had initially hypothesised.
+
+
 \figf{host_since_year}{host since year}
 
 In figure \ref{fig:host_since_year-pie} we can see that except for the first years the among of new hosts has more or less remained constant. However 
@@ -131,8 +159,10 @@ in 2019 there has been another spike of new hosts.
 
 As seen in figure \ref{fig:instant_bookable-bar} there are nearly as many instant bookable listings as not.
 
-%\fign{maximum_nights_avg_ntm}{maximum nights avg ntm}
-%\fign{minimum_nights_avg_ntm}{minimum nights avg ntm}
+\end{comment}
+
+\fign{maximum_nights_avg_ntm}{maximum nights avg ntm}
+\fign{minimum_nights_avg_ntm}{minimum nights avg ntm}
 
 \figf{neighbourhood_group_cleansed}{neighbourhood group cleansed}
 
@@ -146,19 +176,6 @@ In the figure \ref{fig:price-hi_bp-tallat500} we can see that there are some ext
 around \$86.34.
 
 
-%\fign{review_scores_accuracy}{review scores accuracy}
-%\fign{review_scores_cleanliness}{review scores cleanliness}
-\fign{review_scores_value}{review scores value}
-
-This variable follows a similar distribution as the other reviews seen so far. Despite that
-it has the peculiarity of having less perfect scores.
-
-\fign{review_scores_location}{review scores location}
-
-The location score seems to be the one with most positive reviews. In fact the mean is 9.61, almost 0.5 higher than the overall rating. We found as well
-very few negative reviews, being in fact the median and Q3 both a 10.
-
-
 \fign{review_scores_rating}{review scores rating}
 
 We can see that the majority of reviews are considered positive. The mean in fact is 
@@ -169,6 +186,29 @@ We can see as well that there is some polarization, being the most common rating
 negative reviews a 0 and the most common among positive a 10. We suppose polarization occurs
 because users are more likely to leave reviews when they had either really good or 
 really bad experiences.
+
+
+\fign{review_scores_value}{review scores value}
+
+This variable follows a similar distribution as the other reviews seen so far. Despite that
+it has the peculiarity of having less perfect scores.
+
+
+\fign{review_scores_location}{review scores location}
+
+The location score seems to be the one with most positive reviews. In fact the mean is 9.61, almost 0.5 higher than the overall rating. We found as well
+very few negative reviews, being in fact the median and Q3 both a 10.
+
+
+\fign{review_scores_accuracy}{review scores accuracy}
+
+The distribution of this variable is really similar to the review score ratings.
+
+
+\fign{review_scores_cleanliness}{review scores cleanliness}
+
+The distribution of this variable is really similar to the review score ratings.
+
 
 %\fign{number_of_reviews}{number of reviews}
 %\fign{number_of_reviews_l30d}{number of reviews l30d}
@@ -191,14 +231,22 @@ The vast majority of listings correspond to entire homes/apartments or private r
 \subsection{Bivariate analysis}%
 \subsubsection{Host since year vs host listings count}
 
-\fig{bivar-host_since_year-host_listings_count}{Listings per host}
+\fig{bivar-host_since_year-host_listings_count}{Number of listings depending on the year the host joined Airbnb}
 
 Looking at \cref{fig:bivar-host_since_year-host_listings_count} we can see that there is no clear correlation between the number of listings a host has and the time they have been in the platform.It seems like most of the users have a small amount of listings. 
-But the small group that joined the platform in the years 2009, 2010 and 2011 seems to include some owners with upwards of 100 and 150 lisitings.
+But the small group that joined the platform in the years 2009, 2010 and 2011 seems to include some owners with upwards of 100 and 150 listings. This seems to confirm that most of the early adopters of the platform were businesses or big owners that gathered a lot of buildings. We can also see that some of the hosts with more listings joined in the recent years, probably joining the platform after seeing great results from others' operations. 
 
 
 \pagebreak
+\subsubsection{Host since year vs price per night}
 
+\fig{bivar-host_since_year-price}{Price per night depending on the year the host joined Airbnb}
+
+Looking at \cref{fig:bivar-host_since_year-price} we can see that again, there is no .It seems like most of the users have a small amount of listings. 
+But the small group that joined the platform in the years 2009, 2010 and 2011 seems to include some owners with upwards of 100 and 150 listings. This seems to confirm that most of the early adopters of the platform were businesses or big owners that gathered a lot of buildings. We can also see that some of the hosts with more listings joined in the recent years, probably joining the platform after seeing great results from others' operations. 
+
+
+\pagebreak
 
 \label{sub:bivariate_analysis}
 
