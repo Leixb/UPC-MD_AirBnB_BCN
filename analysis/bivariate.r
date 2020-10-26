@@ -32,4 +32,8 @@ bivarplot("neighbourhood_group_cleansed", "review_scores_rating", geo = geom_box
 bivarplot("host_since_year", "host_listings_count", geo = geom_boxplot(), df = dd[dd$host_listings_count < 200, ], save = T)
 bivarplot("host_since_year", "price", geo = geom_boxplot(), df = dd[dd$price < 1000, ], save = T)
 
+p <- ggplot(dd, aes(host_since_year, fill=room_type) ) + geom_bar(position = 'stack')
+p <- p + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+save_pdf(p, 'bivar', p$labels$x, p$labels$fill)
+
 dim(dd)
