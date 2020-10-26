@@ -1,23 +1,15 @@
 library(ggplot2)
-library(kableExtra)
 library(gridExtra)
 library(grid)
-library(extrafont)
-library(showtext)
 library(cowplot)
 
 dd <- readRDS('data/10-data_pre.Rda')
 n <- dim(dd)[1]
 
-theme_font <- theme()
+source('save_plot.r')
 
-font_init <- function() {
-  loadfonts(quiet = T)
-  font_add("LM Roman", regular = "latinmodern-math.otf")
-
-  theme_font <<- theme(text = element_text(family = "LM Roman"))
-
-  showtext_auto()
+save_desc_plot <- function(p, width = plotWidth, height = plotHeight, ...) {
+  save_plot(p, w = width, h = height, 'desc', ...)
 }
 
 ## Summary of numerical variables
@@ -28,10 +20,7 @@ num_summary <- function() {
   colnames(tab) <-
     c("Min", "1st Q.", "Median", "Mean", "3rd Q.", "Max", "NA's")
 
-  cat(kbl(tab, booktabs = T, format = 'latex') %>% #landscape()
-        kable_styling(latex_options = c("scale_down")),
-      file = 'tables/num_summary.tex')
-
+  save_table(tab, 'num_summary')
 }
 
 # Basic descriptive analysis for numerical variables
@@ -41,11 +30,11 @@ plot_num <- function(k, bins = 100, df = dd) {
   var_s <- sym(k)
 
   hi <-
-    ggplot(df, aes(x = !!var_s)) + geom_histogram(bins = bins) + theme_font
+    ggplot(df, aes(x = !!var_s)) + geom_histogram(bins = bins)
 
   bp <-
     ggplot(df, aes(x = "", y = !!var_s)) + geom_boxplot() + coord_flip() +
-    theme_font + labs(x = NULL, y = NULL, fill = NULL)
+      labs(x = NULL, y = NULL, fill = NULL)
 
   plot_grid(
     bp,
@@ -78,55 +67,29 @@ plot_fact <- function(k, frecs, df = dd) {
               family = "LM Roman") +
     labs(x = NULL, y = NULL, fill = NULL) +
     guides(fill = guide_legend(reverse = TRUE)) +
-
-    theme_classic() + theme_font +
+    theme_classic() +
     theme(
       axis.line = element_blank(),
       axis.text = element_blank(),
       axis.ticks = element_blank()
     )
 
-  ggsave(
-    plot = p,
-    sprintf('plots/%s-pie.pdf', k),
-    height = 2.5,
-    width = 3.5
-  )
-
   b <-
     ggplot(df, aes(x = !!var_s, fill = !!var_s)) + geom_bar(width = 0.7) +
     theme(legend.position = "none",
           axis.text.x = element_text(angle = -90, hjust = 0))  + theme_font
 
-  ggsave(
-    plot = b,
-    sprintf('plots/%s-bar.pdf', k),
-    height = 2.5,
-    width = 3.5
-  )
-
+  save_desc_plot(p, k, 'pie', height = 2.5, width = 3.5)
+  save_desc_plot(p, k, 'bar', height = 2.5, width = 3.5)
 }
 
-plot_save <- function(p,
-                      name,
-                      tail,
-                      width = 5.5,
-                      height = 4) {
-  ggsave(
-    plot = p,
-    file = sprintf('plots/%s-%s.pdf', name, tail),
-    device = 'pdf',
-    width = width,
-    height = height
-  )
-}
 
 plot_all <- function() {
   for (k in names(dd)) {
     if (is.numeric(dd[, k])) {
       p <- plot_num(k)
 
-      plot_save(p, k, 'hi_bp')
+      save_desc_plot(p, k, 'hi_bp')
 
       tab <- data.frame(rbind(t(summary(dd[, k]))))
 
@@ -141,21 +104,13 @@ plot_all <- function() {
       tab$SD <- c(sd(dd[, k], na.rm = T))
       tab$VC <- sd(dd[, k], na.rm = T) / mean(dd[, k], na.rm = T)
 
-      cat(
-        kbl(tab, booktabs = T, format = 'latex'),
-        file = sprintf('tables/%s-ext_sum.tex', k)
-      )
+      save_table(tab, k, 'ext_sum')
 
     } else {
       frecs <- table(as.factor(df[, k]), useNA = "ifany")
-
       plot_fact(k, frecs)
-
-      table <- kbl(sort(frecs, decreasing = T),
-            booktabs = T,
-            format = 'latex')
-      cat(table, file = sprintf('tables/%s-freq.tex', k))
-
+      tab <- sort(frecs, decreasing = T)
+      save_table(tab, k, 'freq')
     }
   }
 }
@@ -164,15 +119,13 @@ plot_all <- function() {
 extra_plots <- function() {
   p <- plot_num('price', df = dd[dd$price < 500,])
 
-  plot_save(p, 'price', 'hi_bp-tallat500')
+  save_desc_plot(p, 'price', 'hi_bp-tallat500')
 
   p <- plot_num('host_listings_count', df = dd[dd$host_listings_count < 100,])
 
-  plot_save(p, 'host_listings_count', 'hi_bp-tallat100')
+  save_desc_plot(p, 'host_listings_count', 'hi_bp-tallat100')
 }
 
 num_summary()
-
-font_init()
 plot_all()
 extra_plots()
