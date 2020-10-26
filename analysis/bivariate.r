@@ -1,5 +1,7 @@
 library(ggplot2)
 library(grid)
+library(ellipse)
+library(RColorBrewer)
 
 dd <- readRDS("data/20-data_na.Rda")
 
@@ -9,6 +11,15 @@ save_bivar_plot <- function(p) {
   y <- p$labels$y
   save_pdf(p, 'bivar', x, y)
 }
+
+pal <- colorRampPalette( brewer.pal(5, "Spectral") )(100)
+
+# Order the correlation matrix
+c <- cor(Filter(is.numeric, dd))
+ord <- order(c[1, ])
+c <- c[ord, ord]
+# !!! Export manual
+plotcorr(c , col = pal[c*50+50] , mar = c(1,1,1,1)  )
 
 bivarplot <- function(x, y, color = NULL, df = dd, save = F, geo = geom_point()) {
   p <- ggplot(df, aes_string(x, y, colour = color)) + geo
