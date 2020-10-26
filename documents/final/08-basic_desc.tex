@@ -112,8 +112,21 @@ variable.
 
 
 % TODO: ho posem a l apendix?
-%\fign{availability_60}{availability 60}
-%\fign{availability_90}{availability 90}
+\fign{availability_60}{availability 60}
+
+For the availability in the coming 2 months the distribution of data
+follows an almost identical pattern to the availability in the next
+30 days, where many listings don't have any availability and the rest
+are hardly occupied. The high proportion of properties with no
+availability could be explained by the fact that on \airbnb
+you can have a listing up that isn't open for rental and thus isn't
+available.
+
+\fign{availability_90}{availability 90}
+
+The availability for the following 90 days again has practically
+the same distribution and we believe the same reasons explain it.
+
 \fign{availability_365}{availability 365}
 
 The availability of the year follows a similar distribution to the monthly one.
@@ -157,7 +170,8 @@ businesses that own lots of listings.
 
 \fig{desc-host_listings_count-hi_bp-tallat100}{host listings count}
 
-As oposed to the plots shown before, in \cref{fig:} we can observe
+In figure \cref{fig:desc-host_listings_count-hi_bp-tallat100} we can observe, which we couldn't in figure \Cref{fig:host_listings_count}, that
+the most common number of listings is one, which is to be expected.
 
 \figf{host_response_rate_cat}{host response rate cat}
 
@@ -197,13 +211,25 @@ instant bookable listings as not.
 
 %\end{comment}
 
-% TODO
+\fign{maximum_nights_avg_ntm}{maximum nights avg ntm}
 
-%\fign{maximum_nights_avg_ntm}{maximum nights avg ntm}
+Table \cref{tab:maximum_nights_avg_ntm} shows that the median for
+the maximum number of nights a listing can be booked is 1,125.
+This doesn't come as a surprise as 1,125 nights is the maximum
+\airbnb allows the host to set. Understandably, hosts set it to the
+maximum as they don't want to limit themselves. Interestingly, 
+there seems to be a few hosts that have set the maximum to less
+than 50 days, which could make sense in the case they only want to
+rent their properties during the holidays for example.
 
-%\fig{maximum_nights_avg_ntm-hi_bp-post}{maximum nights avg ntm post}
 
-%\fign{minimum_nights_avg_ntm}{minimum nights avg ntm}
+
+\fign{minimum_nights_avg_ntm}{minimum nights avg ntm}
+
+As expected, most listings have their minimum nights stay set to 1.
+Any other distribution of data would have been
+unanticipated as it makes sense to have a minimum of 1 so as to avoid
+losing any potential tenants. 
 
 \figf{neighbourhood_group_cleansed}{neighbourhood group cleansed}
 
@@ -258,9 +284,31 @@ The distribution of this variable is really similar to the review score ratings.
 
 % TODO
 
-%\fign{number_of_reviews}{number of reviews}
-%\fign{number_of_reviews_l30d}{number of reviews l30d}
-%\fign{number_of_reviews_ltm}{number of reviews ltm}
+\fign{number_of_reviews}{number of reviews}
+
+Some listings don't have any reviews but most do. The median is 5,
+which seems reasonable as not all tenants leave reviews. What is
+surprising is that there are some outliers with around 600 review,
+and not just one but a few. Possibly these are lsitings that have been
+up for a long time and on top of that are very popular and thus
+are rented very often.
+
+\fign{number_of_reviews_l30d}{number of reviews l30d}
+
+Most listings don't have any reviews in the 30 days prior to
+when the data was collected on the 24th of August 2020. 
+That is reasonable given that we are
+in a global pandemic and tourism has decreased dramatically, therefore
+not many \airbnb listings will have been rented and reviewed.
+
+
+\fign{number_of_reviews_ltm}{number of reviews ltm}
+
+Similarly to the total number of reviews and the number of reviews
+over the last 30 days, most listings didn't receive more than one
+review. The maximum, however, is 278, which seems implausible given
+Covid but technically possible. Therefore we won't count these 
+outliers as errors.
 
 \fign{reviews_per_month}{reviews per month}
 
