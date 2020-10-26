@@ -7,20 +7,25 @@
 \section{R Scripts}%
 \label{sec:r_scripts}
 
-\newcommand{\mintedfile}[1]{
+\newcommand{\mintedfile}[2]{
     \subsection{#1}%
     \label{sub:#1}
+    #2
     \inputminted{r}{../../analysis/#1}
     \pagebreak
 }
 
 %TODO add all files
 
-\mintedfile{preprocessing.r}
-\mintedfile{descriptiveAnalysis.r}
-\mintedfile{NAtreatment.r}
-\mintedfile{bivariate.r}
-\mintedfile{PCAcode.r}
-\mintedfile{zclusteringWithPC.r}
-\mintedfile{dendogram.r}
-\mintedfile{profiling.r}
+\mintedfile{preprocessing.r}{}
+\mintedfile{descriptiveAnalysis.r}{}
+\mintedfile{NAtreatment.r}{}
+\mintedfile{bivariate.r}{}
+\mintedfile{PCAcode.r}{}
+\mintedfile{zclusteringWithPC.r}{}
+\mintedfile{dendogram.r}{}
+\mintedfile{profiling.r}{}
+\mintedfile{shared.r}{
+    This script contains all shared code used to generate consistent plots and tables
+    with \emph{ggplot2}.
+}

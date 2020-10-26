@@ -1,19 +1,19 @@
 % vim: spell spelllang=en:
 %! TEX root = **/00-main.tex
 
-\newcommand{\hibp}[2]{
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.8\linewidth]{#1-hi_bp}
-        \caption{Histogram \& Boxplot of #2}%
-        \label{fig:#1}
-    \end{figure}
-}
-
 \newcommand{\sssfig}[1]{
     \pagebreak
     \subsubsection{#1}%
     \label{ssub:#1}
+}
+
+\newcommand{\hibp}[2]{
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\linewidth]{desc-#1-hi_bp}
+        \caption{Histogram \& Boxplot of #2}%
+        \label{fig:#1}
+    \end{figure}
 }
 
 \newcommand{\tabn}[2]{
@@ -21,7 +21,7 @@
         \centering
         \caption{Extended summary statistics of #2}%
         \label{tab:#2}
-        \input{../../analysis/tables/#1-ext_sum}
+        \input{../../analysis/tables/desc-#1-ext_sum}
     \end{table}
 }
 
@@ -36,22 +36,20 @@
 \begin{figure}[H]
     \begin{minipage}{0.5\linewidth}
             \centering
-            \includegraphics[width=\linewidth]{#1-bar}
-            \caption{Barplot chart of #2}%
-            \label{fig:#1-bar}
+            \includegraphics[width=\linewidth]{desc-#1-bar}
     \end{minipage}
     \begin{minipage}{0.5\linewidth}
             \centering
-            \includegraphics[width=\linewidth]{#1-pie}
-            \caption{Pie chart of #2}%
-            \label{fig:#1-pie}
+            \includegraphics[width=\linewidth]{desc-#1-pie}
     \end{minipage}
+    \caption{Barplot \& Pie chart of #2}%
+    \label{fig:#1}
 \end{figure}
 \begin{table}[H]
     \centering
     \caption{Table of #2 frequency}%
     \label{tab:#1}
-    \input{../../analysis/tables/#1-freq}
+    \input{../../analysis/tables/desc-#1-freq}
 \end{table}
 }
 
@@ -71,7 +69,7 @@
     \caption{Numerical variables summary}%
     \label{tab:num_summary}
     \resizebox{\linewidth}{!}{%
-    \input{../../analysis/tables/num_summary}
+    \input{../../analysis/tables/desc-num_summary}
 }
 \end{table}
 
@@ -131,14 +129,14 @@ is a large number of \emph{NA}'s as well.
 
 \figf{host_has_profile_pic}{host has profile pic}
 
-As seen in \cref{fig:host_has_profile_pic-pie}, over 99\% of host with
+As seen in \cref{fig:host_has_profile_pic}, over 99\% of host with
 listings in Barcelona have a profile picture, in fact only 55 out of 20,476
 hosts don't have a picture. Therefore, we don't expect this variable to provide
 significant insight into answering the question we are posing.
 
 \figf{host_identity_verified}{host identity verified}
 
-\Cref{fig:host_identity_verified-pie} shows that only 74\% of hosts have had
+\Cref{fig:host_identity_verified} shows that only 74\% of hosts have had
 their identity verified by \airbnb, meaning that the other 25\% isn't.  This can
 be expected since the verification process can be complicated in some cases,
 even requiring the host to provide an official document or additional pictures
@@ -146,7 +144,7 @@ of himself.
 
 \figf{host_is_superhost}{host is superhost}
 
-As seen in \cref{fig:host_is_superhost-pie}, only the 19\% of hosts are superhosts.
+As seen in \cref{fig:host_is_superhost}, only the 19\% of hosts are superhosts.
 This may be the case because the conditions to achieve this status are rather hard.
 
 \fign{host_listings_count}{host listings count}
@@ -158,14 +156,14 @@ lot of variability with many outliers. These outliers might correspond to
 businesses that own lots of listings.
 
 % TODO
-%\fig{host_listings_count-hi_bp-tallat100}{host listings count}
+%\fig{desc-host_listings_count-hi_bp-tallat100}{host listings count}
 
 
 \figf{host_response_rate_cat}{host response rate cat}
 
 This variable conveys how attentive the host is, as it tells us to what degree
 the host replies to messages received inquiring about its listings. As seen in
-\cref{fig:host_response_rate_cat-pie}, 55\% of hosts have a very high
+\cref{fig:host_response_rate_cat}, 55\% of hosts have a very high
 response rate, that is they reply to more than 80\% of messages they receive.
 It should be noted that this variable has a high share of missing data,
 approximately 34\%.
@@ -173,7 +171,7 @@ approximately 34\%.
 
 \figf{host_response_time}{host response time}
 
-\Cref{fig:host_response_time-bar} shows that the quicker the response, the more
+\Cref{fig:host_response_time} shows that the quicker the response, the more
 number of entries it has. A fact to point out as well is the large number of
 \emph{NA}'s.
 
@@ -181,20 +179,20 @@ number of entries it has. A fact to point out as well is the large number of
 \figf{host_since_season}{host since season}
 
 To our surprise there number of new hosts listings remain more or less equal over
-the four seasons. In \cref{fig:host_since_season-bar} we can see that Spring/Summer
+the four seasons. In \cref{fig:host_since_season} we can see that Spring/Summer
 still have a bigger influx but not as much as we had initially hypothesised.
 
 
 \figf{host_since_year}{host since year}
 
-In \cref{fig:host_since_year-pie} we can see that except for the first years the
+In \cref{fig:host_since_year} we can see that except for the first years the
 among of new hosts has more or less remained constant. However in 2019 there has
 been another spike of new hosts.
 
 
 \figf{instant_bookable}{instant bookable}
 
-As seen in \cref{fig:instant_bookable-bar} there are nearly as many
+As seen in \cref{fig:instant_bookable} there are nearly as many
 instant bookable listings as not.
 
 %\end{comment}
@@ -209,14 +207,14 @@ instant bookable listings as not.
 
 \figf{neighbourhood_group_cleansed}{neighbourhood group cleansed}
 
-Looking at \cref{fig:neighbourhood_group_cleansed-pie} we can see that
+Looking at \cref{fig:neighbourhood_group_cleansed} we can see that
 L'Eixample and Ciutat Vella are the most popular neighborhoods for listing.
 
 
 \fign{price}{price}
-\fig{price-hi_bp-tallat500}{price}
+\fig{desc-price-hi_bp-tallat500}{price}
 
-In \cref{fig:price-hi_bp-tallat500} we can see that there are some extreme
+In \cref{fig:desc-price-hi_bp-tallat500} we can see that there are some extreme
 outliers. To visualize the distribution better we have cut the histogram at
 price 500. Having done that we can see that the price distribution seems to
 follow a chi-square. We were surprised to find out that the mean price is around
@@ -285,6 +283,8 @@ rooms.
 
 \fig{bivar-host_since_year-host_listings_count}{Number of listings depending on the year the host joined Airbnb}
 
+
+
 Looking at \cref{fig:bivar-host_since_year-host_listings_count} we can see that
 there is no clear correlation between the number of listings a host has and the
 time they have been in the platform.It seems like most of the users have a small
@@ -316,6 +316,7 @@ subsequent years.
 \subsubsection{Host since year vs room type}
 
 \fig{bivar-host_since_year-room_type}{Room type depending on the host's joining year}
+
 
 What we wanted to find out with \cref{fig:bivar-host_since_year-room_type} was
 if there was any initial promotion within a certain group of hosts, something

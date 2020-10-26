@@ -13,14 +13,14 @@
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\linewidth]{screeplot} % PCA_inertia_cum
+    \includegraphics[width=0.7\linewidth]{pca_fact-screeplot} % PCA-inertia_cum
     \caption{PCA inertia}%
     \label{fig:pca_inertia}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\linewidth]{PCA_inertia_cum}
+    \includegraphics[width=0.7\linewidth]{PCA-inertia_cum}
     \caption{PCA accumulated inertia}%
     \label{fig:pca_inertia_cum}
 \end{figure}
@@ -47,7 +47,7 @@ only further analyse the first 4 factorial axis.
         \centering
         %\includegraphics[trim=3cm 0 3cm 0, clip, width=0.65\linewidth]{plane_#1_#2-var}
         %\parbox[b]{0.24\linewidth}{lorem ipsum dolor sit amet adescipng susisf jsdasj fsdlk ks aksjldsdf jkls}
-        \includegraphics[width=0.85\linewidth]{plane_#1_#2-var}
+        \includegraphics[width=0.85\linewidth]{pca_fact-plane_#1_#2-var}
         \caption{PCA plane #1 vs #2}%
         \label{fig:plane_#1-#2}
     \end{figure}
@@ -56,7 +56,7 @@ only further analyse the first 4 factorial axis.
 \newcommand{\contrib}[2]{
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.85\linewidth]{plane_#1_#2-contrib}
+        \includegraphics[width=0.85\linewidth]{pca_fact-plane_#1_#2-contrib}
         \caption{PCA variable contributions of plane #1 vs #2}%
         \label{fig:contrib_plane_#1-#2}
     \end{figure}
@@ -65,7 +65,7 @@ only further analyse the first 4 factorial axis.
 \newcommand{\categorica}[4]{
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.85\linewidth]{ind_plane_#3_#1_#2}
+        \includegraphics[width=0.85\linewidth]{pca_fact-#3-plane_#1_#2}
         \caption{PCA variable contributions of #4 in plane #1 vs #2}%
         \label{fig:cat-#3-plane-#1-#2}
     \end{figure}
