@@ -1,29 +1,17 @@
 library(ggplot2)
 library(GGally)
-library(kableExtra)
-library(grid)
-#library(extrafont)
-#library(showtext)
-
-#loadfonts()
-#font_add("LM Roman", regular = "latinmodern-math.otf")
-
-#showtext_auto()
-
-#theme_font <- theme(text = element_text(family = "LM Roman"))
-
-theme_font <- theme()
 
 dd <- readRDS('data/20-data_na.Rda')
 
-saveplot <- function(p) {
-  ggsave(plot = p, sprintf('plots/CorrelationsReviews.pdf'))
+source('save_plot.r')
+save_corr_plot <- function(p, ...) {
+  save_pdf(p, 'corr', ...)
 }
 
 ourggpairs <- function(columnes, save=F, df=dd, color = NULL) {
   simcolor <- sym(color)
   p <- ggpairs(df,columns = columnes, aes(colour=!!simcolor, alpha=0.5))
-  if (save) saveplot(p)
+  if (save) save_corr_plot(p)
   return(p)
 }
 

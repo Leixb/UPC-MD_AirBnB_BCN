@@ -104,13 +104,13 @@ plot_all <- function() {
       tab$SD <- c(sd(dd[, k], na.rm = T))
       tab$VC <- sd(dd[, k], na.rm = T) / mean(dd[, k], na.rm = T)
 
-      save_table(tab, k, 'ext_sum')
+      save_table(tab, 'desc', k, 'ext_sum')
 
     } else {
       frecs <- table(as.factor(dd[, k]), useNA = "ifany")
       plot_fact(k, frecs)
       tab <- sort(frecs, decreasing = T)
-      save_table(tab, k, 'freq')
+      save_table(tab, 'desc', k, 'freq')
     }
   }
 }
