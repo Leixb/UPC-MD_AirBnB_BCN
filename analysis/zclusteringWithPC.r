@@ -9,7 +9,9 @@ source('shared.r')
 save_pcaFact_plot <- function(p, ...) save_pdf(p, 'pca_fact', ..., w = 10, h = 7)
 
 # squared plot for variables (unit circle)
-save_pcaFact_plot_var <- function(p, ...) save_pdf(p, 'pca_fact', ..., w = 7, h = 7)
+save_pcaFact_plot_var <- function(p, ...) save_pdf(p, 'pca_fact', ..., w = 6, h = 6)
+
+save_pcaFact_plot_contrib <- function(p, ...) save_pdf(p, 'pca_fact', ..., w = 6, h = 2.5)
 
 qsup <- names(Filter(function(x)
   is.factor(x) | is.logical(x), dd))
@@ -37,22 +39,17 @@ plane_plots <- function(i, j) {
   var <-
     fviz_pca_var(
       res.pca,
-      #alpha.var = "contrib",
-      #col.var = "contrib",
-      #palette = 'jco',
       axes = c(i, j),
-      select.var = list(cos2 = 0.2),
+      select.var = list(cos2 = 0.25),
       repel = T
     )
   ind <-
     fviz_pca_ind(
       res.pca,
-      'ind',
       axes = c(i, j),
-      select.ind = list(cos2 = 0.3),
       geom = c('point'),
       col.ind = "steelblue",
-      alpha.ind = 0.1,
+      alpha.ind = 0.2,
     )
   bi <-
     fviz_pca_biplot(
@@ -65,13 +62,14 @@ plane_plots <- function(i, j) {
       col.var = "black"
     )
   contrib <- fviz_contrib(res.pca, 'var', axes = c(i, j))
+  contrib$layers[[2]]$data$yintercept <- 2.5
 
   plane <- sprintf('plane_%d_%d', i, j)
 
   save_pcaFact_plot_var(var, plane, 'var')
   save_pcaFact_plot(ind, plane, 'ind')
   save_pcaFact_plot(bi,  plane, 'bi')
-  save_pcaFact_plot(contrib,  plane, 'contrib')
+  save_pcaFact_plot_contrib(contrib,  plane, 'contrib')
 }
 
 ### Plot for the variables
@@ -86,22 +84,28 @@ run_planes <- function(func, planes=4) {
 dcat <- names(Filter(is.factor, dd))
 
 for (cat in dcat) {
-  run_planes(
-    function(i, j) {
-      ind <- fviz(
-          res.pca,
-          'ind',
-          axes = c(i, j),
-          geom = c('point'),
-          alpha = 0.2,
-          habillage = cat,
-          addEllipses = T,
-          ellipse.alpha = 0.1
-        )
-      plane <- sprintf('plane_%d_%d', i, j)
-      save_pcaFact_plot(ind, cat, plane)
-    }
-  )
+  run_planes(function(i, j) {
+    ind <- fviz_pca_biplot(
+      title = NULL,
+      res.pca,
+      axes = c(i, j),
+      geom = c('point'),
+      repel = T,
+      alpha.ind = 0,
+      pointsize = 2,
+      pointshape = 19,
+      habillage = 'room_type',
+      addEllipses = T,
+      ellipse.alpha = 0,
+      alpha.var = 0.1,
+      select.var = list(cos2 = 0.3),
+      col.var = "black"
+    )
+    ind$layers[1] <- NULL # Delete points
+
+    plane <- sprintf('plane_%d_%d', i, j)
+    save_pcaFact_plot(ind, cat, plane)
+  })
 }
 
 run_planes(plane_plots)
