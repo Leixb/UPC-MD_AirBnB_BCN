@@ -111,8 +111,14 @@ plot_all <- function() {
     } else {
       frecs <- table(as.factor(dd[, k]), useNA = "ifany")
       plot_fact(k, frecs)
+
       tab <- sort(frecs, decreasing = T)
-      save_table(tab, 'desc', k, 'freq')
+      dtab <- data.frame(tab)
+      rownames(dtab) <- paste(dtab$Var1)
+      dtab$Var1 <- NULL
+      dtab['Total',] <- sum(dtab$Freq)
+      dtab <- cbind(dtab, Perc = round(dtab$Freq / dtab['Total','Freq'], digits = 4) * 100)
+      save_table(dtab, 'desc', k, 'freq')
     }
   }
 }
