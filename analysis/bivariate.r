@@ -38,3 +38,6 @@ p <- p + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
 save_pdf(p, 'bivar', p$labels$x, p$labels$fill)
 
 dim(dd)
+
+mean(dd[dd$neighbourhood_group_cleansed == 'Eixample',]$price)
+mean(dd[dd$neighbourhood_group_cleansed == 'Nou Barris',]$price)
