@@ -44,14 +44,28 @@ only further analyse the first 4 factorial axis.
 
 % #2 -> caption #3 -> file, #1 -> page
 \newcommand{\factorialmap}[2]{
+    \begin{landscape}
     \begin{figure}[H]
         \centering
-        %\includegraphics[trim=3cm 0 3cm 0, clip, width=0.65\linewidth]{plane_#1_#2-var}
-        %\parbox[t]{0.24\linewidth}{lorem ipsum dolor sit amet adescipng susisf jsdasj fsdlk ks aksjldsdf jkls}
-        \includegraphics[width=\textwidth]{pca_fact-plane_#1_#2-var}
+        \includegraphics[width=0.87\linewidth]{pca_fact-plane_#1_#2-bi}
         \caption{PCA plane #1 vs #2}%
         \label{fig:plane_#1-#2}
     \end{figure}
+    \end{landscape}
+}
+
+\newcommand{\factvar}[2]{
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.67\textwidth]{pca_fact-plane_#1_#2-var}
+        \caption{PCA plane #1 vs #2 (numerical)}%
+        \label{fig:plane_#1-#2-var}
+    \end{figure}
+}
+
+\newcommand{\factorialmapCV}[2]{
+    \contrib{#1}{#2}
+    \factvar{#1}{#2}
 }
 
 \newcommand{\contrib}[2]{
@@ -84,6 +98,8 @@ with higher contribution are the ones about review scores and availability. As a
 mostly affected by these variables. Other variables like availability
 and accommodates seem to contribute mostly to the second factorial axis, however these angles aren't as tight so they probably affect the first axis as well.
 
+\factorialmapCV{1}{2}
+
 
 \factorialmap{1}{3}
 In \cref{fig:plane_1-3} we can see that it seems to hold true that 
@@ -92,25 +108,29 @@ first factorial map might be the reviews score variables. When looking at accomm
 bedrooms we see that they have similar arrows, that again makes sense because there is some 
 correlation between them. These 3 seem to contribute much more to the third factorial axis.
 
+\factorialmapCV{1}{3}
+
 \factorialmap{1}{4}
+\factorialmapCV{1}{4}
 
 
 \factorialmap{2}{3}
+\factorialmapCV{2}{3}
 
 
 \factorialmap{2}{4}
 What we can extract when analysing \cref{fig:plane_1-3} is that the availability variables have 
 a relatively high contribution and form a very small angle with the second factorial axis.
 
+\factorialmapCV{2}{4}
+
 \factorialmap{3}{4}
 When looking at \cref{fig:plane_3-4} we can see that the variable arrows seem to group in 3 different groups: the ones regarding number of reviews, the ones about availability and others related to accommodates and bedroom. If we analyse \cref{fig:contrib_plane_3-4} we can see that the ones that contribute the most are bedrooms, accommodates 
 and reviews per month. It is hard to interpret the latent variables associated using this particular figure because the most contributing variables have large angles to both axis.
 
+\factorialmapCV{3}{4}
 
 \begin{landscape}
-
-\contrib{1}{2}
-\contrib{3}{4}
 
 \categorica{1}{2}{room_type}{room type}
 \categorica{1}{3}{room_type}{room type}
@@ -125,7 +145,14 @@ After studying each factorial axis in depth we can concluded that the latent var
 the first factorial map are the ones that talk about review scores. We reached these conclusion after
 seeing that in all PCA plots with with the first factorial axis, these variables were top contributors
 and their angles to the first axis were really small. The relation seems to be direct as in all plots 
-they appear in the positive first axis.
+they appear in the positive first axis. Although this relation appears in all plots where factorial
+axis 1 appears we think \cref{fig:plane_1-3} depicts this relation the best. 
+
+We conclude that the PCA visualization was an overall success because we were able to detect some grouped
+variables and relate some of them to our factorial axis. In fact, we ended up associating the first axis
+with the review score variables. This is a major success because the first factorial axis is the one
+that represents more variance and therefore associating a meaning to it could help us better explain
+out variables.
 
 \end{landscape}
 
