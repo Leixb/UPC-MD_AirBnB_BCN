@@ -26,8 +26,9 @@ bivarplot("reviews_per_month", "review_scores_rating", color = "price", df = dd[
 
 bivarplot("price", "review_scores_rating", df = dd[dd$price < 1000, ], save = T)
 bivarplot("room_type", "minimum_nights_avg_ntm", geo = geom_boxplot(), df = dd[dd$minimum_nights_avg_ntm < 10, ], save = T)
-bivarplot("neighbourhood_group_cleansed", "price", geo = geom_boxplot(), df = dd[dd$price < 1000, ], save = T)
-bivarplot("neighbourhood_group_cleansed", "review_scores_rating", geo = geom_boxplot(), save = T)
+
+bivarplot("price", "neighbourhood_group_cleansed", geo = geom_boxplot(), df = dd[dd$price < 1000, ], save = T)
+bivarplot("review_scores_rating", "neighbourhood_group_cleansed", geo = geom_boxplot(), save = T)
 
 bivarplot("host_since_year", "host_listings_count", geo = geom_boxplot(), df = dd[dd$host_listings_count < 200, ], save = T)
 bivarplot("host_since_year", "price", geo = geom_boxplot(), df = dd[dd$price < 1000, ], save = T)
