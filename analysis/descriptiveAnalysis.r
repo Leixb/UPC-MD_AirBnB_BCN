@@ -142,8 +142,7 @@ plot_all <- function() {
       tab$VC <- sd(dd[, k], na.rm = T) / mean(dd[, k], na.rm = T)
 
       cat(
-        kbl(tab, booktabs = T, format = 'latex') %>% #landscape()
-          kable_styling(latex_options = c("scale_down")),
+        kbl(tab, booktabs = T, format = 'latex'),
         file = sprintf('tables/%s-ext_sum.tex', k)
       )
 
@@ -152,11 +151,9 @@ plot_all <- function() {
 
       plot_fact(k, frecs)
 
-      table <-
-        kbl(sort(frecs, decreasing = T),
+      table <- kbl(sort(frecs, decreasing = T),
             booktabs = T,
-            format = 'latex') %>%
-        kable_styling(position = "center")
+            format = 'latex')
       cat(table, file = sprintf('tables/%s-freq.tex', k))
 
     }
