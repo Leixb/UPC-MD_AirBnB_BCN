@@ -3,22 +3,26 @@ library(ggdendro)
 
 dd <- readRDS('data/20-data_na.Rda')
 
-source('save_plot.r')
-save_dendo_plot <- function(p, ...) save_pdf(p, 'dendo', ..., w = 11, h = 7.6)
+source('shared.r')
+save_dendo_plot <-
+  function(p, ...)
+    save_pdf(p, 'dendo', ..., w = 11, h = 7.6)
 
 num_vars <- names(Filter(is.numeric, dd))
 
-dcon <-  dd[,num_vars]
+dcon <-  dd[, num_vars]
 
 d  <- dist(dcon)
 h2 <- hclust(d, method = "ward.D")  # NOTICE THE COST
 plot(h2)
 
 # # Nicer plot
- dendo <- ggdendrogram(h2, leaf_labels = F, labels = F)
- dendo +
-   geom_hline(yintercept = 0.9e6, linetype = "dashed", color = "red")
-   # ggtitle('Cluster Dendogram')
+dendo <- ggdendrogram(h2, leaf_labels = F, labels = F)
+dendo <- dendo +
+  geom_hline(yintercept = 0.7e6,
+             linetype = "dashed",
+             color = "red")
+# ggtitle('Cluster Dendogram')
 
 save_dendo_plot(dendo)
 

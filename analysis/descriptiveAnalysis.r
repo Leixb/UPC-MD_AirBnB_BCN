@@ -6,7 +6,7 @@ library(cowplot)
 dd <- readRDS('data/10-data_pre.Rda')
 n <- dim(dd)[1]
 
-source('save_plot.r')
+source('shared.r')
 
 save_desc_plot <- function(p, ..., width = plotWidth, height = plotHeight) {
   save_pdf(p, 'desc', w = width, h = height, ...)

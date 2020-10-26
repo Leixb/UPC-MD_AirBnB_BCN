@@ -3,7 +3,7 @@ library(GGally)
 
 dd <- readRDS('data/20-data_na.Rda')
 
-source('save_plot.r')
+source('shared.r')
 save_corr_plot <- function(p, ...) {
   save_pdf(p, 'corr', ...)
 }

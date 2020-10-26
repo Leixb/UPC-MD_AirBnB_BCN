@@ -3,7 +3,7 @@ library(ggplot2)
 library(extrafont)
 library(showtext)
 
-source('save_plot.r')
+source('shared.r')
 save_prof_plot <- function(p, ...)  save_pdf(p, 'prof', ...)
 
 dd <- readRDS('data/20-data_na.Rda')

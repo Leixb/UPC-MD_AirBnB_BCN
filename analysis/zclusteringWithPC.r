@@ -5,8 +5,8 @@ library(cluster)
 
 dd <- readRDS('data/20-data_na.Rda')
 
-source('save_plot.r')
-save_pcaFact_plot <- function(p, ...) save_pdf(p, 'pca_fact', ...)
+source('shared.r')
+save_pcaFact_plot <- function(p, ...) save_pdf(p, 'pca_fact', ..., w = 10, h = 7)
 
 qsup <- names(Filter(function(x)
   is.factor(x) | is.logical(x), dd))

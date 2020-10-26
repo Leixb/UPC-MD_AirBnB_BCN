@@ -3,7 +3,7 @@ library(grid)
 
 dd <- readRDS("data/20-data_na.Rda")
 
-source("save_plot.r")
+source("shared.r")
 save_bivar_plot <- function(p) {
   x <- p$labels$x
   y <- p$labels$y
