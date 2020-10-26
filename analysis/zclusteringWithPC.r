@@ -29,6 +29,14 @@ res.pca
 # Eigenvalues
 res.pca$eig
 
+tab_eig <- data.frame(res.pca$eig[1:10,])
+colnames(tab_eig) <- c('Eigenvalue', 'Var. %', 'Cum. Var. %' )
+save_table(tab_eig, 'pca_fact', 'eig')
+
+# Variable contribution
+tab_contrib <- data.frame(res.pca$var$contrib)
+save_table(tab_contrib, 'pca_fact', 'contrib')
+
 ### PCA graphs
 # Screeplot
 
