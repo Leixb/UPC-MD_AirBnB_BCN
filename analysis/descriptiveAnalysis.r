@@ -3,7 +3,12 @@ library(gridExtra)
 library(grid)
 library(cowplot)
 
-dd <- readRDS('data/10-data_pre.Rda')
+dd_pre <- readRDS('data/10-data_pre.Rda')
+
+dd_na <- readRDS('data/20-data_na.Rda')
+
+dd <- dd_na
+
 n <- dim(dd)[1]
 
 source('shared.r')
@@ -13,19 +18,27 @@ save_desc_plot <- function(p, ..., width = plotWidth, height = plotHeight) {
 }
 
 ## Summary of numerical variables
-num_summary <- function() {
-  tab <- t(summary(Filter(is.numeric, dd)))
+
+num_summary <- function(df, name) {
+  tab <- t(summary(Filter(is.numeric, df)))
   tab <- apply(tab, 2, function(x)
     sub(".*:", "", x))
-  colnames(tab) <-
-    c("Min", "1st Q.", "Median", "Mean", "3rd Q.", "Max", "NA's")
 
-  save_table(tab, 'desc', 'num_summary')
+  cnames <- c("Min", "1st Q.", "Median", "Mean", "3rd Q.", "Max", "NA's")
+
+  if (length(colnames(tab)) < length(cnames)) {
+    colnames(tab) <- head(cnames, -1)
+  } else {
+    colnames(tab) <- cnames
+    tab[is.na(tab[,"NA's"]), "NA's"] <- 0
+  }
+
+  save_table(tab, 'desc', name)
 }
 
 # Basic descriptive analysis for numerical variables
-plot_num <- function(k, bins = 100, df = dd) {
-  bins <- min(bins, length(unique(df[, k])))
+plot_num <- function(k, bins = 100, df = dd, nounique = F) {
+  if (!nounique) bins <- min(bins, length(unique(df[, k])))
 
   var_s <- sym(k)
 
@@ -129,11 +142,12 @@ extra_plots <- function() {
 
   save_desc_plot(p, 'price', 'hi_bp-tallat500')
 
-  p <- plot_num('host_listings_count', df = dd[dd$host_listings_count < 100,])
+  p <- plot_num('host_listings_count', df = dd[dd$host_listings_count < 50,], nounique = T, bins = 50)
 
   save_desc_plot(p, 'host_listings_count', 'hi_bp-tallat100')
 }
 
-num_summary()
+num_summary(dd_pre, 'num_summary')
+num_summary(dd_na, 'num_summary_na')
 plot_all()
 extra_plots()
