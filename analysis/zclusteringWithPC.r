@@ -8,6 +8,9 @@ dd <- readRDS('data/20-data_na.Rda')
 source('shared.r')
 save_pcaFact_plot <- function(p, ...) save_pdf(p, 'pca_fact', ..., w = 10, h = 7)
 
+# squared plot for variables (unit circle)
+save_pcaFact_plot_var <- function(p, ...) save_pdf(p, 'pca_fact', ..., w = 7, h = 7)
+
 qsup <- names(Filter(function(x)
   is.factor(x) | is.logical(x), dd))
 qqsup <- c()
@@ -65,7 +68,7 @@ plane_plots <- function(i, j) {
 
   plane <- sprintf('plane_%d_%d', i, j)
 
-  save_pcaFact_plot(var, plane, 'var')
+  save_pcaFact_plot_var(var, plane, 'var')
   save_pcaFact_plot(ind, plane, 'ind')
   save_pcaFact_plot(bi,  plane, 'bi')
   save_pcaFact_plot(contrib,  plane, 'contrib')
