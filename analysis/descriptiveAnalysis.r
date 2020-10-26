@@ -59,7 +59,7 @@ plot_fact <- function(k, frecs, df = dd) {
       width = 1,
       size = 1,
       color = "white",
-      stat = "identity"
+      stat = "identity",
     ) +
     coord_polar("y") +
     geom_text(aes(label = paste0(round(Freq * 100), "%")),
@@ -67,11 +67,13 @@ plot_fact <- function(k, frecs, df = dd) {
               family = "LM Roman") +
     labs(x = NULL, y = NULL, fill = NULL) +
     guides(fill = guide_legend(reverse = TRUE)) +
-    theme_classic() +
     theme(
       axis.line = element_blank(),
       axis.text = element_blank(),
-      axis.ticks = element_blank()
+      axis.ticks = element_blank(),
+      panel.background = element_blank(),
+      panel.border = element_blank(),
+      panel.grid = element_blank()
     )
 
   b <-
@@ -79,8 +81,8 @@ plot_fact <- function(k, frecs, df = dd) {
     theme(legend.position = "none",
           axis.text.x = element_text(angle = -90, hjust = 0))
 
-  save_desc_plot(p, k, 'pie', height = 2.5, width = 3.5)
-  save_desc_plot(b, k, 'bar', height = 2.5, width = 3.5)
+  save_desc_plot(p, k, 'pie', height = 3.5, width = 3.5)
+  save_desc_plot(b, k, 'bar', height = 3.5, width = 3.5)
 }
 
 
