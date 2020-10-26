@@ -6,7 +6,7 @@ library(showtext)
 source('shared.r')
 save_prof_plot <- function(p, ...)  save_pdf(p, 'prof', ...)
 
-dd <- readRDS('data/20-data_na.Rda')
+dd <- readRDS('data/30-data_cluster.Rda')
 
 #Calcula els valor test de la variable Xnum per totes les modalitats del factor P
 ValorTestXnum <- function(Xnum, P) {
@@ -75,7 +75,7 @@ ValorTestXquali <- function(P, Xquali) {
 dades <- dd
 K <- dim(dades)[2]
 
-P <- dd$room_type # TODO change this for cluster
+P <- dd$cluster # TODO change this for cluster
 
 nc <- length(levels(factor(P)))
 pvalk <-
@@ -143,7 +143,7 @@ pvalues <- read.csv(text = 'ANOVA,Kruskal-Wallis,Chi square')
 
 for (k in names(dd)) {
    if (is.numeric(dd[, k])) {
-      r <- plot_num(!!sym(k), room_type) # TODO borrar parametre
+      r <- plot_num(!!sym(k), cluster) # TODO borrar parametre
       for (j in r)
          print(r)
 
@@ -162,7 +162,7 @@ for (k in names(dd)) {
       print(pvalk[, k])
       pvalues[k, ] = c(o, kw, NA)
    } else {
-      r <- plot_cat(!!sym(k), room_type) # TODO borrar parametre
+      r <- plot_cat(!!sym(k), cluster) # TODO borrar parametre
       for (j in r)
          print(r)
 
