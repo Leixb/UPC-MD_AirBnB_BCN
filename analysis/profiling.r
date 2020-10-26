@@ -2,24 +2,11 @@ library(dplyr)
 library(ggplot2)
 library(extrafont)
 library(showtext)
-library(kableExtra)
+
+source('shared.r')
+save_prof_plot <- function(p, ...)  save_pdf(p, 'prof', ...)
 
 dd <- readRDS('data/20-data_na.Rda')
-
-names(dd)
-
-theme_font <- theme()
-
-font_init <- function() {
-   loadfonts(quiet = T)
-   font_add("LM Roman", regular = "latinmodern-math.otf")
-
-   theme_font <<- theme(text = element_text(family = "LM Roman"))
-
-   showtext_auto()
-}
-
-font_init()
 
 #Calcula els valor test de la variable Xnum per totes les modalitats del factor P
 ValorTestXnum <- function(Xnum, P) {
@@ -101,12 +88,6 @@ pvalk <-
 nameP <- "Cluster"
 n <- dim(dades)[1]
 
-no_legend <- theme(legend.position = 'none')
-
-save_plot <- function(p, title) {
-   ggsave(filename = sprintf('plots/prof_%s.pdf', title),
-          plot = p + theme_font)
-}
 
 # Numeriques
 plot_num <- function(v, cluster = cluster, df = dd) {
@@ -131,11 +112,11 @@ plot_num <- function(v, cluster = cluster, df = dd) {
 
 
    name <- substring(deparse(v), 2)
-   save_plot(bp, sprintf('%s-bp', name))
-   save_plot(vi, sprintf('%s-vi', name))
-   save_plot(meanp, sprintf('%s-meanp', name))
+   save_prof_plot(bp, name, 'bp')
+   save_prof_plot(vi, name, 'vi')
+   save_prof_plot(meanp, name, 'meanp')
 
-   return(list(bp = bp, vi = vi, meanp = meanp))
+   return(c(bp, vi, meanp))
 }
 
 # Categoriques
@@ -151,15 +132,11 @@ plot_cat <- function(v, cluster = cluster, df = dd) {
       ggplot(df, aes(!!v, fill = !!cluster)) + geom_bar(position = 'fill')
 
    name <- substring(deparse(v), 2)
-   save_plot(stack, sprintf('%s-stack', name))
-   save_plot(side, sprintf('%s-side', name))
-   save_plot(percent, sprintf('%s-percent', name))
+   save_prof_plot(stack, name, 'stack')
+   save_prof_plot(side, name, 'side')
+   save_prof_plot(percent, name, 'percent')
 
-   return(list(
-      stack = stack,
-      side = side,
-      percent = percent
-   ))
+   return(c(stack, side, percent))
 }
 
 pvalues <- read.csv(text = 'ANOVA,Kruskal-Wallis,Chi square')
@@ -233,12 +210,5 @@ for (c in 1:length(levels(as.factor(P)))) {
 
 pvalk <- data.frame(t(pvalk))
 
-table <- kbl(pvalk,
-      booktabs = T,
-      format = 'latex')
-cat(table, file = sprintf('tables/prof-pvalues.tex', k))
-
-table <- kbl(pvalues,
-      booktabs = T,
-      format = 'latex')
-cat(table, file = sprintf('tables/prof-pvalues-special.tex', k))
+save_table(pvalk, 'prof', 'pvalues')
+save_table(pvalues, 'prof', 'pvalues', 'extra')

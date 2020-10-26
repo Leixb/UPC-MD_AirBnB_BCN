@@ -3,13 +3,10 @@ library(ggfortify)
 library(extrafont)
 library(showtext)
 
-loadfonts(quiet = T)
-font_add("LM Roman", regular = "latinmodern-math.otf")
-showtext_auto()
-
-theme_font <- theme(text = element_text(family = "LM Roman"))
-
 dd <- readRDS('data/20-data_na.Rda')
+
+source('shared.r')
+save_pca_plot <- function(p, ...) save_pdf(p, 'PCA', ...)
 
 #
 # VISUALISATION OF DATA
@@ -39,8 +36,7 @@ pinerEix
 pc <- c()
 for (i in 1:20) pc <- c(pc, sprintf('PC%02d', i))
 p <- qplot(pc, pinerEix, geom = "col", xlab = "Axis", ylab = 'Percentatge of total inertia')
-p <- p + theme_font
-ggsave(plot = p, 'plots/PCA_inertia.pdf')
+save_pca_plot(p, 'inertia')
 
 
 # Cummulated Inertia in subspaces, from first principal component to the 11th dimension subspace
@@ -48,8 +44,7 @@ percInerAccum <- 100 * cumsum(PCA$sdev[1:dim(dcon)[2]]^2) / dim(dcon)[2]
 percInerAccum
 
 p <- qplot(pc, percInerAccum, geom = "col", xlab = "Axis", ylab = 'Accumulated Percentatge of total inertia')
-p <- p + theme_font
-ggsave(plot = p, 'plots/PCA_inertia_cum.pdf')
+save_pca_plot(p, 'inertia_cum')
 
 # SELECTION OF THE SINGIFICNT DIMENSIONS (keep 80% of total inertia)
 nd <- 4

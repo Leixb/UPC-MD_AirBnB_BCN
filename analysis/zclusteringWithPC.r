@@ -1,30 +1,12 @@
-#####  READING CREDSCO_BIN
-
-#setwd("D:/karina/docencia/areferenciesPPT/0DadesPractiques/CREDSCO")
-# dd <- read.table("credscoClean.csv",header=T, sep=";");
-
-dd <- readRDS('data/20-data_na.Rda')
-
-##### PCA with FactoMineR
-# install.packages("FactoMineR")
 library(FactoMineR)
 library(factoextra)
 library(ggplot2)
-library(extrafont)
-library(showtext)
+library(cluster)
 
-theme_font <- theme()
+dd <- readRDS('data/20-data_na.Rda')
 
-font_init <- function() {
-  loadfonts(quiet = T)
-  font_add("LM Roman", regular = "latinmodern-math.otf")
-
-  theme_font <<- theme(text = element_text(family = "LM Roman"))
-
-  showtext_auto()
-}
-
-font_init()
+source('shared.r')
+save_pcaFact_plot <- function(p, ...) save_pdf(p, 'pca_fact', ..., w = 10, h = 7)
 
 qsup <- names(Filter(function(x)
   is.factor(x) | is.logical(x), dd))
@@ -43,15 +25,10 @@ res.pca
 res.pca$eig
 
 ### PCA graphs
-
 # Screeplot
 
-save_plot <- function(p, title) {
-  ggsave(filename = sprintf('plots/%s.pdf', title), plot = p + theme_font)
-}
-
 scree <- fviz_screeplot(res.pca, addlabels = T, ncp = 20)
-save_plot(scree, 'screeplot')
+save_pcaFact_plot(scree, 'screeplot')
 
 plane_plots <- function(i, j) {
   var <-
@@ -86,10 +63,12 @@ plane_plots <- function(i, j) {
     )
   contrib <- fviz_contrib(res.pca, 'var', axes = c(i, j))
 
-  save_plot(var, sprintf('plane_%d_%d-%s', i, j, 'var'))
-  save_plot(ind, sprintf('plane_%d_%d-%s', i, j, 'ind'))
-  save_plot(bi, sprintf('plane_%d_%d-%s', i, j, 'bi'))
-  save_plot(contrib, sprintf('plane_%d_%d-%s', i, j, 'contrib'))
+  plane <- sprintf('plane_%d_%d', i, j)
+
+  save_pcaFact_plot(var, plane, 'var')
+  save_pcaFact_plot(ind, plane, 'ind')
+  save_pcaFact_plot(bi,  plane, 'bi')
+  save_pcaFact_plot(contrib,  plane, 'contrib')
 }
 
 ### Plot for the variables
@@ -116,7 +95,8 @@ for (cat in dcat) {
           addEllipses = T,
           ellipse.alpha = 0.1
         )
-      save_plot(ind, sprintf('ind_plane_%s_%d_%d', cat, i, j))
+      plane <- sprintf('plane_%d_%d', i, j)
+      save_pcaFact_plot(ind, cat, plane)
     }
   )
 }
@@ -331,7 +311,6 @@ d  <- dist(dcon)
 h1 <- hclust(d, method = "ward.D")
 plot(h1)
 
-library(cluster)
 actives <- c(2:16)
 dissimMatrix <- daisy(dd[, actives], metric = "gower", stand = TRUE)
 distMatrix <- dissimMatrix ^ 2
