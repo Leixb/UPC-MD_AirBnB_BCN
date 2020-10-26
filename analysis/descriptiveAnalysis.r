@@ -20,7 +20,7 @@ num_summary <- function() {
   colnames(tab) <-
     c("Min", "1st Q.", "Median", "Mean", "3rd Q.", "Max", "NA's")
 
-  save_table(tab, 'num_summary')
+  save_table(tab, 'desc', 'num_summary')
 }
 
 # Basic descriptive analysis for numerical variables
