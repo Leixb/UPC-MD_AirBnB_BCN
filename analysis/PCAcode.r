@@ -44,6 +44,7 @@ percInerAccum <- 100 * cumsum(PCA$sdev[1:dim(dcon)[2]]^2) / dim(dcon)[2]
 percInerAccum
 
 p <- qplot(pc, percInerAccum, geom = "col", xlab = "Axis", ylab = 'Accumulated Percentatge of total inertia')
+p <- p + theme(axis.text.x = element_text(angle = 45, hjust = 0.5, vjust = 0.5))
 save_pca_plot(p, 'inertia_cum')
 
 # SELECTION OF THE SINGIFICNT DIMENSIONS (keep 80% of total inertia)
