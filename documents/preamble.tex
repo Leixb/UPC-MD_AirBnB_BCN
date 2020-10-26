@@ -15,8 +15,12 @@
 \usepackage{fontspec}
 \setmonofont[Scale=MatchLowercase]{DejaVu Sans Mono}
 
-\usepackage[english]{babel}
-\usepackage[htt]{hyphenat}
+\usepackage{microtype}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{english}
+
+\usepackage{hyphenat}
 
 %% Bibliography:
 \usepackage[
@@ -33,7 +37,7 @@
 
 % For cross references
 \usepackage{color, xcolor}
-\usepackage[colorlinks = true]{hyperref}
+\usepackage[breaklinks, colorlinks = true]{hyperref}
 %hyperref configuration so that it doesn't contrast so much colorlinks,
 \hypersetup{
    linkcolor={black},
