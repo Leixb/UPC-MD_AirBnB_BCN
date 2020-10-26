@@ -4,7 +4,7 @@ library(extrafont)
 library(showtext)
 
 source('save_plot.r')
-save_prof_plot <- function(p, ...)  save_plot(p, 'prof', ...)
+save_prof_plot <- function(p, ...)  save_pdf(p, 'prof', ...)
 
 dd <- readRDS('data/20-data_na.Rda')
 

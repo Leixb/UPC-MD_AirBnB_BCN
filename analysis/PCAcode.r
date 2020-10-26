@@ -6,7 +6,7 @@ library(showtext)
 dd <- readRDS('data/20-data_na.Rda')
 
 source('save_plot.r')
-save_pca_plot <- function(p, ...) save_plot(p, 'PCA', ...)
+save_pca_plot <- function(p, ...) save_pdf(p, 'PCA', ...)
 
 #
 # VISUALISATION OF DATA

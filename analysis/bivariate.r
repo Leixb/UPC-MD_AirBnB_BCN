@@ -7,7 +7,7 @@ source("save_plot.r")
 save_bivar_plot <- function(p) {
   x <- p$labels$x
   y <- p$labels$y
-  save_plot(p, 'bivar', x, y)
+  save_pdf(p, 'bivar', x, y)
 }
 
 bivarplot <- function(x, y, color = NULL, df = dd, save = F, geo = geom_point()) {

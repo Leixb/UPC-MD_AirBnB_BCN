@@ -4,7 +4,7 @@ library(ggdendro)
 dd <- readRDS('data/20-data_na.Rda')
 
 source('save_plot.r')
-save_dendo_plot <- function(p, ...) save_plot(p, w = 11, h = 7.6, 'dendo', ...)
+save_dendo_plot <- function(p, ...) save_pdf(p, 'dendo', ..., w = 11, h = 7.6)
 
 num_vars <- names(Filter(is.numeric, dd))
 

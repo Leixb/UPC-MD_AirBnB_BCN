@@ -14,13 +14,13 @@ if (!exists("fontsLoaded")) {
 }
 
 if (!exists("savePlots"))   savePlots <- T
-if (!exists("printPlots"))  printPlots <- T
+if (!exists("printPlots"))  printPlots <- interactive()
 if (!exists("plotFolder"))  plotFolder <- "plots"
 if (!exists("plotWidth"))   plotWidth <- 5.5
 if (!exists("plotHeight"))  plotHeight <- 4
 
-if (!exists("save_plot")) {
-  save_plot <- function(p, name, w = plotWidth, h = plotHeight, ...) {
+if (!exists("save_pdf")) {
+  save_pdf <- function(p, name, ..., w = plotWidth, h = plotHeight) {
     title <- paste0(c(name, ...), collapse = "-")
     filename <- sprintf("%s/%s.pdf", plotFolder, title)
     if (savePlots) {
@@ -39,7 +39,7 @@ if (!exists("save_plot")) {
 
 if (!exists("saveTables"))  saveTables <- T
 if (!exists("printTables")) printTables <- T
-if (!exists("tableFolder")) tableFolder <- "table"
+if (!exists("tableFolder")) tableFolder <- "tables"
 
 if (!exists("save_table")) {
   save_table <- function(t, name, ...) {
@@ -52,21 +52,4 @@ if (!exists("save_table")) {
     }
     if (printTables) print(t)
   }
-}
-
-reset_save_plot <- function() {
-  rm(savePlots)
-  rm(printPlots)
-  rm(plotFolder)
-  rm(fontsLoaded)
-  rm(save_plot)
-  rm(reset_save_plot)
-}
-
-reset_save_table <- function() {
-  rm(saveTables)
-  rm(printTables)
-  rm(tableFolder)
-  rm(save_table)
-  rm(reset_save_table)
 }

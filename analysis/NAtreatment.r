@@ -6,7 +6,7 @@ dd <- readRDS('data/10-data_pre.Rda')
 # Convert years to factors
 dd$host_since_year <- as.factor(dd$host_since_year)
 
-many_nulls <- dd[rowSums(is.na(dd)) > 10, ]
+many_nulls <- dd[rowSums(is.na(dd)) > 10,]
 
 categorical_vars <- names(Filter(is.factor, dd))
 
@@ -22,17 +22,21 @@ for (cat in categorical_vars) {
 
 dd$maximum_nights_avg_ntm[dd$maximum_nights_avg_ntm > 1125] <- NA
 
-uncomplete_vars <- names(Filter(function(x) is.numeric(x) && any(is.na(x)), dd))
-complete_vars <- names(Filter(function(x) is.numeric(x) && !any(is.na(x)), dd))
+uncomplete_vars <-
+    names(Filter(function(x)
+        is.numeric(x) && any(is.na(x)), dd))
+complete_vars <-
+    names(Filter(function(x)
+        is.numeric(x) && !any(is.na(x)), dd))
 
 dd_complete <- dd[, complete_vars]
 dim(dd_complete)
 names(dd_complete)
 
 for (k in uncomplete_vars) {
-    aux1 <- dd_complete[!is.na(dd[, k]), ]
+    aux1 <- dd_complete[!is.na(dd[, k]),]
     dim(aux1)
-    aux2 <- dd_complete[is.na(dd[, k]), ]
+    aux2 <- dd_complete[is.na(dd[, k]),]
     dim(aux2)
 
     ref <- dd[!is.na(dd[, k]), k]
@@ -44,7 +48,7 @@ for (k in uncomplete_vars) {
 }
 
 # Remove
-dd <- dd[!is.na(dd$host_identity_verified), ]
+dd <- dd[!is.na(dd$host_identity_verified),]
 
 dim(dd)
 summary(dd)

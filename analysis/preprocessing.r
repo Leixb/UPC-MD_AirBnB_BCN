@@ -62,27 +62,31 @@ dd$host_since <- as.Date(dd$host_since, format = "%Y-%m-%d")
 dd$price <- as.numeric(sub("\\,", "", sub("\\$", "", dd$price)))
 
 # Parse percentages
-dd$host_response_rate <- as.numeric(sub("%", "", dd$host_response_rate))
-dd$host_acceptance_rate <- as.numeric(sub("%", "", dd$host_acceptance_rate))
+dd$host_response_rate <-
+    as.numeric(sub("%", "", dd$host_response_rate))
+dd$host_acceptance_rate <-
+    as.numeric(sub("%", "", dd$host_acceptance_rate))
 
 # Convert boolean to logical
 booleans <- c(
-    "host_is_superhost", "host_has_profile_pic",
-    "host_identity_verified", "instant_bookable"
+    "host_is_superhost",
+    "host_has_profile_pic",
+    "host_identity_verified",
+    "instant_bookable"
 )
 dd[, booleans] <- dd[, booleans] == "t"
 
 # Convert to factor and numerical
 dd$host_since_year <- factor(sub("-[0-9-]+", "", dd$host_since))
 dd$host_since_mm_dd <- as.Date(sub("[0-9]+[-]", "", dd$host_since),
-    format = "%m-%d"
-)
+                               format = "%m-%d")
 
 # Create new categories
-breaks <- as.Date(c("01-01", "03-21", "06-21", "09-21", "12-21", "12-31"),
-    format = "%m-%d"
-)
-dd$host_since_season <- cut(dd$host_since_mm_dd,
+breaks <-
+    as.Date(c("01-01", "03-21", "06-21", "09-21", "12-21", "12-31"),
+            format = "%m-%d")
+dd$host_since_season <- cut(
+    dd$host_since_mm_dd,
     labels = c("Winter", "Spring", "Summer", "Autumn", "Winter"),
     breaks = breaks
 )
@@ -93,15 +97,14 @@ categories <- c("host_response_rate", "host_acceptance_rate")
 
 for (k in categories) {
     newfield <- paste(sep = "", k, "_cat")
-    dd[, newfield] <- cut(dd[, k],
+    dd[, newfield] <- cut(
+        dd[, k],
         breaks = c(-1, 20, 40, 60, 80, 100),
-        labels = c(
-            "very low",
-            "low",
-            "average",
-            "high",
-            "very high"
-        )
+        labels = c("very low",
+                   "low",
+                   "average",
+                   "high",
+                   "very high")
     )
 
     # remove old category from actives
@@ -113,7 +116,10 @@ for (k in categories) {
 actives <- unique(actives)
 
 # Mark as factors
-factors <- c("neighbourhood_group_cleansed", "host_response_time", "room_type")
+factors <-
+    c("neighbourhood_group_cleansed",
+      "host_response_time",
+      "room_type")
 dd[, factors] <- lapply(dd[, factors], factor)
 
 # Save only the columns we need

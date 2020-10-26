@@ -8,8 +8,8 @@ n <- dim(dd)[1]
 
 source('save_plot.r')
 
-save_desc_plot <- function(p, width = plotWidth, height = plotHeight, ...) {
-  save_plot(p, w = width, h = height, 'desc', ...)
+save_desc_plot <- function(p, ..., width = plotWidth, height = plotHeight) {
+  save_pdf(p, 'desc', w = width, h = height, ...)
 }
 
 ## Summary of numerical variables
@@ -77,10 +77,10 @@ plot_fact <- function(k, frecs, df = dd) {
   b <-
     ggplot(df, aes(x = !!var_s, fill = !!var_s)) + geom_bar(width = 0.7) +
     theme(legend.position = "none",
-          axis.text.x = element_text(angle = -90, hjust = 0))  + theme_font
+          axis.text.x = element_text(angle = -90, hjust = 0))
 
   save_desc_plot(p, k, 'pie', height = 2.5, width = 3.5)
-  save_desc_plot(p, k, 'bar', height = 2.5, width = 3.5)
+  save_desc_plot(b, k, 'bar', height = 2.5, width = 3.5)
 }
 
 
@@ -107,7 +107,7 @@ plot_all <- function() {
       save_table(tab, k, 'ext_sum')
 
     } else {
-      frecs <- table(as.factor(df[, k]), useNA = "ifany")
+      frecs <- table(as.factor(dd[, k]), useNA = "ifany")
       plot_fact(k, frecs)
       tab <- sort(frecs, decreasing = T)
       save_table(tab, k, 'freq')
