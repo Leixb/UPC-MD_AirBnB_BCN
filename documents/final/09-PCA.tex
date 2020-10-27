@@ -29,7 +29,7 @@
 We used the inertia plots to decide the number of factorial axis to analyse. In
 \cref{fig:pca_inertia} we can conclude the 4 first axis represent a much
 larger amount of variance compared to the others. When looking at
-\cref{fig:pca_inertia_cum} we can see that the first 4 axis already contain 63\%
+\cref{fig:pca_inertia_cum} we can see that the first 4 axis already contain 61\%
 of the variance. If we analyse further with the elbow method we can clearly see
 that the slop starts to decrease at around the 4\ts{th} axis. Therefore we decided to
 only further analyse the first 4 factorial axis.
@@ -54,6 +54,17 @@ only further analyse the first 4 factorial axis.
 % Factorial map visualisation:
 \subsection{Factorial map visualisation}%
 \label{sub:factorial_map_visualisation}
+
+\newcommand{\centroidmap}[2]{
+    \begin{landscape}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.87\linewidth]{pca_fact-plane_#1_#2-cent}
+        \caption{PCA plane #1 vs #2}%
+        \label{fig:plane_#1-#2-cent}
+    \end{figure}
+    \end{landscape}
+}
 
 % #2 -> caption #3 -> file, #1 -> page
 \newcommand{\factorialmap}[2]{
