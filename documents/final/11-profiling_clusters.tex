@@ -24,31 +24,37 @@ In \Cref{fig:prof-host_is_superhost-side} we can see how cluster 2 has a signifi
 %\profiling{host_response_time}{}{} %?
 
 
+\clearpage
+\subsection{Room Types \& Accommdates}%
 
 %profiling{room_type}{percent}{room type bar}
-\profiling{room_type}{side}{room type bar}
 %\profiling{room_type}{stack}{room type bar}
 
 
 % --- num
 
-\profiling{accommodates}{meanp}{Accommodates}
-\profiling{accommodates}{vi}{Accommodates}
+%\clearpage
+%\subsection{Accommodates}%
+
+%\profiling{accommodates}{vi}{Accommodates}
 %\profiling{accommodates}{bp}{Accommodates}
-In \Cref{fig:prof-accommodates-meanp,prof-accommodates-vi} we can see that cluster 4 acommodates 
-much more people than the clusters. We can hypothesize that cluster 4 might correspond to listings of big entire houses. 
+\profiling{accommodates}{meanp}{Accommodates}
+\profiling{room_type}{side}{room type bar}
+In \Cref{fig:prof-accommodates-meanp} we can see that listings on cluster 4 accommodate
+much more people than the ones in other clusters. By looking at \Cref{fig:prof-room_type-side}, we can correlate this with the fact that most of the listings on cluster 4 are entire houses or apartments, that usually accommodate more people than hotel rooms, private rooms or shared rooms. 
+
+\clearpage
+\subsection{Host listings count}%
 
 \profiling{host_listings_count}{meanp}{Host listings count}
-\profiling{host_listings_count}{vi}{Host listings count}
 \profiling{host_listings_count}{bp}{Host listings count}
-
-In \Cref{fig:host_listings_count,host_listings_count} we can differences in the clusters.
+In \cref{fig:host_listings_count-meanp,fig:host_listings_count-bp} we can differences in the clusters.
 Cluster 4 has the highest mean, followed by cluster 3. The other two seem to be quite 
-similar. An hypothesis we have is that cluster 4 might be older listings or ones with a lower minimum night average.
+similar. It might indicate that the hosts of the listings in cluster number 4 are actually businesses.
 
-\profiling{price}{meanp}{Price}
-\profiling{price}{vi}{Price}
-\profiling{price}{bp}{Price}
+\profiling{price}{meanp-tallat200}{Price}
+\profiling{price}{vi-tallat200}{Price}
+When looking at \cref{fig:prof-price-meanp-tallat200,fig:prof-price-vi-tallat200} we can clearly see that the listings in cluster 4 have an average price way higher that the other ones. As we already found out that cluster 4 contains the listings that accommodate more guests as well. This makes sense because a house that can accommodate more guests is expected to be more expensive. 
 
 
 \subsection{Review scores rating}%
@@ -58,15 +64,18 @@ similar. An hypothesis we have is that cluster 4 might be older listings or ones
 %\profiling{review_scores_rating}{vi}{Review scores rating}
 \profiling{review_scores_rating}{bp}{Review scores rating}
 
-Looking at \cref{fig:prof-review_scores_rating-meanp,fig:prof-review_scores_rating-bp} we can see that cluster 3 has a much lower mean of review score rantings than the others. The others seem to have a really similar mean and variance. We can conclude that cluster 3 contains the bad reviews while high reviews seem to distribute between the others.
+Looking at \cref{fig:prof-review_scores_rating-meanp,fig:prof-review_scores_rating-bp} we can see that listings on cluster 3 have, on average, much lower review score rantings. The rest seem to have a really similar mean and variance. We can conclude that cluster 3 contains the bad reviews while high reviews seem to distribute between the others.
 
+\clearpage
+\subsection{Reviews per month}%
 
 \profiling{reviews_per_month}{meanp}{Reviews per month}
-\profiling{reviews_per_month}{vi}{Reviews per month}
+%\profiling{reviews_per_month}{vi}{Reviews per month}
 \profiling{reviews_per_month}{bp}{Reviews per month}
 
-\Cref{fig:prof-reviews_per_month-bp,prof-reviews_per_month-meanp} we can see that cluster 2 has higher mean that the rest and
+\Cref{fig:prof-reviews_per_month-bp,fig:prof-reviews_per_month-meanp} we can see that cluster 2 has higher mean that the rest and
 cluster 3 has the lowest mean of them all.
+
 
 
 % Profiling of clusters: Use class variable as a response variable to analyze
