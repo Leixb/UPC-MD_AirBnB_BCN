@@ -3,13 +3,13 @@ library(ggdendro)
 library(GGally)
 library(FactoMineR)
 
+source('shared.r')
+
 dd <- readRDS('data/20-data_na.Rda')
 
 res.pca <- readRDS('data/30-res_pca.Rda')
-#quanti.sup <- rownames(res.pca$quanti.sup$cor)
 
 dcon <-  Filter(is.numeric, dd)
-#dcon[, quanti.sup] <- NULL
 
 d <- dist(dcon)
 
@@ -19,19 +19,22 @@ h2 <- hclust(d, method = 'ward.D2')
 res.hcpc <- readRDS('data/69420nicexd.Rda')
 
 
+
 #plot(h1)
 #plot(h2)
 #plot(res.hcpc)
 
 c1 <- cutree(h1, 3)
 c2 <- cutree(h2, 2)
+c3 <- res.hcpc$data.clust$clust
 
-table(c1)
-table(c2)
+save_table(table(c1), 'cluster', 'c1')
+save_table(table(c2), 'cluster', 'c2')
+save_table(table(c3), 'cluster', 'c3')
 
 dd <- cbind(dd, data.frame(cluster1 = as.factor(c1)))
 dd <- cbind(dd, data.frame(cluster2 = as.factor(c2)))
-dd <- cbind(dd, data.frame(cluster3 = as.factor(res.hcpc$data.clust$clust)))
+dd <- cbind(dd, data.frame(cluster3 = as.factor(c3)))
 
 saveRDS(dd, 'data/40-data_clusters.Rda')
 
