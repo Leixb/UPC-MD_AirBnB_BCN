@@ -99,7 +99,6 @@ only further analyse the first 4 factorial axis.
     \end{figure}
 }
 
-%TODO
 
 \factorialmap{1}{2}
 In \cref{fig:plane_1-2} we are showing the factorial maps that represent the most variance among all our factorial axis. When looking at the numerical variables represented we can see that all there are some variables that tend to be grouped. For example
@@ -107,15 +106,6 @@ there's a group about all review scores, another with beds, bedroom and accommod
 analysing \cref{fig:contrib_plane_1-2} we can see that accommodates, beds and the review scores are top contributors to
 this plane. When analysing the contribution to each plane it's clear that review scores are affecting mostly axis 2, whereas accommodates and beds mostly affect axis 1.
 
-\begin{comment}
-In \cref{fig:plane_1-2} we are showing the factorial maps that represent the most variance among all our factorial axis. When looking at the numerical variables represented we can see that all the variables
-related to reviews tend to have similar arrows, this makes sense 
-because in the bivariate analysis we concluded that they were correlated.
-Looking at \cref{fig:contrib_plane_1-2} we can see that the variables
-with higher contribution are the ones about review scores and availability. As all review score variables have a small angle to the first factorial axis we can begin to speculate that this axis is 
-mostly affected by these variables. Other variables like availability
-and accommodates seem to contribute mostly to the second factorial axis, however these angles aren't as tight so they probably affect the first axis as well. 
-\end{comment}
 \factorialmapCV{1}{2}
 
 
@@ -135,13 +125,6 @@ In \cref{fig:plane_1-4} we can see that again it is true
 the accommodates and beds variables affects axis 1 the most. We can begin to speculate that these might be factorial axis 1
 latent variables. Looking at \cref{fig:contrib_plane_1-4} we 
 can see that availabities first appear as top contributors and seem to be related with the forth factorial axis.
-
-\begin{comment}
-The plane in \cref{fig:plane_1-4} seems to be mostly affected by review scores and the number of reviews.
-In this specific plane number of reviews and accommodates seem to have a similar contribution but with
-inverse relation. We can maybe relate the availability with the first plane, but as the global correlation
-to this plane of this variable isn't has high we can't derive to much from this.
-\end{comment}
 
 \factorialmapCV{1}{4}
 
@@ -170,27 +153,47 @@ aforementioned seems to hold true in this specific plane.
 \begin{landscape}
 
 \categorica{1}{2}{room_type}{room type}
-\categorica{1}{3}{room_type}{room type}
-\categorica{1}{4}{room_type}{room type}
+Looking at \cref{fig:cat-room_type-plane-1-2} that there are some 
+differences between each room type category. As we explained in the PCA analysis of numerical variables, axis 1 is mostly affected by accommodates and bedrooms whereas the variables that contribute most to axis 2 are the review scores. If we analyse the
+placement of centroids along the plane it seems to make sense as entire home/apt are supposed to have more bedrooms and capacities than a private room. If we analyse towards axis 2 we can see that entire homes and hotel rooms have better review scores than the 
+other two. If we look at the variance of private rooms, represented by the ellipsis we 
+can see that in general this category has less accommodates and bedrooms than the others.
+
+
+
+\categorica{1}{2}{neighbourhood_group_cleansed}{Neighbourhood group}
+Similarly to before, in \cref{fig:cat-neighbourhood_group_cleansed-plane-1-2} there seems to be some differences between Barcelona's neighborhoods in this plane. For example we can 
+see that Nou Barris seem to have less accommodates and a worse review. On the other
+hand l'Eixample has the most accommodates and the better reviews. When looking at
+the ellipsis, which represent the 95\% interval of variance we can see that there are
+some differences, specially when comparing the two examples given before. 
+
+\categorica{2}{4}{host_is_superhost}{Host is superhost}
+When looking at \cref{fig:cat-host_is_superhost-plane-2-4} we can
+see that in general superhosts tend to have better reviews scores.
+
+\categorica{2}{3}{host_since_year}{Host since year}
+Looking at \cref{fig:cat-host_since_year-plane-2-3} we can see that the more recent hosts have less number of
+reviews and lower review ratings.
+The only exception is 2008 (which has no significance since it's only one individual).
 
 \end{landscape}
 
 \subsection{Conclusion}%
-What we can conclude after analysing how the variables are distributed along each factorial axis is 
-that our variables generally distribute in 4 groups: the ones about availability, 
+What we can conclude after analysing how the variables are distributed along each factorial axes is 
+that our variables generally distribute in 4 groups: the ones about availability,   
 the ones about review scores, the ones regarding number of reviews and finally beds and accommodation. That might indicate that there is some correlation between them.
 
-After studying each factorial axis in depth we can conclude that each axis
+After studying each factorial axis in depth we can conclude that each axes
 latent variables associated to the first factorial map are the ones about accommodates and beds and the third factorial axis are mostly associated with 
 the number of reviews. This is specially clear in \cref{fig:plane_1-3}. If we analyse the second factorial plane, it's latent variable isn't has clear cut.
-However if we look at 
+However if we look at all planes with axis 2 and specially \cref{fig:plane_2-4}
+we might speculate that it is mostly related to review scores. In this same figure we can see that the forth factorial plane is closely related to the availability.
 
+When analysing the categorical variables we found out that most of them don't have many differences between their categories when projected in the factorial planes. Some interesting result were found in some of them. For example superhosts have better review scores or listings of entire houses and hotels have better accommodations and reviews than private rooms.
 
-We conclude that the PCA visualization was an overall success because we were able to detect some grouped
-variables and relate some of them to our factorial axis. In fact, we ended up associating the first axis
-with the review score variables. This is a major success because the first factorial axis is the one
-that represents more variance and therefore associating a meaning to it could help us better explain
-out variables.
+We conclude that the PCA visualization was an overall success because we were able to detect some grouped variables and relate some of them to our factorial axis. In fact we could more or less guess the latent variables related to
+nearly all axes. This might be helpful in the future when analysing the clusters.
 
 
 % (Be sure you use a single landscape pager for each single map in order to

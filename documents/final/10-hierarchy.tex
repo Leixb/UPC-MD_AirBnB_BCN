@@ -6,20 +6,44 @@
 \section{Hierarchical Clustering}%
 \label{sec:hierarchical_clustering}
 
+\subsection{Description of data}%
+\label{sub:description_data}
 % TODO:
 
 % Precise description of the data used (which variables have not been included
 % in the analysis, if any, whenever you are using a CURE strategy, provide
 % details about eventual sampling performed on data, etc)
 
+We decided to investigate two different hierarchical clustering methods to
+identify which one worked best with our data set: Ward's hierarchical method and 
+Hierarchical Clustering on Principal Components (HCPC). Ward uses
+the whole preprocessed data set while HCPC uses the PCA outcome. None of the
+methods required any kind of sampling.
+
+\subsection{Methods and metrics}
+
 % Clustering method used, metrics and aggregation criteria used (Ward’s method
 % is recommended embedded or not in a CURE strategy whenever scaling to big data
 % is required, for messy data Gower dissimilarity coefficient to the square is
 % recommended )
 
-We decided to investigate three different hierarchical clustering methods to
-identify which one worked best with our data set: Ward's method, and 
-Hierarchical Clustering on Principal Components.
+As mentioned in \ref{sub:description_data}, we explored two different clustering methods.
+ward.D and ward.D2 both use Ward's hierarchical method, but 
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{cluster-dendo-h1}
+    \caption{Cluster Dendogram}%
+    \label{fig:dendogram}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{cluster-dendo-h3}
+    \caption{Cluster Dendogram}%
+    \label{fig:dendogram}
+\end{figure}
 
 \begin{landscape}
 
@@ -31,21 +55,26 @@ Hierarchical Clustering on Principal Components.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\linewidth]{dendo}
+    %\includegraphics[width=0.8\linewidth]{dendo}
+    \includegraphics[width=0.8\linewidth]{cluster-dendo-h3}
     \caption{Cluster Dendogram}%
     \label{fig:dendogram}
 \end{figure}
 
 \end{landscape}
 
-\begin{table}[H]
-\end{table}
 
 % Discuss about how to get the final number of clusters
 
 \subsection{Description of clusters}%
 \label{sub:description_of_clusters}
 
+\begin{table}[H]
+\centering
+\caption{Cluster size table}%
+\label{tab:cluster_size}
+\input{../../analysis/tables/cluster-c3}
+\end{table}
 
 
 % Table with a description of the clusters size
