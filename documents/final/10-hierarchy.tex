@@ -20,7 +20,7 @@ Hierarchical Clustering on Principal Components (HCPC). Ward uses
 the whole preprocessed data set while HCPC uses the PCA outcome. None of the
 methods required any kind of sampling.
 
-\subsection{Methods and metrics}
+\subsection{Methods, metrics and criteria}
 
 % Clustering method used, metrics and aggregation criteria used (Ward’s method
 % is recommended embedded or not in a CURE strategy whenever scaling to big data
@@ -28,9 +28,13 @@ methods required any kind of sampling.
 % recommended )
 
 As mentioned in \ref{sub:description_data}, we explored two different clustering methods.
-Ward uses the squared Euclidean distance between data points of numerical variables
-to 
+Ward chooses which two clusters to merge based on the pair of clusters that leads to the
+minimum increase in the sum of squared Euclidean distances for the merged cluster. 
+On the other hand, HCPC applies the same Ward criterion but on the principal components 
+not to the whole data set.
 
+
+\subsection{Dendogram}
 
 \begin{figure}[H]
     \centering
@@ -70,11 +74,21 @@ to
 \subsection{Description of clusters}%
 \label{sub:description_of_clusters}
 
-\begin{table}[H]
-\centering
+\begin{table}[h!]
+\vspace{5pt}
 \caption{Cluster size table}%
 \label{tab:cluster_size}
-\input{../../analysis/tables/cluster-c3}
+\centering
+\begin{subtable}[t]{.3\textwidth}
+    \centering
+    \caption{Ward cluster size}
+    \input{../../analysis/tables/cluster-c1}
+\end{subtable}
+\begin{subtable}[t]{.3\textwidth}
+    \centering
+    \caption{HCPC cluster size}
+    \input{../../analysis/tables/cluster-c3}
+\end{subtable}
 \end{table}
 
 
