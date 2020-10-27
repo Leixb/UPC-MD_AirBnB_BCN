@@ -4,6 +4,19 @@
 \section{Profiling of clusters}%
 \label{sec:profiling_of_clusters}
 
+\newcommand{\profiling}[3]{
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{prof-c3-#1-#2}
+    \caption{#3}%
+    \label{fig:#1-#2}
+\end{figure}
+}
+
+\profiling{room_type}{percent}{room type bar}
+\profiling{room_type}{side}{room type bar}
+\profiling{room_type}{stack}{room type bar}
+
 % Profiling of clusters: Use class variable as a response variable to analyze
 % conditional distributions of variables to clusters and eventual statistical
 % tests to assess which variables are significant in each cluster. Detect
