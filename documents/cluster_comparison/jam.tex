@@ -1,0 +1,100 @@
+%\documentclass[12pt, oneside]{article}
+\documentclass[12pt, oneside]{article}
+%\documentclass[final, 12pt, oneside]{article}
+%\usepackage[a4paper, left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage[a4paper, landscape, left=0.5cm, right=0.5cm, top=0.1cm, bottom=0.1cm]{geometry}
+
+\usepackage[T1]{fontenc}
+
+%% Not needed with lualatex
+%\usepackage[utf8]{inputenc} % Use unicode for input
+%\usepackage{lmodern}
+
+% With lualatex:
+\usepackage{fontspec}
+
+\usepackage{microtype}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{english}
+
+\usepackage{hyphenat}
+
+\usepackage{mathtools}                    % amsmath + more
+\usepackage{amsthm}                       % Theorem enviroment
+\usepackage{amssymb}                      % More symbols
+\usepackage{amstext}                      % Text inside mathenv
+
+\newcommand{\hf}[3]{
+    \includegraphics[width=0.30\linewidth]{../../analysis/plots/prof-c#1-#2-#3.pdf}
+}
+
+\newcommand{\figfn}[1]{
+    \clearpage
+    \hf{1}{#1}{bp}
+    \hf{2}{#1}{bp}
+    \hf{3}{#1}{bp}
+    \par
+    \hf{1}{#1}{vi}
+    \hf{2}{#1}{vi}
+    \hf{3}{#1}{vi}
+    \par
+    \hf{1}{#1}{meanp}
+    \hf{2}{#1}{meanp}
+    \hf{3}{#1}{meanp}
+}
+
+\newcommand{\figfc}[1]{
+    \clearpage
+    \hf{1}{#1}{percent}
+    \hf{2}{#1}{percent}
+    \hf{3}{#1}{percent}
+    \par
+    \hf{1}{#1}{side}
+    \hf{2}{#1}{side}
+    \hf{3}{#1}{side}
+    \par
+    \hf{1}{#1}{stack}
+    \hf{2}{#1}{stack}
+    \hf{3}{#1}{stack}
+}
+
+\begin{document}
+
+%\figfc{cluster1}
+%\figfc{cluster2}
+%\figfc{cluster3}
+\figfc{host_acceptance_rate_cat}
+\figfc{host_has_profile_pic}
+\figfc{host_identity_verified}
+\figfc{host_is_superhost}
+\figfc{host_response_rate_cat}
+\figfc{host_response_time}
+\figfc{host_since_season}
+\figfc{host_since_year}
+\figfc{instant_bookable}
+\figfc{neighbourhood_group_cleansed}
+\figfc{room_type}
+
+\figfn{accommodates}
+\figfn{availability_30}
+\figfn{availability_365}
+\figfn{availability_60}
+\figfn{availability_90}
+\figfn{bedrooms}
+\figfn{beds}
+\figfn{host_listings_count}
+\figfn{maximum_nights_avg_ntm}
+\figfn{minimum_nights_avg_ntm}
+\figfn{number_of_reviews}
+\figfn{number_of_reviews_l30d}
+\figfn{number_of_reviews_ltm}
+\figfn{price}
+\figfn{review_scores_accuracy}
+\figfn{review_scores_cleanliness}
+\figfn{review_scores_location}
+\figfn{review_scores_rating}
+\figfn{review_scores_value}
+\figfn{reviews_per_month}
+
+\end{document}
