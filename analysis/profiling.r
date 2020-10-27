@@ -231,3 +231,6 @@ dd$cluster <- dd$cluster3
 save_prof_plot <- function(p, ...)  save_pdf(p, FILE_PRE, 'c3' , ...)
 save_prof_table <- function(p, ...)  save_table(p, FILE_PRE, 'c3' , ...)
 profile()
+
+save_prof_plot <- function(p, ...)  save_pdf(p, FILE_PRE, 'c3', ..., 'tallat200')
+plot_num(price, cluster=cluster, df = dd[dd$price < 200,])
