@@ -20,7 +20,8 @@
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\linewidth]{PCA-inertia_cum}
+    %\includegraphics[width=0.7\linewidth]{PCA-inertia_cum}
+    \includegraphics[width=0.7\linewidth]{pca_fact-screeplot-cum} % PCA-inertia_cum
     \caption{PCA accumulated inertia}%
     \label{fig:pca_inertia_cum}
 \end{figure}
@@ -55,14 +56,6 @@ only further analyse the first 4 factorial axis.
 \subsection{Factorial map visualisation}%
 \label{sub:factorial_map_visualisation}
 
-\newcommand{\centroidmap}[2]{
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.87\linewidth]{pca_fact-plane_#1_#2-cent}
-        \caption{PCA plane #1 vs #2 (categorical variables centroids)}%
-        \label{fig:plane_#1-#2-cent}
-    \end{figure}
-}
 
 % #2 -> caption #3 -> file, #1 -> page
 \newcommand{\factorialmap}[2]{
@@ -161,7 +154,15 @@ aforementioned seems to hold true in this specific plane.
 
 \begin{landscape}
 
-\centroidmap{1}{2}
+We can see that
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.87\linewidth, trim=0 3cm 0 3cm, clip]{pca_fact-plane_1_2-cent}
+    \caption{PCA plane 1 vs 2 (categorical variables centroids)}%
+    \label{fig:plane_1-2-cent-}
+\end{figure}
+
 
 \categorica{1}{2}{room_type}{room type}
 Looking at \cref{fig:cat-room_type-plane-1-2} that there are some 
