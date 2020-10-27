@@ -56,14 +56,12 @@ only further analyse the first 4 factorial axis.
 \label{sub:factorial_map_visualisation}
 
 \newcommand{\centroidmap}[2]{
-    \begin{landscape}
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.87\linewidth]{pca_fact-plane_#1_#2-cent}
-        \caption{PCA plane #1 vs #2}%
+        \caption{PCA plane #1 vs #2 (categorical variables centroids)}%
         \label{fig:plane_#1-#2-cent}
     \end{figure}
-    \end{landscape}
 }
 
 % #2 -> caption #3 -> file, #1 -> page
@@ -162,6 +160,8 @@ aforementioned seems to hold true in this specific plane.
 \factorialmapCV{3}{4}
 
 \begin{landscape}
+
+\centroidmap{1}{2}
 
 \categorica{1}{2}{room_type}{room type}
 Looking at \cref{fig:cat-room_type-plane-1-2} that there are some 
