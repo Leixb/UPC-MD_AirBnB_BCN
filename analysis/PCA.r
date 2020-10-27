@@ -122,7 +122,22 @@ centroids <- comp_centroids()
 scree_plot <- function() {
   scree <- fviz_screeplot(res.pca, addlabels = T, ncp = 20)
   save_pcaFact_plot(scree, 'screeplot')
+
+  d <- data.frame(res.pca$eig[,3])
+  names(d) <- c('cumInnertia')
+
+  n <- c()
+  for (i in 1:dim(d)[1]) {
+    n <- c(n, sprintf("PC%02d", i))
+  }
+
+  d$comp <- n
+
+  p <- ggplot(d, aes(x=comp, y=cumInnertia)) + geom_col()
+
+  save_pcaFact_plot(p, 'screeplot', 'cum')
 }
+
 
 plane_plots <- function(i, j) {
   var <-
@@ -130,7 +145,7 @@ plane_plots <- function(i, j) {
       res.pca,
       axes = c(i, j),
       select.var = list(cos2 = 0.25),
-      alpha.quanti.sup = 0.1,
+      invisible = 'quanti.sup',
       repel = T
     )
   ind <-
@@ -150,6 +165,7 @@ plane_plots <- function(i, j) {
       alpha.ind = 0.1,
       alpha.quanti.sup = 0.1,
       col.ind = "steelblue",
+      invisible = 'quanti.sup',
       col.var = "black"
     )
   contrib <- fviz_contrib(res.pca, 'var', axes = c(i, j))
