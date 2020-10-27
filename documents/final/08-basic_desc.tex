@@ -170,7 +170,7 @@ businesses that own lots of listings.
 
 \fig{desc-host_listings_count-hi_bp-tallat100}{host listings count}
 
-In figure \cref{fig:desc-host_listings_count-hi_bp-tallat100} we can observe, which we couldn't in figure \Cref{fig:host_listings_count}, that
+In \cref{fig:desc-host_listings_count-hi_bp-tallat100} we can observe, which we couldn't in figure \Cref{fig:host_listings_count}, that
 the most common number of listings is one, which is to be expected.
 
 \figf{host_response_rate_cat}{host response rate cat}
@@ -179,8 +179,8 @@ This variable conveys how attentive the host is, as it tells us to what degree
 the host replies to messages received inquiring about its listings. As seen in
 \cref{fig:host_response_rate_cat}, 55\% of hosts have a very high
 response rate, that is they reply to more than 80\% of messages they receive.
-It should be noted that this variable has a high share of missing data,
-approximately 34\%.
+It should be noted that this variable has a high share of "Unknown" 
+data, approximately 34\%.
 
 
 \figf{host_response_time}{host response time}
@@ -406,6 +406,8 @@ This obviously was not the case, which is interesting, since it indicates that
 
 \pagebreak
 
+\subsubsection{Price vs neighbourhood}
+
 \fig{bivar-price-neighbourhood_group_cleansed}{Price of listings depending on the neighbourhood \airbnb}
 
 % TODO: Nose si a la figure "we can see" els mean prices XD
@@ -419,6 +421,8 @@ neighborhoods. This leads us to believe that although not much there is some
 correlation between price and neighborhood.
 
 \pagebreak
+
+\subsubsection{Minimum number of nights vs room type}
 
 \fig{bivar-room_type-minimum_nights_avg_ntm}{Minimum number of nights depending on room type}
 

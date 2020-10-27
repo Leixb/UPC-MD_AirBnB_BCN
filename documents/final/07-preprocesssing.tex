@@ -12,7 +12,7 @@
 
 \subsection{Formatting issues, building software context}
 
-We haven't encountered any formatting issues or problems with R not recognising
+We didn't encounter any formatting issues or problems with R not recognising
 any rows, columns or variable types.
 
 \subsection{Determining working matrix}%
@@ -35,9 +35,17 @@ Most variables have a missing percentage between 0-5\%. However there are also
 variables like \texttt{host\_response\_rate\_cat} with much higher percentages,
 reaching up to 35\%. We studied each variable accordingly and performed different missing data treatment techniques.
 
-Categorical with a large number of missing data were analysed and we found out that the best 
+For all categorical variables with missing values we decided to 
+replace them with a new nominal category that we called "Unknown".
 
-Numerical variables were treated using the Knn algorithm. This decision was made because our dataset already contained many numerical variables with no NA's. Therefore Knn seemed the best suited algorithm.
+Numerical variables were treated using the Knn algorithm. This decision
+was made because our dataset already contained many numerical variables
+with no NA's. Therefore Knn seemed the best suited algorithm.
+
+In the case of boolean variables we found that most of them didn't have
+missing data and the ones that did only had the same 8 missing entries.
+Hence, we decided the best option was to remove those 8 rows, as they
+only represented around 0.04\% of all data.
 
 \subsection{Identification and treatment of outliers}
 
@@ -92,9 +100,13 @@ represents the season of the year during which the host signed up. For the
 latter, the modalities are Winter, Spring, Summer and Autumn.
 
 We have also categorized \texttt{host\_response\_rate} and
-\texttt{host\_acceptance\_rate} as we converted them from a numerical variables
-measured in percentages to categorical ones with the following modalities: very
-low, low, average, high and very high.
+\texttt{host\_acceptance\_rate} as we converted them from a numerical 
+variables
+measured in percentages to categorical ones with the following 
+modalities: very
+low for values between 0\% and 20\%, low from 20\% to 40\%, average 
+starting at 40\% up to 60\%, high within 60\% and 80\% and very high if
+above 80\%.
 
 These were all the variable derivations we carried out in our data set for this
 project. They were all motivated by the necessity to have more categorical

@@ -6,15 +6,8 @@
 \section{Data mining process}%
 \label{sec:data_mining_process}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.6\linewidth]{images/workflow.pdf}
-    \caption{Our data mining workflow}%
-    \label{fig:airbnblistingsPlot.PNG}
-\end{figure}
-
 As discussed in \cref{sec:data_source}, our data came from a single dataset
-in \emph{csv} format which we imported in R.
+in \emph{csv} format which we imported to R.
 
 For the initial exploration, we imported the \emph{raw} dataset into R and
 inspected the variables provided. Once we had a good understanding of the
@@ -47,6 +40,13 @@ clustering, which are explained in detail in its corresponding section.
 
 \subsection{Workflow}%
 \label{sub:workflow}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{images/workflow.pdf}
+    \caption{Our data mining workflow}%
+    \label{fig:airbnblistingsPlot.PNG}
+\end{figure}
 
 We decided to create an R script for each process (preprocessing, NA treatment,
 PCA, clustering \dots). The data transformation scripts serialize the data frame
