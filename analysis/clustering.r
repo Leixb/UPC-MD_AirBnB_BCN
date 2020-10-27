@@ -5,6 +5,46 @@ library(FactoMineR)
 
 dd <- readRDS('data/20-data_na.Rda')
 
+res.pca <- readRDS('data/30-res_pca.Rda')
+quanti.sup <- rownames(res.pca$quanti.sup$cor)
+
+dcon <-  Filter(is.numeric, dd)
+dcon[, quanti.sup] <- NULL
+
+d <- dist(dcon)
+
+h1 <- hclust(d, method = 'ward.D')
+h2 <- hclust(d, method = 'ward.D2')
+#res.hcpc <- HCPC(res.pca, nb.clust = -1, graph = F)
+
+plot(h1)
+plot(h2)
+plot(res.hcpc)
+
+c1 <- cutree(h1, 2)
+c2 <- cutree(h2, 3)
+
+dd <- cbind(dd, data.frame(cluster1 = as.factor(c1)))
+dd <- cbind(dd, data.frame(cluster2 = as.factor(c2)))
+#dd <- cbind(dd, data.frame(cluster3=as.factor(res.hcpc$data.clust$clust)))
+
+ggpairs(dd, columns = c(8,11,16,21,22,23), ggplot2::aes(colour=cluster1, alpha=0.7))
+
+pairs()
+
+pairs(dd,
+      col = c("red", "cornflowerblue", "purple")[dd$cluster1],   # Change color by group
+      )
+
+# Write to file
+write.csv(dd, "csv/bcn_listings_cluster.csv", row.names = FALSE)
+
+# Serialize object
+saveRDS(dd, 'data/31-data_cluster.Rda')
+
+
+stop()
+
 names(dd)
 
 num_vars <- names(Filter(is.numeric, dd))
@@ -16,7 +56,7 @@ h2 <- hclust(d, method = "ward.D2")  # NOTICE THE COST
 
 c <- cutree(h2, 3)
 
-dd <- cbind(dd, data.frame(cluster=c))
+dd <- cbind(dd, data.frame(cluster1=as.factor(c)))
 
 dd$cluster <- as.factor(dd$cluster)
 
@@ -86,5 +126,5 @@ ggpairs(dd2, columns = c(8,11,16,21,22,23), ggplot2::aes(colour=cluster, alpha=0
 write.csv(dd2, "csv/bcn_listings_cluster.csv", row.names = FALSE)
 
 # Serialize object
-saveRDS(dd2, 'data/30-data_cluster.Rda')
+saveRDS(dd2, 'data/31-data_cluster.Rda')
 

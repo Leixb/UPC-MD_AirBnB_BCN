@@ -13,16 +13,45 @@ save_pcaFact_plot_var <- function(p, ...) save_pdf(p, 'pca_fact', ..., w = 6, h 
 
 save_pcaFact_plot_contrib <- function(p, ...) save_pdf(p, 'pca_fact', ..., w = 6, h = 2.5)
 
-qsup <- names(Filter(function(x)
+quanti.sup.names <- c(
+  #"accommodates"                ,
+  "bedrooms"                    ,
+  "beds"                        ,
+  #"availability_30"             ,
+  "availability_60"             ,
+  "availability_90"             ,
+  "availability_365"            ,
+  #"number_of_reviews"           ,
+  "number_of_reviews_ltm"       ,
+  "number_of_reviews_l30d"      ,
+  #"review_scores_rating"        ,
+  "review_scores_accuracy"      ,
+  "review_scores_cleanliness"   ,
+  "review_scores_location"      ,
+  "review_scores_value"         ,
+  #"maximum_nights_avg_ntm",
+  #"minimum_nights_avg_ntm",
+  "number_of_reviews"
+)
+quanti.sup.names <- c()
+
+quali.sup.names <- names(Filter(function(x)
   is.factor(x) | is.logical(x), dd))
-qqsup <- c()
-for (i in qsup)
-  qqsup <- c(qqsup, which(colnames(dd) == i))
+
+quali.sup <- c()
+for (i in quali.sup.names)
+  quali.sup <- c(quali.sup, which(colnames(dd) == i))
+
+quanti.sup <- c()
+for (i in quanti.sup.names)
+  quanti.sup <- c(quanti.sup, which(colnames(dd) == i))
+
 
 ### Perform PCA
 res.pca <- PCA(dd,
                ncp = 4,
-               quali.sup = qqsup,
+               quali.sup = quali.sup,
+               quanti.sup = quanti.sup,
                graph = FALSE)
 res.pca
 
@@ -37,6 +66,13 @@ save_table(tab_eig, 'pca_fact', 'eig')
 tab_contrib <- data.frame(res.pca$var$contrib)
 save_table(tab_contrib, 'pca_fact', 'contrib')
 
+tab_cor <- data.frame(res.pca$var$cor)
+save_table(tab_cor, 'pca_fact', 'cor')
+
+# Supplementary Variable correlation
+tab_scor <- data.frame(res.pca$quanti.sup$cor)
+save_table(tab_scor, 'pca_fact', 'qtsup', 'cor')
+
 ### PCA graphs
 # Screeplot
 
@@ -49,6 +85,7 @@ plane_plots <- function(i, j) {
       res.pca,
       axes = c(i, j),
       select.var = list(cos2 = 0.25),
+      alpha.quanti.sup = 0.1,
       repel = T
     )
   ind <-
@@ -66,6 +103,7 @@ plane_plots <- function(i, j) {
       geom = c('point'),
       repel = T,
       alpha.ind = 0.1,
+      alpha.quanti.sup = 0.1,
       col.ind = "steelblue",
       col.var = "black"
     )
@@ -102,7 +140,7 @@ for (cat in dcat) {
       alpha.ind = 0,
       pointsize = 2,
       pointshape = 19,
-      habillage = 'room_type',
+      habillage = cat,
       addEllipses = T,
       ellipse.alpha = 0,
       alpha.var = 0.1,
@@ -345,3 +383,5 @@ suggested.level <- function(hc, min = 3, max = 10) {
 ###
 suggested.level(h1)
 suggested.level(h2)
+
+

@@ -6,9 +6,10 @@ dd <- readRDS('data/10-data_pre.Rda')
 # Convert years to factors
 dd$host_since_year <- as.factor(dd$host_since_year)
 
-many_nulls <- dd[rowSums(is.na(dd)) > 10,]
-
 categorical_vars <- names(Filter(is.factor, dd))
+
+# Remove
+dd <- dd[!is.na(dd$host_identity_verified),]
 
 # Imputation of categorical variables
 for (cat in categorical_vars) {
@@ -47,8 +48,6 @@ for (k in uncomplete_vars) {
     dd_complete <- dd[, complete_vars]
 }
 
-# Remove
-dd <- dd[!is.na(dd$host_identity_verified),]
 
 dim(dd)
 summary(dd)
