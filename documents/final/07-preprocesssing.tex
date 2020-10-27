@@ -28,7 +28,7 @@ different variable names, such as \texttt{host\_listings\_count} and
 \subsection{Identification and treatment of missing data}
 
 The dataset provided had already all missing data encoded as \NA's. Therefore no
-more missing were found encoded as other values. When looking at the missing
+more missings were found encoded as other values. When looking at the missing
 values, they appear to be random. Some effort was put into analysing if the missing values had a correlation with the date of the entry, for example if older entries contained more missing data. However we couldn't find any pattern that supported those claims.
 
 Most variables have a missing percentage between 0-5\%. However there are also
@@ -59,7 +59,7 @@ On the other hand we also found some outliers that correspond to extreme values
 that are not expected. For example in \texttt{maximum\_nights\_avg\_ntm} we
 found some rows with the value 2147483647, which corresponds to the maximum
 int32 allowed. If we convert that value into years we would get a result that is
-unreasonable. After doing some research we found out that the maximum number of nights is limited by AirBnb to 1125. We decided to consider all entries that surpassed that number as errors. 
+unreasonable. After doing some research we found out that the maximum number of nights is limited by \airbnb to 1125. We decided to consider all entries that surpassed that number as errors. 
 
 We have decided to allow for some outliers as long as they are few and
 justifiable, in these cases we will try to correlate them to other variables.
@@ -72,11 +72,14 @@ large values mentioned before. In those cases we decided to change those values 
 \subsection{Feature selection/extraction, dimensional reduction}
 
 The \airbnb dataset contained a large amount of variables. First of all we
-decided which of them would made it in our working matrix following the steps
+decided which of them would make it in our working matrix following the steps
 detailed in \ref{ssub:work_matrix}. Upon further investigation we decided to
-discard additional variables like \texttt{host\_has\_profile\_pic} because the
-information it provided wasn't relevant to this project. Of those variables that
-made it into our working matrix there are several more relevant than others.
+discard \texttt{host\_since} because in its initial date format it didn't
+seem useful to us. Nonetheless, before deleting it, we used it to derive two
+new variables, \texttt{host\_since\_year} and \texttt{host\_since\_season},
+as explain in \ref{ssub:variable_derivation}.
+Of those variables that made it into our working matrix, there are several
+more relevant than others.
 
 \begin{comment} % TODO posar aixo?
 
@@ -87,6 +90,7 @@ made it into our working matrix there are several more relevant than others.
 \end{comment}
 
 \subsection{Derivation of new variables}
+\label{ssub:variable_derivation}
 
 We derived some new variables from the data set in order to flourish new
 categorical variables.
