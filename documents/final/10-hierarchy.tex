@@ -75,7 +75,12 @@ suggested cut, which in this case is at level 4.
 \subsection{Description of clusters}%
 \label{sub:description_of_clusters}
 
-As a result of the cut levels mentioned before, we obtained the follow
+As a result of the cut levels mentioned before, we obtained the following cluster sizes.
+For Ward's method the clusters are equitably sized, as we can appreciate in
+\cref{tab:cluster_size_ward}. On \cref{tab:cluster_size_hcpc}, we can observe that
+the cluster sizes aren't as homogeneous, with cluster 1 absorbing more than half
+of all data records at 12,733. Then we have cluster 4 with a size of 4,414 and cluster 2
+taking 2,378. Finally, cluster 3 only contains 810 records.
 
 \begin{table}[h!]
 \vspace{5pt}
@@ -84,15 +89,25 @@ As a result of the cut levels mentioned before, we obtained the follow
 \centering
 \begin{subtable}[t]{.3\textwidth}
     \centering
-    \caption{Ward cluster size}
+    \caption{Ward cluster size}%
+    \label{tab:cluster_size_ward}
     \input{../../analysis/tables/cluster-c1}
 \end{subtable}
 \begin{subtable}[t]{.3\textwidth}
     \centering
-    \caption{HCPC cluster size}
+    \caption{HCPC cluster size}%
+    \label{tab:cluster_size_hcpc}
     \input{../../analysis/tables/cluster-c3}
 \end{subtable}
 \end{table}
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\linewidth]{factor_map}
+\caption{Clusters on PCA}%
+\label{fig:clusters-pca}
+\end{figure}
+
+In \cref{fig:clusters-pca} we can view the HCPC cluster divisions on a PCA factor map.
 
 % Table with a description of the clusters size
