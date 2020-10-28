@@ -234,3 +234,15 @@ profile()
 
 save_prof_plot <- function(p, ...)  save_pdf(p, FILE_PRE, 'c3', ..., 'tallat200')
 plot_num(price, cluster=cluster, df = dd[dd$price < 200,])
+
+# pvalues
+
+c1 <- res.hcpc$desc.var$quanti$`1`[,6]
+c2 <- res.hcpc$desc.var$quanti$`2`[,6]
+c3 <- res.hcpc$desc.var$quanti$`3`[,6]
+c4 <- res.hcpc$desc.var$quanti$`4`[,6]
+
+save_table(data.frame(c1), 'pval', 'c1')
+save_table(data.frame(c2), 'pval', 'c2')
+save_table(data.frame(c3), 'pval', 'c3')
+save_table(data.frame(c4), 'pval', 'c4')
