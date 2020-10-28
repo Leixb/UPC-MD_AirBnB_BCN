@@ -1,0 +1,130 @@
+% vim: spell spelllang=en:
+%! TEX root = **/00-main.tex
+
+% Detailed description of Preprocessing and data preparation. Please be sure to
+% justify all decisions made.
+
+\section{Preprocessing}%
+\label{sec:preprocessing}
+
+% TODO : aixo es copiat tal qual del D3. S'ha de canviar perk sigui el que
+%        realment vam acabar fent.
+
+\subsection{Formatting issues, building software context}
+
+We didn't encounter any formatting issues or problems with R not recognising
+any rows, columns or variable types.
+
+\subsection{Determining working matrix}%
+\label{ssub:work_matrix}
+
+We discarded many variables from the original data set that didn't provide any
+useful information to our project such as URLs and ids or that couldn't be
+categorised or were uninteresting such as the \texttt{host\_name}, name and
+description of the listing, etc. Furthermore, some columns were duplicated with
+different variable names, such as \texttt{host\_listings\_count} and
+\texttt{host\_total\_listings\_count}, we removed those redundancies as well.
+
+\subsection{Identification and treatment of missing data}
+
+The dataset provided had already all missing data encoded as \NA's. Therefore no
+more missings were found encoded as other values. When looking at the missing
+values, they appear to be random. Some effort was put into analysing if the missing values had a correlation with the date of the entry, for example if older entries contained more missing data. However we couldn't find any pattern that supported those claims.
+
+Most variables have a missing percentage between 0-5\%. However there are also
+variables like \texttt{host\_response\_rate\_cat} with much higher percentages,
+reaching up to 35\%. We studied each variable accordingly and performed different missing data treatment techniques.
+
+For all categorical variables with missing values we decided to 
+replace them with a new nominal category that we called "Unknown".
+
+Numerical variables were treated using the Knn algorithm. This decision
+was made because our dataset already contained many numerical variables
+with no NA's. Therefore Knn seemed the best suited algorithm.
+
+In the case of boolean variables we found that most of them didn't have
+missing data and the ones that did only had the same 8 missing entries.
+Hence, we decided the best option was to remove those 8 rows, as they
+only represented around 0.04\% of all data.
+
+\subsection{Identification and treatment of outliers}
+
+When looking at the boxplots of most of the numerical variables in the dataset
+we can observe that there are a few outliers. Some of them, although differing
+from the general distribution of the values, are to be expected. For example the
+outliers we find in price, beds or score could easily be explained (maybe they
+correlate to the \texttt{room\_type} variable).
+
+On the other hand we also found some outliers that correspond to extreme values
+that are not expected. For example in \texttt{maximum\_nights\_avg\_ntm} we
+found some rows with the value 2147483647, which corresponds to the maximum
+int32 allowed. If we convert that value into years we would get a result that is
+unreasonable. After doing some research we found out that the maximum number of nights is limited by \airbnb to 1125. We decided to consider all entries that surpassed that number as errors. 
+
+We have decided to allow for some outliers as long as they are few and
+justifiable, in these cases we will try to correlate them to other variables.
+
+\subsection{Identification and treatment of errors}
+
+After inspecting the data we have not found errors apart from the one abnormally
+large values mentioned before. In those cases we decided to change those values to NA's and then impute those values with the knn algorithm.
+
+\subsection{Feature selection/extraction, dimensional reduction}
+
+The \airbnb dataset contained a large amount of variables. First of all we
+decided which of them would make it in our working matrix following the steps
+detailed in \ref{ssub:work_matrix}. Upon further investigation we decided to
+discard \texttt{host\_since} because in its initial date format it didn't
+seem useful to us. Nonetheless, before deleting it, we used it to derive two
+new variables, \texttt{host\_since\_year} and \texttt{host\_since\_season},
+as explain in \ref{ssub:variable_derivation}.
+Of those variables that made it into our working matrix, there are several
+more relevant than others.
+
+\begin{comment} % TODO posar aixo?
+
+\subsubsection{Instance selection}
+
+\subsubsection{Data transformation}
+
+\end{comment}
+
+\subsection{Derivation of new variables}
+\label{ssub:variable_derivation}
+
+We derived some new variables from the data set in order to flourish new
+categorical variables.
+
+First, starting with the \texttt{host\_since} variable, which gave us the date
+the host signed up to \airbnb to list his property, we extracted two new
+variables: \texttt{host\_since\_year} and \texttt{host\_since\_season}, both
+categorical. \texttt{host\_since\_year} categorizes the host sign up dates into
+their particular year and since. The variable \texttt{host\_since\_season}
+represents the season of the year during which the host signed up. For the
+latter, the modalities are Winter, Spring, Summer and Autumn.
+
+We have also categorized \texttt{host\_response\_rate} and
+\texttt{host\_acceptance\_rate} as we converted them from a numerical 
+variables
+measured in percentages to categorical ones with the following 
+modalities: very
+low for values between 0\% and 20\%, low from 20\% to 40\%, average 
+starting at 40\% up to 60\%, high within 60\% and 80\% and very high if
+above 80\%.
+
+These were all the variable derivations we carried out in our data set for this
+project. They were all motivated by the necessity to have more categorical
+variables in our data set, as it had plenty numerical and binary variables but
+was short of categorical ones.
+
+% Enumerate which steps of the preprocessing process are used with your
+% particular data (consider the steps proposed in slide 4 of Preprocessing
+% Slides in Theme 2. Data Preparation. Remember that you have the whole complete
+% information on preprocessing in the reference text from the linkSurvey of
+% preprocessing. Reference paper (MIE 2001) from complementary materials section
+% of Theme 2. Data Preparation)
+
+% List and justify all decisions taken for each preprocessing step
+
+% Additional descriptive statistics of variables that have been modified or
+% created by preprocessing

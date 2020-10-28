@@ -1,0 +1,73 @@
+% vim: spell spelllang=en:
+\input{../preamble}
+
+\title{MD - \airbnb Barcelona Listings}
+\author{
+    Aleix Bon\'e\\
+    Eduard Bosch\\
+    David Gili\\
+    Albert Mercad\'e\\
+}
+\date{\today}
+
+
+\graphicspath{{../../analysis/plots/}{images}}
+
+\newcommand{\airbnb}{\emph{Airbnb}\xspace}
+\newcommand{\NA}{\emph{NA}\xspace}
+
+\newcommand{\fig}[3][0.8]{
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=#1\linewidth]{#2}
+        \caption{#3}%
+        \label{fig:#2}
+    \end{figure}
+}
+
+%\hfuzz=3pt
+%\vfuzz=3pt
+
+\begin{document}
+
+% Video frances de HCPC
+% https://www.youtube.com/watch?v=4XrgWmN9erg
+
+\include{01-titlepage}
+
+\pagenumbering{Roman}
+
+%\setcounter{tocdepth}{2}
+\tableofcontents
+
+\pagebreak
+\listoffigures
+
+\pagebreak
+\listoftables
+
+\clearpage
+\pagenumbering{arabic}
+
+\setlength{\parskip}{1em}
+
+\include{03-motivation}
+\include{04-data_source}
+\include{05-formal}
+\include{06-data_mining}
+\include{07-preprocesssing}
+\include{08-basic_desc}
+\include{09-PCA}
+\include{10-hierarchy}
+\include{11-profiling_clusters}
+\include{12-global_discussion}
+\include{13-working_plan}
+
+\printbibliography
+
+\appendix
+
+%\include{14-R_scripts}
+\include{15-extra_plots}
+
+\end{document}
