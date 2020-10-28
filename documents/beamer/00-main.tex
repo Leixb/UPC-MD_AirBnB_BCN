@@ -158,7 +158,7 @@
         \itemsep-0.5em
     	\item[--] Acceptance rate
     	\item[--] Listings count
-    	\item[--] ...
+    	\item[--] \dots
     \end{itemize}
     \normalsize
     Listing information
@@ -167,7 +167,7 @@
         \itemsep-0.5em
     	\item[--] Price
     	\item[--] Reviews
-    	\item[--] ...
+    	\item[--] \dots
     \end{itemize}
     \normalsize
 \end{columns}
@@ -307,27 +307,43 @@ Variables that contribute the most to each factorial axis:
 %14. Slide with CPG or eventual profiling graphs or numerical information about clusters to be highlighted (whenever possible,
 %synthesize important graphics in a single slide... evenctually you can add some extra slide)
 \section{Profiling}
-\begin{frame}{Profiling}
+\begin{frame}[allowframebreaks]{Profiling}
 
 \begin{columns}
 \begin{column}{0.5\textwidth}
 \profiling{review_scores_rating}{vi}{Review scores rating}
 \end{column}
 \begin{column}{0.5\textwidth}  %%<--- here
-\profiling{reviews_per_month}{bp}{Review per month}
+\profiling{reviews_per_month}{bp}{Reviews per month}
 \end{column}
 \end{columns}
 
+\framebreak
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\profiling{accommodates}{bp}{Listing's allowance}
+\end{column}
+\begin{column}{0.5\textwidth}  %%<--- here
+\profiling{bedrooms}{meanp}{Median number of bedrooms}
+\end{column}
+\end{columns}
 \end{frame}
 
 %15. Slide with final class profiling (synthesis with description of class characteristics)
+\begin{frame}{Final class profiling}
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.9\textheight]{pairs.png}
+\end{figure}
+\end{frame}
 %16. Slide with comparison of conclusions between PCA and clustering
 
 
 %17. Slide with conclusions
 \section{Conclusions}
-\begin{frame}{Conclusions}
-\end{frame}
+%\begin{frame}{Conclusions}
+%\end{frame}
 
 %18. Slide with original and final scheduling
 \section{Working plan}
