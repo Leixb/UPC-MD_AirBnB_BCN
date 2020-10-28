@@ -10,13 +10,13 @@
 % TODO explicacio de com va una mica...
 The following subsections contain all the scripts used. There is a brief
 explanation for each of them. They have to be run in the same working directory
-with a \texttt{data} folder containing the data.
+with a \texttt{data} folder containing the data at different steps of the
+processing.
 
-By default they produce and save all plots and tables to the file system
-(although it will fail if there are no \texttt{plots/} and \texttt{tables/} in
-the directory). To disable the PDF and table creation set the variables:
-\mintinline{r}{savePlots <- FALSE; saveTables <- FALSE} before running the
-scripts (see script in \cref{sub:shared.r} for details).
+By default they produce and save all plots and tables to the file system. To
+disable the PDF and table creation set the variables: \mintinline{r}{savePlots
+<- FALSE; saveTables <- FALSE} before running the scripts (see script in
+\cref{sub:shared.r} for details).
 
 \newcommand{\mintedfile}[2]{
     \subsection{#1}%
@@ -32,16 +32,16 @@ scripts (see script in \cref{sub:shared.r} for details).
     Script used for the preprocessing data transformation explained in
     \cref{sec:preprocessing}
 }
-\mintedfile{descriptiveAnalysis.r}{
-    Script used for univariate analysis (\cref{sub:univariate_analysis})
-}
 \mintedfile{NAtreatment.r}{
     Script used for \emph{NA} imputation.
+}
+\mintedfile{descriptiveAnalysis.r}{
+    Script used for univariate analysis (\cref{sub:univariate_analysis})
 }
 \mintedfile{bivariate.r}{
     Script used for bivariate analysis (\cref{sub:bivariate_analysis})
 }
-\mintedfile{PCAcode.r}{
+\mintedfile{PCAoriginal.r}{
     Original script for PCA using built-in R methods. This was used in the exploration
     but in the end we decided to use the PCA with factorminer.
 }
@@ -59,9 +59,11 @@ scripts (see script in \cref{sub:shared.r} for details).
     This script contains all shared code used to generate consistent plots and tables
     with \emph{ggplot2} and \emph{kable}.
 
-    This script is sourced by all the other scripts that produce plots.
+    This script is sourced by all the other scripts that produce plots and
+    tables for the report.
 
-    To prevent it from generating pdf files set: \mintinline{r}{savePlots <- F}
+    To prevent it from saving pdf files set: \mintinline{r}{savePlots <- F}
+    To prevent it from saving tex tables set: \mintinline{r}{savePlots <- F}
 
     It has several dependencies used to generate tables and plots with latin
     modern font (\LaTeX{} font). If you don't want to use it or don't have it installed

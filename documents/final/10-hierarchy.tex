@@ -15,7 +15,7 @@
 % details about eventual sampling performed on data, etc)
 
 We decided to investigate two different hierarchical clustering methods to
-identify which one worked best with our data set: Ward's hierarchical method and 
+identify which one worked best with our data set: Ward's hierarchical method and
 Hierarchical Clustering on Principal Components (HCPC). The script for both methods
 can be found in \cref{sub:clustering.r}. Ward uses
 the whole preprocessed data set while HCPC uses the PCA outcome. None of the
@@ -30,8 +30,8 @@ methods required any kind of sampling.
 
 As mentioned in \cref{sub:description_data}, we explored two different clustering methods.
 Ward chooses which two clusters to merge based on the pair of clusters that leads to the
-minimum increase in the sum of squared Euclidean distances for the merged cluster. 
-On the other hand, HCPC applies the same Ward criterion but on the principal components 
+minimum increase in the sum of squared Euclidean distances for the merged cluster.
+On the other hand, HCPC applies the same Ward criterion but on the principal components
 not to the whole data set.
 
 
@@ -43,32 +43,39 @@ not to the whole data set.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\linewidth]{cluster-dendo-h1}
+    \includegraphics[width=0.8\linewidth]{cluster-dendo-h1-v2}
     \caption{Cluster Dendogram}%
     \label{fig:dendogram-h2}
 \end{figure}
 
-This is the dendogram for the Ward hierarchical clustering, which we decided to split into 3 clusters
-as they were evenly sized, see \cref{sub:description_of_clusters}. While the cluster 
-partitions are uniform in size and at first it may look promising, we found out by examining 
-the clusters in detail that HCPC provided better results. For that reason we chose to study the
+This is the dendogram for the Ward hierarchical clustering, which we decided to
+split into 3 clusters as they were evenly sized, see
+\cref{sub:description_of_clusters}. While the cluster partitions are uniform in
+size and at first it may look promising, we found out by examining the clusters
+in detail that HCPC provided better results\footnote{
+In \cref{sub:add_cluster_comp}
+there are some of the plots showing the differences between both clusters that
+we used to make our decisions.
+}.
+Therefore, we chose to study the
 cluster profiling for HCPC.
 
 \begin{landscape}
-
 \begin{figure}[H]
     \centering
     %\includegraphics[width=0.8\linewidth]{dendo}
-    \includegraphics[width=0.8\linewidth]{cluster-dendo-h3}
+    \includegraphics[width=\linewidth]{cluster-dendo-h3-color}
     \caption{Cluster Dendogram}%
     \label{fig:dendogram-final}
 \end{figure}
-
 \end{landscape}
 
-The dendogram in \cref{fig:dendogram-final} corresponds to HCPC. When calling FactoMineR's \texttt{HCPC}
-function to calculate the clusters, we set the argument \texttt{nb.clust} to -1 in order to obtain the
-suggested cut, which in this case is at level 4.
+The dendogram in \cref{fig:dendogram-final} corresponds to HCPC. When calling
+FactoMineR's \texttt{HCPC} function to calculate the clusters, we set the
+argument \texttt{nb.clust} to -1 in order to obtain the suggested cut, which in
+this case is at level 4. We tried to use 5 and 2 clusters as it seemed those
+were the other best options but settled on 4 since 5 was quite messy and with 2
+there was not much to discuss.
 
 % Discuss about how to get the final number of clusters
 

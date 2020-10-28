@@ -40,7 +40,7 @@ only further analyse the first 4 factorial axis.
 
 \begin{table}[H]
     \centering
-    \caption{Eigenvalues \& variance percentage of first 5 Dimensions}%
+    \caption{Eigenvalues \& variance percentage of first 14 Components}%
     \label{tab:eig}
     \input{../../analysis/tables/pca_fact-eig}
 \end{table}
@@ -93,18 +93,20 @@ only further analyse the first 4 factorial axis.
 }
 
 \newcommand{\categorica}[4]{
+    \begin{landscape}
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.85\linewidth]{pca_fact-#3-plane_#1_#2}
         \caption{PCA variable contributions of #4 in plane #1 vs #2}%
         \label{fig:cat-#3-plane-#1-#2}
     \end{figure}
+    \end{landscape}
 }
 
 
 \factorialmap{1}{2}
 In \cref{fig:plane_1-2} we are showing the factorial maps that represent the most variance among all our factorial axis. When looking at the numerical variables represented we can see that all there are some variables that tend to be grouped. For example
-there's a group about all review scores, another with beds, bedroom and accommodates and another with availabilities. When 
+there's a group about all review scores, another with beds, bedroom and accommodates and another with availabilities. When
 analysing \cref{fig:contrib_plane_1-2} we can see that accommodates, beds and the review scores are top contributors to
 this plane. When analysing the contribution to each plane it's clear that review scores are affecting mostly axis 2, whereas accommodates and beds mostly affect axis 1.
 
@@ -112,9 +114,9 @@ this plane. When analysing the contribution to each plane it's clear that review
 
 
 \factorialmap{1}{3}
-In \cref{fig:plane_1-3} we can see that it seems to hold true that the accommodates and beds affects axis 1 the most. Price 
+In \cref{fig:plane_1-3} we can see that it seems to hold true that the accommodates and beds affects axis 1 the most. Price
 seems to have a similar arrow as those variables. This might be
-because there is some correlation between those variables. 
+because there is some correlation between those variables.
 (The more beds a house has, probably the more expensive it is).
 The arrows of variables about number of reviews have a very small angle with factorial axis 3. Minimum\_nights\_avg\_ntm seem to
 be affecting axis 3 as well but inversely.
@@ -125,7 +127,7 @@ be affecting axis 3 as well but inversely.
 
 In \cref{fig:plane_1-4} we can see that again it is true
 the accommodates and beds variables affects axis 1 the most. We can begin to speculate that these might be factorial axis 1
-latent variables. Looking at \cref{fig:contrib_plane_1-4} we 
+latent variables. Looking at \cref{fig:contrib_plane_1-4} we
 can see that availabities first appear as top contributors and seem to be related with the forth factorial axis.
 
 \factorialmapCV{1}{4}
@@ -140,7 +142,7 @@ from this plot because the variables seem to have contributions to both axis.
 
 \factorialmap{2}{4}
 
-What we can extract when analysing \cref{fig:plane_2-4} is that the availability variables have 
+What we can extract when analysing \cref{fig:plane_2-4} is that the availability variables have
 a relatively high contribution and form a very small angle with the forth factorial axis. The same happens with review scores and the second axis.
 
 \factorialmapCV{2}{4}
@@ -155,7 +157,7 @@ aforementioned seems to hold true in this specific plane.
 \begin{landscape}
 
 \Cref{fig:plane_1-2-cent-} shows the centroids of our categorical variables in the plane 1 vs 2. The other planes are included
-in \ref{sub:add_centroids}
+in \cref{sub:add_centroids}
 
 \begin{figure}[H]
     \centering
@@ -164,22 +166,24 @@ in \ref{sub:add_centroids}
     \label{fig:plane_1-2-cent-}
 \end{figure}
 
+\end{landscape}
+
 
 \categorica{1}{2}{room_type}{room type}
-Looking at \cref{fig:cat-room_type-plane-1-2} that there are some 
+Looking at \cref{fig:cat-room_type-plane-1-2} that there are some
 differences between each room type category. As we explained in the PCA analysis of numerical variables, axis 1 is mostly affected by accommodates and bedrooms whereas the variables that contribute most to axis 2 are the review scores. If we analyse the
-placement of centroids along the plane it seems to make sense as entire home/apt are supposed to have more bedrooms and capacities than a private room. If we analyse towards axis 2 we can see that entire homes and hotel rooms have better review scores than the 
-other two. If we look at the variance of private rooms, represented by the ellipsis we 
+placement of centroids along the plane it seems to make sense as entire home/apt are supposed to have more bedrooms and capacities than a private room. If we analyse towards axis 2 we can see that entire homes and hotel rooms have better review scores than the
+other two. If we look at the variance of private rooms, represented by the ellipsis we
 can see that in general this category has less accommodates and bedrooms than the others.
 
 
 
 \categorica{1}{2}{neighbourhood_group_cleansed}{Neighbourhood group}
-Similarly to before, in \cref{fig:cat-neighbourhood_group_cleansed-plane-1-2} there seems to be some differences between Barcelona's neighborhoods in this plane. For example we can 
+Similarly to before, in \cref{fig:cat-neighbourhood_group_cleansed-plane-1-2} there seems to be some differences between Barcelona's neighborhoods in this plane. For example we can
 see that Nou Barris seem to have less accommodates and a worse review. On the other
 hand l'Eixample has the most accommodates and the better reviews. When looking at
 the ellipsis, which represent the 95\% interval of variance we can see that there are
-some differences, specially when comparing the two examples given before. 
+some differences, specially when comparing the two examples given before.
 
 \categorica{2}{4}{host_is_superhost}{Host is superhost}
 When looking at \cref{fig:cat-host_is_superhost-plane-2-4} we can
@@ -190,15 +194,15 @@ Looking at \cref{fig:cat-host_since_year-plane-2-3} we can see that the more rec
 reviews and lower review ratings.
 The only exception is 2008 (which has no significance since it's only one individual).
 
-\end{landscape}
+%\end{landscape}
 
 \subsection{Conclusion}%
-What we can conclude after analysing how the variables are distributed along each factorial axes is 
-that our variables generally distribute in 4 groups: the ones about availability,   
+What we can conclude after analysing how the variables are distributed along each factorial axes is
+that our variables generally distribute in 4 groups: the ones about availability,
 the ones about review scores, the ones regarding number of reviews and finally beds and accommodation. That might indicate that there is some correlation between them.
 
 After studying each factorial axis in depth we can conclude that each axes
-latent variables associated to the first factorial map are the ones about accommodates and beds and the third factorial axis are mostly associated with 
+latent variables associated to the first factorial map are the ones about accommodates and beds and the third factorial axis are mostly associated with
 the number of reviews. This is specially clear in \cref{fig:plane_1-3}. If we analyse the second factorial plane, it's latent variable isn't has clear cut.
 However if we look at all planes with axis 2 and specially \cref{fig:plane_2-4}
 we might speculate that it is mostly related to review scores. In this same figure we can see that the forth factorial plane is closely related to the availability.

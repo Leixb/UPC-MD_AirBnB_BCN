@@ -179,7 +179,7 @@ This variable conveys how attentive the host is, as it tells us to what degree
 the host replies to messages received inquiring about its listings. As seen in
 \cref{fig:host_response_rate_cat}, 55\% of hosts have a very high
 response rate, that is they reply to more than 80\% of messages they receive.
-It should be noted that this variable has a high share of "Unknown" 
+It should be noted that this variable has a high share of "Unknown"
 data, approximately 34\%.
 
 
@@ -217,7 +217,7 @@ instant bookable listings as not.
 the maximum number of nights a listing can be booked is 1,125.
 This doesn't come as a surprise as 1,125 nights is the maximum
 \airbnb allows the host to set. Understandably, hosts set it to the
-maximum as they don't want to limit themselves. Interestingly, 
+maximum as they don't want to limit themselves. Interestingly,
 there seems to be a few hosts that have set the maximum to less
 than 50 days, which could make sense in the case they only want to
 rent their properties during the holidays for example.
@@ -229,7 +229,7 @@ rent their properties during the holidays for example.
 As expected, most listings have their minimum nights stay set to 1.
 Any other distribution of data would have been
 unanticipated as it makes sense to have a minimum of 1 so as to avoid
-losing any potential tenants. 
+losing any potential tenants.
 
 \figf{neighbourhood_group_cleansed}{neighbourhood group cleansed}
 
@@ -296,7 +296,7 @@ are rented very often.
 \fign{number_of_reviews_l30d}{number of reviews l30d}
 
 Most listings don't have any reviews in the 30 days prior to
-when the data was collected on the 24th of August 2020. 
+when the data was collected on the 24th of August 2020.
 That is reasonable given that we are
 in a global pandemic and tourism has decreased dramatically, therefore
 not many \airbnb listings will have been rented and reviewed.
@@ -307,7 +307,7 @@ not many \airbnb listings will have been rented and reviewed.
 Similarly to the total number of reviews and the number of reviews
 over the last 30 days, most listings didn't receive more than one
 review. The maximum, however, is 278, which seems implausible given
-Covid but technically possible. Therefore we won't count these 
+Covid but technically possible. Therefore we won't count these
 outliers as errors.
 
 \fign{reviews_per_month}{reviews per month}
@@ -334,11 +334,16 @@ rooms.
     \label{fig:ellipses}
 \end{figure}
 
-We are using \cref{fig:ellipses} to analyse the correlation between variables. The more narrow the ellipsis is the bigger the correlation between variables. Knowing this we can clearly see that there is some correlation between all review scores (review\_scores\_rating,
-review\_scores\_cleanliness, review\_scores\_accuracy..). There is some correlation as well between accommodates, bed and bedrooms. All availability variables are really correlated as well.
+We are using \cref{fig:ellipses} to analyse the correlation between variables.
+The more narrow the ellipsis is the bigger the correlation between variables.
+Knowing this we can clearly see that there is some correlation between all
+review scores (\texttt{review\_scores\_rating},
+\texttt{review\_scores\_cleanliness}, \texttt{review\_scores\_accuracy} \dots).
+There is some correlation as well between \texttt{accommodates}, \texttt{bed} and
+\texttt{bedrooms}. All availability variables are really correlated as well.
 \subsubsection{Host since year vs host listings count}
 
-\fig{bivar-host_since_year-host_listings_count}{Number of listings depending on the year the host joined Airbnb}
+\fig{bivar-host_since_year-host_listings_count}{Number of listings depending on the year the host joined \airbnb}
 
 
 

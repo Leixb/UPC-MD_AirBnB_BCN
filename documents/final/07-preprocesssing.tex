@@ -35,7 +35,7 @@ Most variables have a missing percentage between 0-5\%. However there are also
 variables like \texttt{host\_response\_rate\_cat} with much higher percentages,
 reaching up to 35\%. We studied each variable accordingly and performed different missing data treatment techniques.
 
-For all categorical variables with missing values we decided to 
+For all categorical variables with missing values we decided to
 replace them with a new nominal category that we called "Unknown".
 
 Numerical variables were treated using the Knn algorithm. This decision
@@ -47,6 +47,7 @@ missing data and the ones that did only had the same 8 missing entries.
 Hence, we decided the best option was to remove those 8 rows, as they
 only represented around 0.04\% of all data.
 
+\pagebreak
 \subsection{Identification and treatment of outliers}
 
 When looking at the boxplots of most of the numerical variables in the dataset
@@ -59,7 +60,7 @@ On the other hand we also found some outliers that correspond to extreme values
 that are not expected. For example in \texttt{maximum\_nights\_avg\_ntm} we
 found some rows with the value 2147483647, which corresponds to the maximum
 int32 allowed. If we convert that value into years we would get a result that is
-unreasonable. After doing some research we found out that the maximum number of nights is limited by \airbnb to 1125. We decided to consider all entries that surpassed that number as errors. 
+unreasonable. After doing some research we found out that the maximum number of nights is limited by \airbnb to 1125. We decided to consider all entries that surpassed that number as errors.
 
 We have decided to allow for some outliers as long as they are few and
 justifiable, in these cases we will try to correlate them to other variables.
@@ -89,6 +90,7 @@ more relevant than others.
 
 \end{comment}
 
+\pagebreak
 \subsection{Derivation of new variables}
 \label{ssub:variable_derivation}
 
@@ -104,11 +106,11 @@ represents the season of the year during which the host signed up. For the
 latter, the modalities are Winter, Spring, Summer and Autumn.
 
 We have also categorized \texttt{host\_response\_rate} and
-\texttt{host\_acceptance\_rate} as we converted them from a numerical 
+\texttt{host\_acceptance\_rate} as we converted them from a numerical
 variables
-measured in percentages to categorical ones with the following 
+measured in percentages to categorical ones with the following
 modalities: very
-low for values between 0\% and 20\%, low from 20\% to 40\%, average 
+low for values between 0\% and 20\%, low from 20\% to 40\%, average
 starting at 40\% up to 60\%, high within 60\% and 80\% and very high if
 above 80\%.
 

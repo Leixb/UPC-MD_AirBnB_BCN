@@ -6,27 +6,42 @@
 \section{Additional plots}%
 \label{sec:additional_plots}
 
-\newcommand{\centroidmap}[2]{
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.87\linewidth]{pca_fact-plane_#1_#2-cent}
-        \caption{PCA plane #1 vs #2 (categorical variables centroids)}%
-        \label{fig:plane_#1-#2-cent}
-    \end{figure}
-}
+%\newcommand{\centroidmap}[2]{
+%    \begin{figure}[H]
+%        \centering
+%        \includegraphics[width=0.87\linewidth]{pca_fact-plane_#1_#2-cent}
+%        \caption{PCA plane #1 vs #2 (categorical variables centroids)}%
+%        \label{fig:plane_#1-#2-cent}
+%    \end{figure}
+%}
 
-\begin{landscape}
+%\begin{landscape}
 
-\subsection{Categorical centroids on PCA planes}%
-\label{sub:add_centroids}
+%\subsection{Categorical centroids on PCA planes}%
+%\label{sub:add_centroids}
+%
+%\centroidmap{1}{2}
+%\centroidmap{1}{3}
+%\centroidmap{1}{4}
+%\centroidmap{2}{3}
+%\centroidmap{2}{4}
+%\centroidmap{3}{4}
+%\end{landscape}
 
-\centroidmap{1}{2}
-\centroidmap{1}{3}
-\centroidmap{1}{4}
-\centroidmap{2}{3}
-\centroidmap{2}{4}
-\centroidmap{3}{4}
-\end{landscape}
+\includepdf[pages=-,landscape=true, addtotoc={
+1,subsection,1,PCA Categorical variable centroids,sub:add_centroids
+},pagecommand={\thispagestyle{plain}}
+]{../../analysis/plots/centroides}
+
+\includepdf[pages=-,landscape=true, addtotoc={
+1,subsection,1,Cluster profiling comparison,sub:add_cluster_comp
+},pagecommand={\thispagestyle{plain}}
+]{../cluster_comparison/jam}
+
+%\includepdf[pages=-,landscape=true, addtotoc={
+%1,subsection,1,PCA Categorical variables projections,sub:add_fact_planes
+%},pagecommand={\thispagestyle{plain}}
+%]{../../analysis/plots/fact_planes}
 
 % TODO
 
