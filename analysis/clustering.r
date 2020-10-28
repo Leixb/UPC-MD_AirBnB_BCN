@@ -16,7 +16,8 @@ d <- dist(dcon)
 h1 <- hclust(d, method = 'ward.D')
 h2 <- hclust(d, method = 'ward.D2')
 #res.hcpc <- HCPC(res.pca, nb.clust = -1, graph = F)
-res.hcpc <- readRDS('data/69420nicexd.Rda')
+#saveRDS(res.hcpcp, 'data/39-res_hcpc.Rda')
+res.hcpc <- readRDS('data/39-res_hcpc.Rda')
 
 
 
