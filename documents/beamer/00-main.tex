@@ -143,9 +143,9 @@
 \begin{columns}[t]
     \column{0.3\textwidth}
     20,703 data records
-    
+
     9.01\% of missing data
-    
+
     74 variables
     \small
     \begin{itemize}[topsep=0pt]
@@ -155,7 +155,7 @@
     	\item[--] 6 boolean
     \end{itemize}
     \normalsize
-    
+
     \column{0.3\textwidth}
     Host information
     \small
@@ -229,11 +229,11 @@ user review is positive or negative.
 \begin{itemize}
      \itemsep0.5em
      \item Determining working matrix
-     \item Missing 
+     \item Missing
      \begin{itemize}
          \itemsep0.25em
          \item Numerical $\rightarrow$ Knn Algorithm
-         \item Categorical $\rightarrow$ New 'Unknown' category 
+         \item Categorical $\rightarrow$ New 'Unknown' category
      \end{itemize}
      \item Outliers
      \item Errors
@@ -329,6 +329,7 @@ Variables that contribute the most to each factorial axis:
 \begin{frame}{Final class profiling}
 \begin{columns}
 \begin{column}{0.5\textwidth}
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{pairs.png}
@@ -341,6 +342,11 @@ Variables that contribute the most to each factorial axis:
         \item \textcolor{blau}{\textbf{Cluster 3}} Bad reviews
         \item \textcolor{lila}{\textbf{Cluster 4}} Big houses
     \end{itemize}
+
+    \begin{table}[H]
+        \centering
+        \input{../../analysis/tables/cluster-c3.tex}
+    \end{table}
 \end{column}
 \end{columns}
 \end{frame}
@@ -368,7 +374,7 @@ Variables that contribute the most to each factorial axis:
 \centering
 \vspace{1.4em}
 \scalebox{0.25}{
-\input{13-02-final_gantt} 
+\input{13-02-final_gantt}
 }
 \end{frame}
 
