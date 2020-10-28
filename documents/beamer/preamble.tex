@@ -1,0 +1,146 @@
+%! TEX root = **/00-main.tex
+\documentclass[12pt, oneside]{article}
+%\documentclass[draft, 12pt, oneside]{article}
+%\documentclass[final, 12pt, oneside]{article}
+\usepackage[a4paper, left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+%\usepackage[showframe, a4paper, left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+
+\usepackage[T1]{fontenc}
+
+%% Not needed with lualatex
+%\usepackage[utf8]{inputenc} % Use unicode for input
+%\usepackage{lmodern}
+
+% With lualatex:
+\usepackage{fontspec}
+\setmonofont[Scale=MatchLowercase]{DejaVu Sans Mono}
+
+\usepackage{microtype}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{english}
+
+\usepackage{hyphenat}
+
+%% Bibliography:
+\usepackage[
+    backend=biber,
+    style=numeric,
+]{biblatex}
+\DeclareNameAlias{default}{last-first}
+
+%\DeclareQuoteAlias{spanish}{catalan}
+
+\addbibresource{biblio.bib}
+%% see:
+%% https://www.sharelatex.com/learn/Bibliography_management_in_LaTeX#The_bibliography_file
+
+% For cross references
+\usepackage{color, xcolor}
+\usepackage[breaklinks, colorlinks = true]{hyperref}
+%hyperref configuration so that it doesn't contrast so much colorlinks,
+\hypersetup{
+   linkcolor={black},
+   citecolor={black},
+   urlcolor={blue!80!black}
+}
+
+\usepackage{mathtools}                    % amsmath + more
+\usepackage{amsthm}                       % Theorem enviroment
+\usepackage{amssymb}                      % More symbols
+\usepackage{amstext}                      % Text inside mathenv
+
+\usepackage{relsize}                      % Bigger math with mathlarger{___}
+\usepackage{nicefrac}                     % nice fractions in one line
+
+\usepackage[export]{adjustbox}            % Adjust table size
+\usepackage{float}                        % Force tables and images position (H and H!)
+\usepackage{wrapfig}                      % Wrap images like in HTML
+
+%\usepackage{tabularx, colortbl, booktabs} % Better tables
+%\usepackage{longtable}                    % Multiple page table
+\usepackage{xltabular, colortbl, booktabs} % longtable + tabularx (has bug with booktabs: fix below)
+
+% bug booktabs + xltabular
+\makeatletter
+\def\@BTrule[#1]{%
+  \ifx\longtable\undefined
+    \let\@BTswitch\@BTnormal
+  \else\ifx\hline\LT@hline
+    \nobreak
+    \let\@BTswitch\@BLTrule
+  \else
+     \let\@BTswitch\@BTnormal
+  \fi\fi
+  \global\@thisrulewidth=#1\relax
+  \ifnum\@thisruleclass=\tw@\vskip\@aboverulesep\else
+  \ifnum\@lastruleclass=\z@\vskip\@aboverulesep\else
+  \ifnum\@lastruleclass=\@ne\vskip\doublerulesep\fi\fi\fi
+  \@BTswitch}
+\makeatother
+
+% Split cell in lines and more formating options inside table
+\usepackage{array, multirow, multicol, makecell}
+
+%\usepackage{subcaption}                     % Subfigures
+%\usepackage[framemethod=tikz]{mdframed}     % Custom frames
+
+\usepackage[bottom]{footmisc} % Footnotes at bottom of page
+
+%\usepackage[alsoload=hep]{siunitx}          % SI units and uncertainties
+%\sisetup{locale = FR}                       % Commas and so on for spanish
+%\sisetup{separate-uncertainty=true}
+%\sisetup{
+  %per-mode=fraction,
+  %fraction-function=\nicefrac
+%}
+
+%\usepackage{tikz}
+%%\usetikzlibrary{arrows}
+%%\usetikzlibrary{scopes}
+%\usetikzlibrary{babel}
+
+%% Custom Math operators (functions not in italic in math mode):
+%\DeclareMathOperator{\cis}{cis}
+
+% Set pages to landscape
+\usepackage{pdflscape}
+\usepackage{afterpage}
+
+\usepackage{pdfpages}
+
+\usepackage{comment}        % multiline comments
+
+\usepackage{pifont}         % some fancy symbols
+
+\usepackage{xspace}         % to create commands with space at end
+
+%\usepackage{listings}       % For code listings (prefer minted)
+\usepackage{minted}         % -shell-escape
+\definecolor{codeBg}{HTML}{FFFDE7}
+\setminted[r]{
+    %style=pastie,
+    frame=lines,
+    framesep=3mm,
+    linenos,
+    breaklines=true,
+    encoding=utf8,
+    fontsize=\footnotesize,
+    bgcolor=codeBg
+}
+
+\usepackage{pgfgantt}           % Gantt chart
+
+\newcommand{\whitepage}{        % white page without adding to pagenumber
+    \clearpage\thispagestyle{empty}\addtocounter{page}{-1} \newpage \clearpage
+}
+\newcommand{\ts}{\textsuperscript}
+
+\usepackage{tocbibind}
+
+\usepackage[justification=centering]{caption}
+
+\usepackage[english]{cleveref}
+\usepackage{csquotes}       % For bibliography quotations
+
+\usepackage{subcaption}
