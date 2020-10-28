@@ -1,0 +1,14 @@
+\beamer@slide {fig:review_scores_rating}{10}
+\beamer@slide {fig:neighbourhood_group_cleansed}{11}
+\beamer@slide {fig:bivar-reviews_per_month-review_scores_rating}{12}
+\beamer@slide {fig:host_listings_count}{13}
+\beamer@slide {fig:pca_inertia}{17}
+\beamer@slide {fig:plane_1-2}{18}
+\beamer@slide {fig:plane_1-3}{19}
+\beamer@slide {fig:plane_2-4}{20}
+\beamer@slide {fig:clusters-pca}{23}
+\beamer@slide {fig:dendogram-final}{24}
+\beamer@slide {fig:prof-review_scores_rating-vi}{26}
+\beamer@slide {fig:prof-reviews_per_month-bp}{26}
+\beamer@slide {fig:prof-accommodates-bp}{26}
+\beamer@slide {fig:prof-bedrooms-meanp}{26}
