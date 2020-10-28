@@ -1,6 +1,11 @@
 % vim: spell spelllang=en:
 \input{preamble}
 
+\definecolor{lila}{HTML}{C77CFF}
+\definecolor{blau}{HTML}{00BFC4}
+\definecolor{verd}{HTML}{7CAE00}
+\definecolor{vermell}{HTML}{F8766D}
+
 \title{MD - \airbnb Barcelona Listings}
 \author{
     Aleix Bon\'e\\
@@ -123,6 +128,7 @@
 \section{Outline}
 \begin{frame}{Outline}
 \begin{scriptsize}
+    \vspace{1.5em}
     \tableofcontents
 \end{scriptsize}
 \end{frame}
@@ -132,7 +138,6 @@
 \begin{frame}{Our Dataset}
 \begin{center}
     Inside Airbnb Barcelona Listings - 24/08/2020\footnote[frame]{Dataset URL: \url{http://data.insideairbnb.com/spain/catalonia/barcelona/2020-08-24/data/listings.csv.gz}}
-
 \vspace{5 mm}
 
 \begin{columns}[t]
@@ -207,12 +212,7 @@ user review is positive or negative.
 \end{frame}
 
 
-%6. Slide synthesizing univariate descriptive analysis
-\section{Univariate descriptive analysis}
-\begin{frame}{Univariate descriptive analysis}
-\end{frame}
-
-\section{Bivariate descriptive analysis}
+\subsection{Bivariate descriptive analysis}
 \begin{frame}{Bivariate descriptive analysis}
 \fig{bivar-reviews_per_month-review_scores_rating}{Score rating vs reviews per month}
 \end{frame}
@@ -271,10 +271,10 @@ user review is positive or negative.
 \begin{frame}{Conclusions}
 Variables that contribute the most to each factorial axis:
 \begin{itemize}
-     \item Axis 1: accommodates, beds and bedrooms (direct relation)
-     \item Axis 2: review scores ratings (direct relation)
-     \item Axis 3: number of reviews (direct relation)
-     \item Axis 4: availability (direct relation)
+     \item \textbf{Axis 1:} accommodates, beds and bedrooms (direct relation)
+     \item \textbf{Axis 2:} review scores ratings (direct relation)
+     \item \textbf{Axis 3:} number of reviews (direct relation)
+     \item \textbf{Axis 4:} availability (direct relation)
 \end{itemize}
 \end{frame}
 
@@ -297,11 +297,6 @@ Variables that contribute the most to each factorial axis:
     %\caption{Cluster Dendogram}%
     \label{fig:dendogram-final}
 \end{figure}
-\end{frame}
-
-
-%13. Slide describing which tools of class interpretation you have been used
-\begin{frame}{Class interpretation Dendogram}
 \end{frame}
 
 %14. Slide with CPG or eventual profiling graphs or numerical information about clusters to be highlighted (whenever possible,
@@ -332,11 +327,24 @@ Variables that contribute the most to each factorial axis:
 
 %15. Slide with final class profiling (synthesis with description of class characteristics)
 \begin{frame}{Final class profiling}
+\begin{columns}
+\begin{column}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[height=0.9\textheight]{pairs.png}
+\includegraphics[width=\textwidth]{pairs.png}
 \end{figure}
+\end{column}
+\begin{column}{0.5\textwidth}
+    \begin{itemize}
+        \item \textcolor{vermell}{\textbf{Cluster 1}} Small apartments
+        \item \textcolor{verd}{\textbf{Cluster 2}} Lots of reviews
+        \item \textcolor{blau}{\textbf{Cluster 3}} Bad reviews
+        \item \textcolor{lila}{\textbf{Cluster 4}} Big houses
+    \end{itemize}
+\end{column}
+\end{columns}
 \end{frame}
+
 %16. Slide with comparison of conclusions between PCA and clustering
 
 
