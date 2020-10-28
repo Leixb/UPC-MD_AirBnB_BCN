@@ -1,8 +1,8 @@
 %! TEX root = **/00-main.tex
-\documentclass[12pt, oneside]{article}
-%\documentclass[draft, 12pt, oneside]{article}
-%\documentclass[final, 12pt, oneside]{article}
-\usepackage[a4paper, left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\documentclass[aspectratio=169]{beamer}
+\usetheme{metropolis}
+
+\usepackage{geometry}
 %\usepackage[showframe, a4paper, left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
 
 \usepackage[T1]{fontenc}
@@ -23,27 +23,27 @@
 \usepackage{hyphenat}
 
 %% Bibliography:
-\usepackage[
-    backend=biber,
-    style=numeric,
-]{biblatex}
-\DeclareNameAlias{default}{last-first}
+%\usepackage[
+%    backend=biber,
+%    style=numeric,
+%]{biblatex}
+%\DeclareNameAlias{default}{last-first}
 
 %\DeclareQuoteAlias{spanish}{catalan}
 
-\addbibresource{biblio.bib}
+%\addbibresource{biblio.bib}
 %% see:
 %% https://www.sharelatex.com/learn/Bibliography_management_in_LaTeX#The_bibliography_file
 
 % For cross references
 \usepackage{color, xcolor}
-\usepackage[breaklinks, colorlinks = true]{hyperref}
+%\usepackage[breaklinks, colorlinks = true]{hyperref}
 %hyperref configuration so that it doesn't contrast so much colorlinks,
-\hypersetup{
-   linkcolor={black},
-   citecolor={black},
-   urlcolor={blue!80!black}
-}
+%\hypersetup{
+   %linkcolor={black},
+   %citecolor={black},
+   %urlcolor={blue!80!black}
+%}
 
 \usepackage{mathtools}                    % amsmath + more
 \usepackage{amsthm}                       % Theorem enviroment
@@ -104,7 +104,7 @@
 %\DeclareMathOperator{\cis}{cis}
 
 % Set pages to landscape
-\usepackage{pdflscape}
+%\usepackage{pdflscape}
 \usepackage{afterpage}
 
 \usepackage{pdfpages}
@@ -136,11 +136,13 @@
 }
 \newcommand{\ts}{\textsuperscript}
 
-\usepackage{tocbibind}
+%\usepackage{tocbibind}
 
 \usepackage[justification=centering]{caption}
 
-\usepackage[english]{cleveref}
+%\usepackage[english]{cleveref}
 \usepackage{csquotes}       % For bibliography quotations
 
 \usepackage{subcaption}
+
+\usepackage{enumitem}

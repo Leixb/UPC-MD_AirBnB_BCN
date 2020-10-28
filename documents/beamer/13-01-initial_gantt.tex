@@ -1,29 +1,14 @@
 % vim: spell spelllang=en:
 %! TEX root = **/00-main.tex
 
-\newgeometry{top=0.5cm, bottom=0.5cm, left=0.5cm, right=0.5cm}
-\begin{landscape}
-
-\section{Working plan}%
-\label{sec:working_plan}
-
-\null
-\vspace{1em}
-{
-\centering
-\subsection{Initial Gantt}%
-\label{sub:ini_gantt}
-\vspace{2em}
-\par}
-
-\begin{center}
 \begin{ganttchart}[
 vgrid={*{6}{draw=none}, dotted},
 x unit=.75cm,
 y unit title=1cm,
 y unit chart=1cm,
     time slot format=isodate
-    ]{2020-09-15}{2020-10-07}
+    %]{2020-09-15}{2020-10-07}
+    ]{2020-09-15}{2020-10-28}
 \gantttitlecalendar{month=name, day}
 \ganttnewline
 
@@ -54,22 +39,19 @@ y unit chart=1cm,
 \ganttnewline
 \ganttbar{Conclusion describing data}{2020-10-04}{2020-10-07}
 \ganttnewline
-\end{ganttchart}
-\end{center}
-
-\pagebreak
-\null
-\vspace{3.5em}
-\begin{center}
-\begin{ganttchart}[
-vgrid={*{6}{draw=none}, dotted},
-x unit=.85cm,
-y unit title=1cm,
-y unit chart=1cm,
-    time slot format=isodate
-    ]{2020-10-07}{2020-10-28}
-\gantttitlecalendar{month=name, day}
-\ganttnewline
+%\end{ganttchart}
+%
+%\framebreak
+%
+%\begin{ganttchart}[
+%vgrid={*{6}{draw=none}, dotted},
+%x unit=.85cm,
+%y unit title=1cm,
+%y unit chart=1cm,
+%    time slot format=isodate
+%    ]{2020-10-07}{2020-10-28}
+%\gantttitlecalendar{month=name, day}
+%\ganttnewline
 
 \ganttgroup{PCA analysis for numerical variables}{2020-10-07}{2020-10-14}
 \ganttnewline
@@ -99,7 +81,3 @@ y unit chart=1cm,
 \ganttnewline
 
 \end{ganttchart}
-\end{center}
-\end{landscape}
-
-\restoregeometry

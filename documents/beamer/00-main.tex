@@ -1,22 +1,32 @@
 % vim: spell spelllang=en:
-\input{../preamble}
+\input{preamble}
 
 \title{MD - \airbnb Barcelona Listings}
 \author{
     Aleix Bon\'e\\
     Eduard Bosch\\
     David Gili\\
-    Albert Mercad\'e\\
+    Albert Mercad\'e
 }
 \date{\today}
 
+\setbeamercolor{background canvas}{bg=white}
 
 \graphicspath{{../../analysis/plots/}{images}}
 
 \newcommand{\airbnb}{\emph{Airbnb}\xspace}
 \newcommand{\NA}{\emph{NA}\xspace}
 
-\newcommand{\fig}[3][0.8]{
+\newcommand{\profiling}[3]{
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{prof-c3-#1-#2}
+    \caption{#3}%
+    \label{fig:prof-#1-#2}
+\end{figure}
+}
+
+\newcommand{\fig}[3][0.6]{
     \begin{figure}[H]
         \centering
         \includegraphics[width=#1\linewidth]{#2}
@@ -25,49 +35,363 @@
     \end{figure}
 }
 
+\newcommand{\hibp}[2]{
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.6\linewidth]{desc-#1-hi_bp}
+        \caption{Histogram \& Boxplot of #2}%
+        \label{fig:#1}
+    \end{figure}
+}
+
+\newcommand{\tabn}[2]{
+    \begin{table}[H]
+        \centering
+        \caption{Extended summary statistics of #2}%
+        \label{tab:#1}
+        \input{../../analysis/tables/desc-#1-ext_sum}
+    \end{table}
+}
+
+\newcommand{\factorialmap}[2]{
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\linewidth]{pca_fact-plane_#1_#2-bi}
+        \caption{PCA plane #1 vs #2}%
+        \label{fig:plane_#1-#2}
+    \end{figure}
+}
+
+\newcommand{\fign}[2]{
+    %\sssfig{#2}
+    \hibp{#1}{#2}
+    %\tabn{#1}{#2}
+}
+
+\newcommand{\figf}[2]{
+%\sssfig{#2}
+\begin{figure}[H]
+    \begin{minipage}{0.39\linewidth}
+            \centering
+            \includegraphics[width=\linewidth]{desc-#1-bar}
+    \end{minipage}
+    \begin{minipage}{0.39\linewidth}
+            \centering
+            \includegraphics[width=\linewidth]{desc-#1-pie}
+    \end{minipage}
+    \caption{Barplot \& Pie chart of #2}%
+    \label{fig:#1}
+\end{figure}
+
+
+%\begin{table}[H]
+%    \centering
+%    \caption{Table of #2 frequency}%
+%    \label{tab:#1}
+%    \input{../../analysis/tables/desc-#1-freq}
+%\end{table}
+}
+
 %\hfuzz=3pt
 %\vfuzz=3pt
 
+%1. Slide with title, name of all group components, delivery date
+%2. Slide with outline of talk
+%3. Slide with topics addressed, goals of the work and urls from data sources, overview of BD structure and variables analyzed
+%4. Slide with the Data mining process schema
+%5. Slide with the descriptive analysis of one numerical variable and one qualitative variable
+%6. Slide synthesizing univariate descriptive analysis
+%7. Slide with additional descriptive analysis issues when relevant
+%8. Slide describing preprocessing steps (if required add additional slides for any specific aspect to be commented)
+%9. Slide with PCA specificacions, screeplot
+%10. Slide wtith first factorial plane for PCA (eventually additional slides for othe planes retained). Lack of visibility of map
+%penalizes.
+%11. Slide with conlusions of PCA
+%12. Slide describing the clustering process followed and resulting dendrogramm
+%13. Slide describing which tools of class interpretation you have been used
+%14. Slide with CPG or eventual profiling graphs or numerical information about clusters to be highlighted (whenever possible,
+%synthesize important graphics in a single slide... evenctually you can add some extra slide)
+%15. Slide with final class profiling (synthesis with description of class characteristics)
+%16. Slide with comparison of conclusions between PCA and clustering
+%17. Slide with conclusions
+%18. Slide with original and final scheduling
+
 \begin{document}
+
+\maketitle
+
+\section{Outline}
+\begin{frame}{Outline}
+\begin{scriptsize}
+    \tableofcontents
+\end{scriptsize}
+\end{frame}
+
+%3. Slide with topics addressed, goals of the work and urls from data sources, overview of BD structure and variables analyzed
+\section{Data source}
+\begin{frame}{Our Dataset}
+\begin{center}
+    Inside Airbnb Barcelona Listings - 24/08/2020\footnote[frame]{Dataset URL: \url{http://data.insideairbnb.com/spain/catalonia/barcelona/2020-08-24/data/listings.csv.gz}}
+
+\vspace{5 mm}
+
+\begin{columns}[t]
+    \column{0.3\textwidth}
+    20,703 data records
+    
+    9.01\% of missing data
+    
+    74 variables
+    \small
+    \begin{itemize}[topsep=0pt]
+        \itemsep-0.25em
+    	\item[--] 30 categorical
+    	\item[--] 38 numerical
+    	\item[--] 6 boolean
+    \end{itemize}
+    \normalsize
+    
+    \column{0.3\textwidth}
+    Host information
+    \small
+    \begin{itemize}[topsep=0pt]
+        \itemsep-0.5em
+    	\item[--] Acceptance rate
+    	\item[--] Listings count
+    	\item[--] ...
+    \end{itemize}
+    \normalsize
+    Listing information
+    \small
+    \begin{itemize}[topsep=0pt]
+        \itemsep-0.5em
+    	\item[--] Price
+    	\item[--] Reviews
+    	\item[--] ...
+    \end{itemize}
+    \normalsize
+\end{columns}
+
+\end{center}
+\end{frame}
+
+
+\begin{frame}{Goals}
+\begin{quote}
+The focus of the project will be to analyse whether or not factors
+such as price, availability or neighbourhood impact whether or not the final
+user review is positive or negative.
+\end{quote}
+\end{frame}
+
+%4. Slide with the Data mining process schema
+\section{Data mining process scheme}
+\begin{frame}{Data mining process}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{../final/images/workflow}
+    %\caption*{Our data mining workflow}
+\end{figure}
+\end{frame}
+
+%5. Slide with the descriptive analysis of one numerical variable and one qualitative variable
+\section{Descriptive analysis}
+\begin{frame}{Numerical variable}
+\vspace{0.7em}
+\fign{review_scores_rating}{review scores rating}
+\end{frame}
+
+\begin{frame}{Qualitative variable}
+\vspace{1.5em}
+\figf{neighbourhood_group_cleansed}{neighbourhood group cleansed}
+\end{frame}
+
+
+%6. Slide synthesizing univariate descriptive analysis
+\section{Univariate descriptive analysis}
+\begin{frame}{Univariate descriptive analysis}
+\end{frame}
+
+\section{Bivariate descriptive analysis}
+\begin{frame}{Bivariate descriptive analysis}
+\fig{bivar-reviews_per_month-review_scores_rating}{Score rating vs reviews per month}
+\end{frame}
+
+%7. Slide with additional descriptive analysis issues when relevant
+\begin{frame}{Issues}
+\fign{host_listings_count}{Host listings count}
+\end{frame}
+
+%8. Slide describing preprocessing steps (if required add additional slides for any specific aspect to be commented)
+\section{Preprocessing}
+\begin{frame}{Preprocessing steps}
+\large
+\begin{itemize}
+     \itemsep0.5em
+     \item Determining working matrix
+     \item Missing 
+     \begin{itemize}
+         \itemsep0.25em
+         \item Numerical $\rightarrow$ Knn Algorithm
+         \item Categorical $\rightarrow$ New 'Unknown' category 
+     \end{itemize}
+     \item Outliers
+     \item Errors
+     \item Derivation of new categorical variables
+\end{itemize}
+\normalsize
+\end{frame}
+
+%9. Slide with PCA specificacions, screeplot
+\section{PCA}
+\begin{frame}{Screeplot}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{pca_fact-screeplot} % PCA-inertia_cum
+    \caption{PCA inertia}%
+    \label{fig:pca_inertia}
+\end{figure}
+\end{frame}
+
+%10. Slide wtith first factorial plane for PCA (eventually additional slides for othe planes retained). Lack of visibility of map
+%penalizes.
+\begin{frame}{First factorial plane}
+\factorialmap{1}{2}
+\end{frame}
+
+\begin{frame}{factorial plane 1 v 3} %  o lo k sigui
+\factorialmap{1}{3}
+\end{frame}
+
+\begin{frame}{factorial plane 2 v 4} %  o lo k sigui
+\factorialmap{2}{4}
+\end{frame}
+
+%11. Slide with conlusions of PCA
+\begin{frame}{Conclusions}
+Variables that contribute the most to each factorial axis:
+\begin{itemize}
+     \item Axis 1: accommodates, beds and bedrooms (direct relation)
+     \item Axis 2: review scores ratings (direct relation)
+     \item Axis 3: number of reviews (direct relation)
+     \item Axis 4: availability (direct relation)
+\end{itemize}
+\end{frame}
+
+%12. Slide describing the clustering process followed and resulting dendrogramm
+\section{Clustering}
+\begin{frame}{Process}
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{factor_map}
+    \caption{Clusters on PCA}%
+    \label{fig:clusters-pca}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Resulting Dendogram}
+\begin{figure}[H]
+    \centering
+    %\includegraphics[width=0.8\linewidth]{dendo}
+    \includegraphics[width=0.8\linewidth]{cluster-dendo-h3}
+    %\caption{Cluster Dendogram}%
+    \label{fig:dendogram-final}
+\end{figure}
+\end{frame}
+
+
+%13. Slide describing which tools of class interpretation you have been used
+\begin{frame}{Class interpretation Dendogram}
+\end{frame}
+
+%14. Slide with CPG or eventual profiling graphs or numerical information about clusters to be highlighted (whenever possible,
+%synthesize important graphics in a single slide... evenctually you can add some extra slide)
+\section{Profiling}
+\begin{frame}{Profiling}
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\profiling{review_scores_rating}{vi}{Review scores rating}
+\end{column}
+\begin{column}{0.5\textwidth}  %%<--- here
+\profiling{reviews_per_month}{bp}{Review per month}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+%15. Slide with final class profiling (synthesis with description of class characteristics)
+%16. Slide with comparison of conclusions between PCA and clustering
+
+
+%17. Slide with conclusions
+\section{Conclusions}
+\begin{frame}{Conclusions}
+\end{frame}
+
+%18. Slide with original and final scheduling
+\section{Working plan}
+\begin{frame}{Original scheduling}
+\centering
+\vspace{1.4em}
+\scalebox{0.25}{%\begin{minipage}{1.20\textwidth}
+\input{13-01-initial_gantt}
+%\end{minipage}
+}
+\end{frame}
+
+\begin{frame}{Final scheduling}
+\centering
+\vspace{1.4em}
+\scalebox{0.25}{
+\input{13-02-final_gantt} 
+}
+\end{frame}
+
+
+
+
+
+
 
 % Video frances de HCPC
 % https://www.youtube.com/watch?v=4XrgWmN9erg
 
-\include{01-titlepage}
+%\include{01-titlepage}
+%
+%\pagenumbering{Roman}
+%
+%%\setcounter{tocdepth}{2}
+%\tableofcontents
+%
+%\pagebreak
+%\listoffigures
+%
+%\pagebreak
+%\listoftables
+%
+%\clearpage
+%\pagenumbering{arabic}
+%
+%\setlength{\parskip}{1em}
 
-\pagenumbering{Roman}
-
-%\setcounter{tocdepth}{2}
-\tableofcontents
-
-\pagebreak
-\listoffigures
-
-\pagebreak
-\listoftables
-
-\clearpage
-\pagenumbering{arabic}
-
-\setlength{\parskip}{1em}
-
-\include{03-motivation}
-\include{04-data_source}
-\include{05-formal}
-\include{06-data_mining}
-\include{07-preprocesssing}
-\include{08-basic_desc}
-\include{09-PCA}
-\include{10-hierarchy}
-\include{11-profiling_clusters}
-\include{12-global_discussion}
-\include{13-working_plan}
-
-\printbibliography
-
-\appendix
-
-%\include{14-R_scripts}
-\include{15-extra_plots}
+%\include{03-motivation}
+%\include{04-data_source}
+%\include{05-formal}
+%\include{06-data_mining}
+%\include{07-preprocesssing}
+%\include{08-basic_desc}
+%\include{09-PCA}
+%\include{10-hierarchy}
+%\include{11-profiling_clusters}
+%\include{12-global_discussion}
+%\include{13-working_plan}
+%
+%\printbibliography
+%
+%\appendix
+%
+%%\include{14-R_scripts}
+%\include{15-extra_plots}
 
 \end{document}
